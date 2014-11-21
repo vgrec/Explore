@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.traveler" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.traveler.activity.LocationSearchActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.traveler.activity.LocationSummaryActivity"
+            android:label="@string/title_activity_location_preview"
+            android:theme="@style/ThemeTransparentActionBarOverlay" />
+        <activity
+            android:name="com.traveler.activity.ImagesActivity"
+            android:label="@string/title_activity_images" />
+        <activity
+            android:name="com.traveler.activity.DescriptionActivity"
+            android:label="@string/title_activity_description" />
+        <activity
+            android:name="com.traveler.activity.AttractionsActivity"
+            android:label="@string/title_activity_attractions"
+            android:theme="@style/AttractionsTheme" />
+        <activity
+            android:name="com.traveler.activity.PlaceDetailActivity"
+            android:label="@string/title_activity_place_detail" >
+        </activity>
+    </application>
+
+</manifest>

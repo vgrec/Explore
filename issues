@@ -1,0 +1,5 @@
+1. handle redirects, eg "slanic moldova"
+2. Attractions -> Fragment: handle city with space eg. "tel aviv"
+3. Display attributions, on photo first/details, and on details page at bottom.
+4. Add floating action button on location details screen, bookmark, like: http://www.google.com/design/spec/style/icons.html#icons-system-icons
+http://www.google.com/design/spec/style/imagery.html#imagery-ui-integration

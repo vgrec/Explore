@@ -1,0 +1,222 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/big_image"
+            tools:src="@drawable/lac"
+            android:layout_width="fill_parent"
+            android:layout_height="240dp" />
+
+        <LinearLayout
+            android:layout_marginTop="1dp"
+            android:id="@+id/title_header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_weight="1"
+                android:padding="6dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#FFF"
+                tools:text="EXAMPLENOW"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="#fff"
+                android:layout_width="1dp"
+                android:layout_height="fill_parent" />
+
+            <ImageView
+                android:id="@+id/small_image"
+                tools:src="@drawable/bazin"
+                android:scaleType="centerCrop"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/label"
+                    android:text="DESCRIPTION"
+                    android:textColor="#424242"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="#ccc"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/description"
+                    android:background="@drawable/description_background"
+                    android:maxLines="5"
+                    android:layout_gravity="bottom"
+                    tools:text="Using the Uber API, developers can integrate the power of Uber into 3rd party applications. Calls to the API can be made to request information on available car types, driver location expressed"
+                    android:textSize="18sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/attractions_card"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="ATRACTIONS"
+                    android:textColor="#424242"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="#ccc"
+                    android:layout_height="1dp" />
+
+                <ImageView
+                    android:layout_marginTop="4dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/lac"
+                    android:layout_width="fill_parent"
+                    android:layout_height="140dp" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="STREET VIEW"
+                    android:textColor="#424242"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="#ccc"
+                    android:layout_height="1dp" />
+
+                <ImageView
+                    android:layout_marginTop="4dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/streetview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="140dp" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="VIDEOS ABOUT BERLIN"
+                    android:textColor="#424242"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="#ccc"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="140dp">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/lac"
+                        android:layout_marginRight="2dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bazin"
+                        android:layout_marginRight="2dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/lac"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>
