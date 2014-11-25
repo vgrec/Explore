@@ -1,6 +1,9 @@
 package com.traveler.fragment;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -24,9 +27,12 @@ import butterknife.InjectView;
 /**
  * @author vgrec, created on 11/17/14.
  */
+
+// http://blog.syedgakbar.com/2012/07/changing-color-of-the-drawable-or-imageview-at-runtime-in-android/
 public class PlaceDetailFragment extends Fragment {
 
     private String placeId;
+    private int vibrantColor = Color.BLUE; // default;
     private PlaceDetailsResponse placeResponse;
 
     @InjectView(R.id.place_detail_picture)
@@ -47,10 +53,15 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.web_site)
     TextView webSiteTextView;
 
-    public static Fragment newInstance(String placeId) {
+    @InjectView(R.id.details_header_container)
+    ViewGroup detailsHeaderContainer;
+
+
+    public static Fragment newInstance(String placeId, int vibrantColor) {
         PlaceDetailFragment fragment = new PlaceDetailFragment();
         Bundle args = new Bundle();
         args.putString(Extra.PLACE_ID, placeId);
+        args.putInt(Extra.VIBRANT_COLOR, vibrantColor);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,6 +72,7 @@ public class PlaceDetailFragment extends Fragment {
         setRetainInstance(true);
         if (getArguments() != null) {
             placeId = getArguments().getString(Extra.PLACE_ID);
+            vibrantColor = getArguments().getInt(Extra.VIBRANT_COLOR);
         }
     }
 
@@ -95,16 +107,31 @@ public class PlaceDetailFragment extends Fragment {
 
     private void updateUi() {
         Place place = placeResponse.getPlace();
+        if (place == null) {
+            return;
+        }
+
         nameTextView.setText(place.getName());
+        detailsHeaderContainer.setBackgroundColor(vibrantColor);
         addressTextView.setText(place.getAddress());
         phoneNumberTextView.setText(place.getPhoneNumber());
         ratingTextView.setText(place.getRating());
         webSiteTextView.setText(place.getWebSite());
+
+        setColorFor(addressTextView, phoneNumberTextView, webSiteTextView);
 
         if (place.getPhotos().size() > 0) {
             String url = String.format(Constants.Google.IMAGE_URL, place.getPhotos().get(0).getPhotoReference());
             ImageHelper.loadImage(getActivity(), url, placeDetailImageView);
         }
 
+    }
+
+    private void setColorFor(TextView... textViews) {
+        for (TextView textView : textViews) {
+            Drawable[] drawables = textView.getCompoundDrawables();
+            Drawable leftDrawable = drawables[0];
+            leftDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN);
+        }
     }
 }

@@ -167,7 +167,7 @@ public class LocationSummaryFragment extends Fragment {
         Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
-                vibrantColor = palette.getDarkVibrantColor(Color.DKGRAY);
+                vibrantColor = palette.getDarkMutedColor(Color.DKGRAY);
                 titleHeader.setBackgroundColor(vibrantColor);
             }
         });

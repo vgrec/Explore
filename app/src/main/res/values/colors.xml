@@ -2,8 +2,10 @@
 <resources>
 
     <color name="grey_light">#5ccc</color>
+    <color name="white">#fff</color>
     <color name="row_foreground">#00000000</color>
 
     <color name="windowBackgroundColor">#333333</color>
     <color name="black_translucent">#80000000</color>
+    <color name="fab">#0099cc</color>
 </resources>

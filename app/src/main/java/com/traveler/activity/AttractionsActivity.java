@@ -16,6 +16,7 @@ import com.traveler.adapters.AttractionsPagerAdapter;
 public class AttractionsActivity extends Activity {
 
     private String city;
+    private int vibrantColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class AttractionsActivity extends Activity {
 
         city = getIntent().getStringExtra(Extra.LOCATION);
 
-        int vibrantColor = getIntent().getIntExtra(Extra.VIBRANT_COLOR, Color.DKGRAY);
+        vibrantColor = getIntent().getIntExtra(Extra.VIBRANT_COLOR, Color.DKGRAY);
         if (getActionBar() != null) {
             configureActionBar(vibrantColor);
         }
@@ -56,5 +57,9 @@ public class AttractionsActivity extends Activity {
 
     public String getCity() {
         return city;
+    }
+
+    public int getVibrantColor() {
+        return vibrantColor;
     }
 }

@@ -2,6 +2,7 @@ package com.traveler.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -87,8 +88,16 @@ public class AttractionsFragment extends Fragment {
     }
 
     private void openPlaceDetailsActivity(int position) {
+        int vibrantColor;
+        if (getActivity() != null) {
+            vibrantColor = ((AttractionsActivity) getActivity()).getVibrantColor();
+        } else {
+            vibrantColor = Color.BLUE;
+        }
+
         Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
         intent.putExtra(Extra.PLACE_ID, places.get(position).getPlaceId());
+        intent.putExtra(Extra.VIBRANT_COLOR, vibrantColor);
         startActivity(intent);
     }
 
