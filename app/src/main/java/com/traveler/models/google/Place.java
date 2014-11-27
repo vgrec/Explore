@@ -38,7 +38,7 @@ public class Place implements Serializable {
     private OpeningHours openingHours;
 
     private List<GooglePhoto> photos = new ArrayList<GooglePhoto>();
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<Review>();
 
     public String getPlaceId() {
         return placeId;

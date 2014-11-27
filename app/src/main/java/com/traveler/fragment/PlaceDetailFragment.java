@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -20,6 +21,9 @@ import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
+import com.traveler.models.google.Review;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -56,6 +60,8 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.details_header_container)
     ViewGroup detailsHeaderContainer;
 
+    @InjectView(R.id.reviews_container)
+    ViewGroup reviewsContainer;
 
     public static Fragment newInstance(String placeId, int vibrantColor) {
         PlaceDetailFragment fragment = new PlaceDetailFragment();
@@ -125,6 +131,20 @@ public class PlaceDetailFragment extends Fragment {
             ImageHelper.loadImage(getActivity(), url, placeDetailImageView);
         }
 
+        displayReviews(place.getReviews());
+    }
+
+    private void displayReviews(List<Review> reviews) {
+        for (Review review : reviews) {
+            View row = View.inflate(getActivity(), R.layout.review_layout, null);
+            TextView author = (TextView) row.findViewById(R.id.author);
+            author.setText(review.getAuthor());
+            TextView text = (TextView) row.findViewById(R.id.text);
+            text.setText(review.getText());
+            RatingBar ratingBar = (RatingBar) row.findViewById(R.id.rating_bar);
+            ratingBar.setNumStars(Integer.valueOf(review.getRating()));
+            reviewsContainer.addView(row);
+        }
     }
 
     private void setColorFor(TextView... textViews) {
