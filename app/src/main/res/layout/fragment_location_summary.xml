@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.android.volley.toolbox.NetworkImageView
@@ -61,19 +61,19 @@
 
                 <TextView
                     android:id="@+id/label"
+                    style="@style/TextView.Category"
                     android:text="DESCRIPTION"
-                    android:textColor="#424242"
-                    android:textStyle="bold"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
                 <View
+                    android:layout_marginBottom="8dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />
 
                 <TextView
-                    android:layout_marginTop="2dp"
+
                     android:id="@+id/description"
                     android:background="@drawable/description_background"
                     android:maxLines="5"
@@ -100,13 +100,13 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/TextView.Category"
                     android:text="ATRACTIONS"
-                    android:textColor="#424242"
-                    android:textStyle="bold"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
                 <View
+                    android:layout_marginBottom="8dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />
@@ -124,6 +124,7 @@
 
 
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/streetview_card"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             card_view:cardCornerRadius="4dp">
@@ -135,13 +136,13 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/TextView.Category"
                     android:text="STREET VIEW"
-                    android:textColor="#424242"
-                    android:textStyle="bold"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
                 <View
+                    android:layout_marginBottom="8dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />
@@ -169,13 +170,13 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/TextView.Category"
                     android:text="VIDEOS ABOUT BERLIN"
-                    android:textColor="#424242"
-                    android:textStyle="bold"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
                 <View
+                    android:layout_marginBottom="8dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />

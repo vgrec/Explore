@@ -23,13 +23,14 @@ import com.traveler.Size;
 import com.traveler.activity.AttractionsActivity;
 import com.traveler.activity.DescriptionActivity;
 import com.traveler.activity.ImagesActivity;
+import com.traveler.activity.StreetViewActivity;
 import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.http.VolleySingleton;
+import com.traveler.models.flickr.Photo;
 import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.wikipedia.PageDescription;
-import com.traveler.models.flickr.Photo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +98,12 @@ public class LocationSummaryFragment extends Fragment {
         Intent intent = new Intent(getActivity(), AttractionsActivity.class);
         intent.putExtra(Extra.LOCATION, location);
         intent.putExtra(Extra.VIBRANT_COLOR, vibrantColor);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.streetview_card)
+    void openStreetViewActivity() {
+        Intent intent = new Intent(getActivity(), StreetViewActivity.class);
         startActivity(intent);
     }
 

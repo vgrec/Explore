@@ -88,6 +88,7 @@
                 android:id="@+id/web_site"
                 tools:text="http://google.com"
                 android:gravity="center_vertical"
+                android:singleLine="true"
                 android:textSize="18sp"
                 android:drawableLeft="@drawable/ic_website"
                 android:drawableStart="@drawable/ic_website"

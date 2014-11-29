@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/Traveler.ActionBar</item>
+    </style>
+
+    <style name="Traveler.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@null</item>
+        <item name="android:icon">@android:color/transparent</item>
+    </style>
+
+    <style name="ThemeTransparentActionBarOverlay" parent="AppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AttractionsTheme" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>
