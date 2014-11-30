@@ -13,5 +13,6 @@
     <string name="title_activity_attractions">AttractionsActivity</string>
     <string name="title_activity_place_detail">Details</string>
     <string name="title_activity_street_view">StreetViewActivity</string>
+    <string name="title_activity_videos">VideosActivity</string>
 
 </resources>

@@ -24,6 +24,7 @@ import com.traveler.activity.AttractionsActivity;
 import com.traveler.activity.DescriptionActivity;
 import com.traveler.activity.ImagesActivity;
 import com.traveler.activity.StreetViewActivity;
+import com.traveler.activity.VideosActivity;
 import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
@@ -106,6 +107,13 @@ public class LocationSummaryFragment extends Fragment {
         Intent intent = new Intent(getActivity(), StreetViewActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.videos_card)
+    void openVideosActivity() {
+        Intent intent = new Intent(getActivity(), VideosActivity.class);
+        startActivity(intent);
+    }
+
 
     @OnClick(R.id.description)
     void openDescriptionActivity() {

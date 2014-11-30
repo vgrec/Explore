@@ -32,6 +32,12 @@ public class Constants {
         public static final String PLACE_DETAILS_URL = BASE_URL + "/details/json?placeid=%s&key=" + PLACES_API_KEY;
     }
 
+    public class Youtube {
+        private static final int max = 40;
+        // http://gdata.youtube.com/feeds/base/videos?q=travel%20in%20chisinau&max-results=40
+        public static final String VIDEOS_URL = "http://gdata.youtube.com/feeds/base/videos?q=%s&max-results=" + max;
+    }
+
     // ==================
     //
 
