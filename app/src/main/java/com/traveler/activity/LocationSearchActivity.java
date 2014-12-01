@@ -26,13 +26,14 @@ public class LocationSearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_search);
         ButterKnife.inject(this);
-        goButton.setEnabled(false);
+        // TODO disabled in testing
+        //goButton.setEnabled(false);
     }
 
     @OnClick(R.id.go)
     void startLocationSummaryActivity() {
         Intent intent = new Intent(LocationSearchActivity.this, LocationSummaryActivity.class);
-        intent.putExtra(Extra.LOCATION, locationEditText.getText().toString());
+        intent.putExtra(Extra.LOCATION, locationEditText.getText().toString().trim());
         startActivity(intent);
     }
 
