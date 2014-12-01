@@ -1,8 +1,8 @@
 <resources>
 
     <style name="TextView.Category" parent="android:Widget.TextView">
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#424242</item>
         <item name="android:textStyle">bold</item>

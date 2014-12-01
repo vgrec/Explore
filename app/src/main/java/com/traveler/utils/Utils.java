@@ -1,6 +1,9 @@
 package com.traveler.utils;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,6 +32,14 @@ public class Utils {
             Log.e("GREC", "Exception", e);
         }
         return null;
+    }
+
+    public static void setColorForTextViewDrawable(int color, TextView... textViews) {
+        for (TextView textView : textViews) {
+            Drawable[] drawables = textView.getCompoundDrawables();
+            Drawable leftDrawable = drawables[0];
+            leftDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        }
     }
 
 

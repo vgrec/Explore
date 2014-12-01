@@ -22,6 +22,7 @@ import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.Review;
+import com.traveler.utils.Utils;
 
 import java.util.List;
 
@@ -124,7 +125,7 @@ public class PlaceDetailFragment extends Fragment {
         ratingTextView.setText(place.getRating());
         webSiteTextView.setText(place.getWebSite());
 
-        setColorFor(addressTextView, phoneNumberTextView, webSiteTextView);
+        Utils.setColorForTextViewDrawable(vibrantColor, addressTextView, phoneNumberTextView, webSiteTextView);
 
         if (place.getPhotos().size() > 0) {
             String url = String.format(Constants.Google.IMAGE_URL, place.getPhotos().get(0).getPhotoReference());
@@ -144,14 +145,6 @@ public class PlaceDetailFragment extends Fragment {
             RatingBar ratingBar = (RatingBar) row.findViewById(R.id.rating_bar);
             ratingBar.setNumStars(Integer.valueOf(review.getRating()));
             reviewsContainer.addView(row);
-        }
-    }
-
-    private void setColorFor(TextView... textViews) {
-        for (TextView textView : textViews) {
-            Drawable[] drawables = textView.getCompoundDrawables();
-            Drawable leftDrawable = drawables[0];
-            leftDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN);
         }
     }
 }

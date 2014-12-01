@@ -32,6 +32,7 @@ import com.traveler.http.VolleySingleton;
 import com.traveler.models.flickr.Photo;
 import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.wikipedia.PageDescription;
+import com.traveler.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,7 @@ public class LocationSummaryFragment extends Fragment {
     private ArrayList<Photo> photos = new ArrayList<Photo>();
     private PageDescription pageDescription;
     private String location;
+    private int vibrantColor;
 
     @InjectView(R.id.description)
     TextView descriptionTextView;
@@ -66,7 +68,19 @@ public class LocationSummaryFragment extends Fragment {
 
     @InjectView(R.id.title_header)
     View titleHeader;
-    private int vibrantColor;
+
+    @InjectView(R.id.description_label)
+    TextView descriptionLabel;
+
+    @InjectView(R.id.attractions_label)
+    TextView attractionsLabel;
+
+    @InjectView(R.id.streetview_label)
+    TextView streetViewLabel;
+
+    @InjectView(R.id.videos_label)
+    TextView videosLabel;
+
 
     public LocationSummaryFragment() {
     }
@@ -184,6 +198,7 @@ public class LocationSummaryFragment extends Fragment {
             public void onGenerated(Palette palette) {
                 vibrantColor = palette.getDarkMutedColor(Color.DKGRAY);
                 titleHeader.setBackgroundColor(vibrantColor);
+               // Utils.setColorForTextViewDrawable(vibrantColor, descriptionLabel, streetViewLabel, attractionsLabel, videosLabel);
             }
         });
     }

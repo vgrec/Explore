@@ -91,6 +91,7 @@
     <orderEntry type="library" exported="" name="butterknife-6.0.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-databind-2.4.1.3" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.4.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-6.1.71" level="project" />
     <orderEntry type="library" exported="" name="library-aar-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v13-21.0.0" level="project" />
   </component>

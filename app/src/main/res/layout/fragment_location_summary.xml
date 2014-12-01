@@ -60,8 +60,11 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/label"
+                    android:id="@+id/description_label"
                     style="@style/TextView.Category"
+                    android:drawableLeft="@drawable/ic_description"
+                    android:drawableStart="@drawable/ic_description"
+                    android:gravity="center_vertical"
                     android:text="DESCRIPTION"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
@@ -73,7 +76,6 @@
                     android:layout_height="1dp" />
 
                 <TextView
-
                     android:id="@+id/description"
                     android:background="@drawable/description_background"
                     android:maxLines="5"
@@ -101,7 +103,11 @@
 
                 <TextView
                     style="@style/TextView.Category"
+                    android:id="@+id/attractions_label"
                     android:text="ATRACTIONS"
+                    android:drawableLeft="@drawable/ic_theatre"
+                    android:drawableStart="@drawable/ic_theatre"
+                    android:gravity="center_vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
@@ -136,8 +142,12 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/streetview_label"
                     style="@style/TextView.Category"
                     android:text="STREET VIEW"
+                    android:drawableLeft="@drawable/ic_street_view"
+                    android:drawableStart="@drawable/ic_street_view"
+                    android:gravity="center_vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
@@ -171,8 +181,12 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/videos_label"
                     style="@style/TextView.Category"
-                    android:text="VIDEOS ABOUT BERLIN"
+                    android:text="VIDEOS"
+                    android:drawableLeft="@drawable/ic_video"
+                    android:drawableStart="@drawable/ic_video"
+                    android:gravity="center_vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 

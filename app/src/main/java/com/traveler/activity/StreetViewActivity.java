@@ -11,7 +11,7 @@ import com.traveler.R;
 
 public class StreetViewActivity extends Activity {
 
-    private static final LatLng SYDNEY = new LatLng(-33.87365, 151.20689);
+    private static final LatLng SYDNEY = new LatLng(44.4267674, 26.1025384);
 
     private StreetViewPanoramaView streetView;
 
