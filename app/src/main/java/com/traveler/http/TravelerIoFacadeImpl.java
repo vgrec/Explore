@@ -13,6 +13,7 @@ import com.traveler.models.flickr.PhotosResponse;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.PlaceItemsResponse;
 import com.traveler.models.wikipedia.DescriptionResponse;
+import com.traveler.models.youtube.VideosResponse;
 import com.traveler.utils.Utils;
 
 import java.util.List;
@@ -34,6 +35,13 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
     public TravelerIoFacade forLocation(String location) {
         this.location = location;
         return this;
+    }
+
+    /**
+     * store location in preferences
+     */
+    private static class TravelerPreferences {
+
     }
 
     // handle redirects, eg "slanic moldova"
@@ -113,7 +121,21 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
     }
 
     @Override
-    public void getVideos(TaskFinishedListener listener) {
+    public void getVideos(final TaskFinishedListener<VideosResponse> listener) {
+        String url = String.format(Constants.Youtube.VIDEOS_URL, "travel in Berlin");
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
 
+            @Override
+            public void onResponse(String response) {
+                VideosResponse videosResponse = Utils.fromJson(VideosResponse.class, response);
+                listener.onSuccess(videosResponse);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onFailure(error);
+            }
+        });
+        requestQueue.add(request);
     }
 }

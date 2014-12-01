@@ -5,6 +5,7 @@ import com.traveler.models.flickr.Photo;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.PlaceItemsResponse;
 import com.traveler.models.wikipedia.DescriptionResponse;
+import com.traveler.models.youtube.VideosResponse;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface TravelerIoFacade {
 
     void getPhotos(TaskFinishedListener<List<Photo>> listener);
 
-    void getVideos(TaskFinishedListener<String> listener);
+    void getVideos(TaskFinishedListener<VideosResponse> listener);
 
     void getPlaces(TaskFinishedListener<PlaceItemsResponse> listener, PlaceType placeType);
 
