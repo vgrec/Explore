@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ import com.traveler.http.VolleySingleton;
 import com.traveler.models.flickr.Photo;
 import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.wikipedia.PageDescription;
-import com.traveler.utils.Utils;
+import com.traveler.utils.ScrimUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,8 @@ public class LocationSummaryFragment extends Fragment {
     @InjectView(R.id.videos_label)
     TextView videosLabel;
 
+    @InjectView(R.id.header_container)
+    ViewGroup headerContainer;
 
     public LocationSummaryFragment() {
     }
@@ -171,6 +174,8 @@ public class LocationSummaryFragment extends Fragment {
                 }
             }
         });
+
+        headerContainer.setBackgroundDrawable(ScrimUtil.makeCubicGradientScrimDrawable(0xaa000000, 8, Gravity.BOTTOM));
     }
 
     private void downloadImageAndProcessColor(Photo photo, final ImageView imageView, Size size) {
@@ -198,7 +203,7 @@ public class LocationSummaryFragment extends Fragment {
             public void onGenerated(Palette palette) {
                 vibrantColor = palette.getDarkMutedColor(Color.DKGRAY);
                 titleHeader.setBackgroundColor(vibrantColor);
-               // Utils.setColorForTextViewDrawable(vibrantColor, descriptionLabel, streetViewLabel, attractionsLabel, videosLabel);
+                // Utils.setColorForTextViewDrawable(vibrantColor, descriptionLabel, streetViewLabel, attractionsLabel, videosLabel);
             }
         });
     }

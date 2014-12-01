@@ -8,11 +8,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/big_image"
-            tools:src="@drawable/lac"
+        <FrameLayout
+            android:id="@+id/header_container"
             android:layout_width="fill_parent"
-            android:layout_height="240dp" />
+            android:layout_height="240dp">
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/big_image"
+                tools:src="@drawable/lac"
+                android:layout_width="fill_parent"
+                android:layout_height="240dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="6dp"
+                android:textSize="16sp"
+                android:text="10 photos"
+                android:layout_gravity="bottom" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_marginTop="1dp"
