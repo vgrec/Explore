@@ -147,4 +147,8 @@ public class PlaceDetailFragment extends Fragment {
             reviewsContainer.addView(row);
         }
     }
+
+//    Intent intent = new Intent(Intent.ACTION_DIAL);
+//    intent.setData(Uri.parse("1234567890"))
+//    startActivity(intent);
 }

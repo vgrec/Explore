@@ -1,5 +1,5 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list"
+    android:id="@+id/attractions_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="2dp"

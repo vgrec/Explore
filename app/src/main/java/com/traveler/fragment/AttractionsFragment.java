@@ -39,7 +39,7 @@ public class AttractionsFragment extends Fragment {
     private PlaceType placeType;
     private List<Place> places = new ArrayList<Place>();
 
-    @InjectView(R.id.list)
+    @InjectView(R.id.attractions_list)
     RecyclerView recyclerView;
 
     public static AttractionsFragment newInstance(PlaceType placeType) {
