@@ -1,6 +1,8 @@
 package com.traveler.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -93,8 +95,9 @@ public class VideosFragment extends Fragment {
             String title = entry.getTitle().getText();
             String thumbnail = extractThumbnail(entry.getContent().getText());
             String duration = extractDuration(Html.fromHtml(entry.getContent().getText()).toString());
+            String link = entry.getLinks().get(0).getHref();
 
-            videos.add(new Video(title, thumbnail, duration));
+            videos.add(new Video(title, thumbnail, duration, link));
         }
 
         return videos;
@@ -135,6 +138,6 @@ public class VideosFragment extends Fragment {
     }
 
     private void openPlayVideoActivity(int position) {
-
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position).getLink())));
     }
 }

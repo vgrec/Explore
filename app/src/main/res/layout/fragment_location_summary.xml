@@ -1,73 +1,71 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <ScrollView xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/header_container"
-            android:layout_width="fill_parent"
-            android:layout_height="240dp">
-
-            <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/big_image"
-                tools:src="@drawable/lac"
-                android:layout_width="fill_parent"
-                android:layout_height="240dp" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:padding="6dp"
-                android:textSize="16sp"
-                android:text="10 photos"
-                android:layout_gravity="bottom" />
-
-        </FrameLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_marginTop="1dp"
-            android:id="@+id/title_header"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_weight="1"
-                android:padding="6dp"
-                android:layout_gravity="center_vertical"
-                android:textColor="#FFF"
-                tools:text="EXAMPLENOW"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+            <FrameLayout
+                android:id="@+id/header_container"
+                android:layout_width="fill_parent"
+                android:layout_height="240dp">
 
-            <View
-                android:background="#fff"
-                android:layout_width="1dp"
-                android:layout_height="fill_parent" />
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/big_image"
+                    tools:src="@drawable/lac"
+                    android:layout_width="fill_parent"
+                    android:layout_height="240dp" />
 
-            <ImageView
-                android:id="@+id/small_image"
-                tools:src="@drawable/bazin"
-                android:scaleType="centerCrop"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:padding="6dp"
+                    android:textSize="16sp"
+                    android:text="10 photos"
+                    android:layout_gravity="bottom" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_marginTop="1dp"
+                android:id="@+id/title_header"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_weight="1"
+                    android:padding="6dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#FFF"
+                    tools:text="EXAMPLENOW"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:background="#fff"
+                    android:layout_width="1dp"
+                    android:layout_height="fill_parent" />
+
+                <ImageView
+                    android:id="@+id/small_image"
+                    tools:src="@drawable/bazin"
+                    android:scaleType="centerCrop"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
 
 
-        </LinearLayout>
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="4dp">
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -86,7 +84,7 @@
                     android:layout_height="wrap_content" />
 
                 <View
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="6dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />
@@ -103,15 +101,9 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/attractions_card"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="4dp">
 
             <LinearLayout
+                android:id="@+id/attractions_card"
                 android:orientation="vertical"
                 android:padding="6dp"
                 android:layout_width="fill_parent"
@@ -128,7 +120,7 @@
                     android:layout_height="wrap_content" />
 
                 <View
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="6dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />
@@ -142,16 +134,8 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/streetview_card"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="4dp">
-
             <LinearLayout
+                android:id="@+id/streetview_card"
                 android:orientation="vertical"
                 android:padding="6dp"
                 android:layout_width="fill_parent"
@@ -168,7 +152,7 @@
                     android:layout_height="wrap_content" />
 
                 <View
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="6dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />
@@ -182,15 +166,8 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/videos_card"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="4dp">
-
             <LinearLayout
+                android:id="@+id/videos_card"
                 android:orientation="vertical"
                 android:padding="6dp"
                 android:layout_width="fill_parent"
@@ -207,12 +184,13 @@
                     android:layout_height="wrap_content" />
 
                 <View
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="6dp"
                     android:layout_width="fill_parent"
                     android:background="#ccc"
                     android:layout_height="1dp" />
 
                 <LinearLayout
+                    android:id="@+id/thumbnail_container"
                     android:layout_marginTop="4dp"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
@@ -241,14 +219,25 @@
                         android:src="@drawable/lac"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content" />
-
-
                 </LinearLayout>
 
             </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-        </android.support.v7.widget.CardView>
+    <!-- Progress View -->
+    <FrameLayout
+        android:id="@+id/progress_view"
+        android:background="@color/white"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
 
+        <ProgressBar
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    </LinearLayout>
-</ScrollView>
+    </FrameLayout>
+
+</RelativeLayout>

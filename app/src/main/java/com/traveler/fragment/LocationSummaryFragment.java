@@ -34,6 +34,7 @@ import com.traveler.models.flickr.Photo;
 import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.wikipedia.PageDescription;
 import com.traveler.utils.ScrimUtil;
+import com.traveler.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,9 @@ public class LocationSummaryFragment extends Fragment {
     private PageDescription pageDescription;
     private String location;
     private int vibrantColor;
+
+    private int tasksFinished;
+    private int totalNumberOfTasks = 3;
 
     @InjectView(R.id.description)
     TextView descriptionTextView;
@@ -84,6 +88,9 @@ public class LocationSummaryFragment extends Fragment {
 
     @InjectView(R.id.header_container)
     ViewGroup headerContainer;
+
+    @InjectView(R.id.progress_view)
+    ViewGroup progressView;
 
     public LocationSummaryFragment() {
     }
@@ -154,16 +161,14 @@ public class LocationSummaryFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
-        ioFacade.getDescription(new TaskFinishedListener<DescriptionResponse>() {
-            @Override
-            protected void onSuccess(DescriptionResponse result) {
-                pageDescription = result.getPageDescription();
-                descriptionTextView.setText(result.getPageDescription().getExtract());
-                locationTextView.setText(result.getPageDescription().getTitle());
-            }
-        });
+        getFlickrPhotos();
+        getDescription();
 
+        headerContainer.setBackgroundDrawable(ScrimUtil.makeCubicGradientScrimDrawable(0xaa000000, 8, Gravity.BOTTOM));
+    }
+
+    private void getFlickrPhotos() {
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
         ioFacade.getPhotos(new TaskFinishedListener<List<Photo>>() {
             @Override
             protected void onSuccess(List<Photo> result) {
@@ -171,11 +176,41 @@ public class LocationSummaryFragment extends Fragment {
                     photos.addAll(result);
                     downloadImage(result.get(0), bigImageView, Size.z);
                     downloadImageAndProcessColor(result.get(1), smallImageView, Size.q);
+                }else {
+                    checkTasks();
                 }
             }
-        });
 
-        headerContainer.setBackgroundDrawable(ScrimUtil.makeCubicGradientScrimDrawable(0xaa000000, 8, Gravity.BOTTOM));
+            @Override
+            protected void onFailure(VolleyError error) {
+                checkTasks();
+            }
+        });
+    }
+
+    private void checkTasks() {
+        tasksFinished++;
+        if (tasksFinished == totalNumberOfTasks) {
+            progressView.setVisibility(View.GONE);
+        }
+    }
+
+    private void getDescription() {
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
+        ioFacade.getDescription(new TaskFinishedListener<DescriptionResponse>() {
+            @Override
+            protected void onSuccess(DescriptionResponse result) {
+                pageDescription = result.getPageDescription();
+                descriptionTextView.setText(result.getPageDescription().getExtract());
+                locationTextView.setText(result.getPageDescription().getTitle());
+                checkTasks();
+            }
+
+            @Override
+            protected void onFailure(VolleyError error) {
+                checkTasks();
+            }
+        });
     }
 
     private void downloadImageAndProcessColor(Photo photo, final ImageView imageView, Size size) {
@@ -185,6 +220,7 @@ public class LocationSummaryFragment extends Fragment {
 
             public void onErrorResponse(VolleyError error) {
                 imageView.setImageResource(R.drawable.ic_launcher);
+                checkTasks();
             }
 
             public void onResponse(ImageLoader.ImageContainer response, boolean arg1) {
@@ -192,6 +228,8 @@ public class LocationSummaryFragment extends Fragment {
                 if (bitmap != null) {
                     smallImageView.setImageBitmap(bitmap);
                     generatePaletteAndSetColor(bitmap);
+                } else {
+                    checkTasks();
                 }
             }
         });
@@ -203,7 +241,8 @@ public class LocationSummaryFragment extends Fragment {
             public void onGenerated(Palette palette) {
                 vibrantColor = palette.getDarkMutedColor(Color.DKGRAY);
                 titleHeader.setBackgroundColor(vibrantColor);
-                // Utils.setColorForTextViewDrawable(vibrantColor, descriptionLabel, streetViewLabel, attractionsLabel, videosLabel);
+                Utils.setColorForTextViewDrawable(vibrantColor, descriptionLabel, streetViewLabel, attractionsLabel, videosLabel);
+                checkTasks();
             }
         });
     }

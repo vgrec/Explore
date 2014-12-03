@@ -7,11 +7,13 @@ public class Video {
     private final String title;
     private final String thumbnail;
     private final String duration;
+    private final String link;
 
-    public Video(String title, String thumbnail, String duration) {
+    public Video(String title, String thumbnail, String duration, String link) {
         this.title = title;
         this.thumbnail = thumbnail;
         this.duration = duration;
+        this.link = link;
     }
 
     public String getTitle() {
@@ -24,5 +26,9 @@ public class Video {
 
     public String getDuration() {
         return duration;
+    }
+
+    public String getLink() {
+        return link;
     }
 }

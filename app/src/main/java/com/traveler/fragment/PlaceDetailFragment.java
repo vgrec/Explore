@@ -2,8 +2,6 @@ package com.traveler.fragment;
 
 import android.app.Fragment;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -138,13 +136,15 @@ public class PlaceDetailFragment extends Fragment {
     private void displayReviews(List<Review> reviews) {
         for (Review review : reviews) {
             View row = View.inflate(getActivity(), R.layout.review_layout, null);
-            TextView author = (TextView) row.findViewById(R.id.author);
-            author.setText(review.getAuthor());
-            TextView text = (TextView) row.findViewById(R.id.text);
-            text.setText(review.getText());
-            RatingBar ratingBar = (RatingBar) row.findViewById(R.id.rating_bar);
-            ratingBar.setNumStars(Integer.valueOf(review.getRating()));
-            reviewsContainer.addView(row);
+            if (row != null) {
+                TextView author = (TextView) row.findViewById(R.id.author);
+                author.setText(review.getAuthor());
+                TextView text = (TextView) row.findViewById(R.id.text);
+                text.setText(review.getText());
+                RatingBar ratingBar = (RatingBar) row.findViewById(R.id.rating_bar);
+                ratingBar.setNumStars(Integer.valueOf(review.getRating()));
+                reviewsContainer.addView(row);
+            }
         }
     }
 
