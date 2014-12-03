@@ -122,7 +122,8 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
 
     @Override
     public void getVideos(final TaskFinishedListener<VideosResponse> listener) {
-        String url = String.format(Constants.Youtube.VIDEOS_URL, "travel in Berlin");
+        String location = (this.location) != null ? this.location : "Berlin";
+        String url = String.format(Constants.Youtube.VIDEOS_URL, "travel in " + location);
         StringRequest request = new StringRequest(url.replaceAll(" ", "%20"), new Response.Listener<String>() {
 
             @Override

@@ -33,8 +33,12 @@ import com.traveler.http.VolleySingleton;
 import com.traveler.models.flickr.Photo;
 import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.wikipedia.PageDescription;
+import com.traveler.models.youtube.Entry;
+import com.traveler.models.youtube.Video;
+import com.traveler.models.youtube.VideosResponse;
 import com.traveler.utils.ScrimUtil;
 import com.traveler.utils.Utils;
+import com.traveler.utils.VideoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +61,7 @@ public class LocationSummaryFragment extends Fragment {
     private int vibrantColor;
 
     private int tasksFinished;
-    private int totalNumberOfTasks = 3;
+    private int totalNumberOfTasks = 4;
 
     @InjectView(R.id.description)
     TextView descriptionTextView;
@@ -91,6 +95,9 @@ public class LocationSummaryFragment extends Fragment {
 
     @InjectView(R.id.progress_view)
     ViewGroup progressView;
+
+    @InjectView(R.id.videos_container)
+    ViewGroup videosContainer;
 
     public LocationSummaryFragment() {
     }
@@ -163,6 +170,7 @@ public class LocationSummaryFragment extends Fragment {
 
         getFlickrPhotos();
         getDescription();
+        getVideos();
 
         headerContainer.setBackgroundDrawable(ScrimUtil.makeCubicGradientScrimDrawable(0xaa000000, 8, Gravity.BOTTOM));
     }
@@ -176,7 +184,7 @@ public class LocationSummaryFragment extends Fragment {
                     photos.addAll(result);
                     downloadImage(result.get(0), bigImageView, Size.z);
                     downloadImageAndProcessColor(result.get(1), smallImageView, Size.q);
-                }else {
+                } else {
                     checkTasks();
                 }
             }
@@ -195,12 +203,49 @@ public class LocationSummaryFragment extends Fragment {
         }
     }
 
+    private void getVideos() {
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
+        ioFacade.getVideos(new TaskFinishedListener<VideosResponse>() {
+            @Override
+            protected void onSuccess(VideosResponse result) {
+                if (result != null) {
+                    List<Entry> entries = result.getFeed().getEntries();
+                    List<Video> videos = VideoUtils.toVideos(entries);
+                    showFirstVideos(videos);
+                }
+                checkTasks();
+            }
+
+            @Override
+            protected void onFailure(VolleyError error) {
+                checkTasks();
+            }
+        });
+    }
+
+    private void showFirstVideos(List<Video> videos) {
+        int numberOfImages = videosContainer.getChildCount();
+        if (videos.size() < numberOfImages) {
+            // TODO: hide videos card
+            return;
+        }
+
+        for (int i = 0; i < numberOfImages; i++) {
+            ViewGroup viewGroup = (ViewGroup) videosContainer.getChildAt(i);
+            NetworkImageView imageView = (NetworkImageView) viewGroup.getChildAt(0);
+            ImageHelper.loadImage(getActivity(), videos.get(i).getThumbnailUrl(), imageView);
+            TextView textView = (TextView) viewGroup.getChildAt(1);
+            textView.setText(videos.get(i).getTitle());
+        }
+    }
+
     private void getDescription() {
         TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
         ioFacade.getDescription(new TaskFinishedListener<DescriptionResponse>() {
             @Override
             protected void onSuccess(DescriptionResponse result) {
                 pageDescription = result.getPageDescription();
+
                 descriptionTextView.setText(result.getPageDescription().getExtract());
                 locationTextView.setText(result.getPageDescription().getTitle());
                 checkTasks();
