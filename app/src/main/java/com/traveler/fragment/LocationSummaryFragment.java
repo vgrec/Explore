@@ -199,7 +199,7 @@ public class LocationSummaryFragment extends Fragment {
     private void showFirstPlaces(final List<Place> places) {
         int numberOfImages = placesContainer.getChildCount();
         if (places.size() < numberOfImages) {
-            // TODO:// hide attractions card
+            // TODO: hide attractions card
             return;
         }
 
