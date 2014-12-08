@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PreviewCard">
+        <attr name="previewCardTitle" format="string" />
+        <attr name="previewCardIcon" format="reference" />
+        <attr name="previewContentLayout" format="reference" />
+    </declare-styleable>
+
+</resources>

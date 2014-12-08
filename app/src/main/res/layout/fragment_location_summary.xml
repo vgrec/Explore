@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
@@ -67,155 +68,29 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:padding="6dp"
+            <com.traveler.views.PreviewCard
+                android:id="@+id/description_card"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:previewCardTitle="DESCRIPTION"
+                app:previewCardIcon="@drawable/ic_description"
+                app:previewContentLayout="@layout/layout_card_description" />
 
-                <TextView
-                    android:id="@+id/description_label"
-                    style="@style/TextView.Category"
-                    android:drawableLeft="@drawable/ic_description"
-                    android:drawableStart="@drawable/ic_description"
-                    android:gravity="center_vertical"
-                    android:text="DESCRIPTION"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:layout_marginBottom="6dp"
-                    android:layout_width="fill_parent"
-                    android:background="#ccc"
-                    android:layout_height="1dp" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:background="@drawable/description_background"
-                    android:maxLines="5"
-                    android:layout_gravity="bottom"
-                    tools:text="Using the Uber API, developers can integrate the power of Uber into 3rd party applications. Calls to the API can be made to request information on available car types, driver location expressed"
-                    android:textSize="18sp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
+            <com.traveler.views.PreviewCard
                 android:id="@+id/attractions_card"
-                android:orientation="vertical"
-                android:padding="6dp"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:previewCardTitle="ATTRACTIONS"
+                app:previewCardIcon="@drawable/ic_theatre"
+                app:previewContentLayout="@layout/layout_card_attractions" />
 
-                <TextView
-                    style="@style/TextView.Category"
-                    android:id="@+id/attractions_label"
-                    android:text="ATRACTIONS"
-                    android:drawableLeft="@drawable/ic_theatre"
-                    android:drawableStart="@drawable/ic_theatre"
-                    android:gravity="center_vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:layout_marginBottom="6dp"
-                    android:layout_width="fill_parent"
-                    android:background="#ccc"
-                    android:layout_height="1dp" />
-
-                <LinearLayout
-                    android:id="@+id/attractions_photos_container"
-                    android:layout_marginTop="4dp"
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                    <FrameLayout
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-
-                        <com.android.volley.toolbox.NetworkImageView
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/lac"
-                            android:layout_width="fill_parent"
-                            android:layout_height="120dp" />
-
-                        <TextView
-                            android:lines="2"
-                            android:layout_gravity="bottom"
-                            android:background="#77000000"
-                            android:padding="4dp"
-                            android:textColor="@color/white"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_marginLeft="3dp"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-
-                        <com.android.volley.toolbox.NetworkImageView
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/lac"
-                            android:layout_width="fill_parent"
-                            android:layout_height="120dp" />
-
-                        <TextView
-                            android:lines="2"
-                            android:layout_gravity="bottom"
-                            android:background="#77000000"
-                            android:padding="4dp"
-                            android:textColor="@color/white"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content" />
-                    </FrameLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- StreetView won't be in first version -->
-            <LinearLayout
-                android:id="@+id/streetview_card"
-                android:visibility="gone"
-                android:orientation="vertical"
-                android:padding="6dp"
+            <com.traveler.views.PreviewCard
+                android:id="@+id/videos_card"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/streetview_label"
-                    style="@style/TextView.Category"
-                    android:text="STREET VIEW"
-                    android:drawableLeft="@drawable/ic_street_view"
-                    android:drawableStart="@drawable/ic_street_view"
-                    android:gravity="center_vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:layout_marginBottom="6dp"
-                    android:layout_width="fill_parent"
-                    android:background="#ccc"
-                    android:layout_height="1dp" />
-
-                <ImageView
-                    android:layout_marginTop="4dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/streetview"
-                    android:layout_width="fill_parent"
-                    android:layout_height="140dp" />
-
-            </LinearLayout>
-
-            <include layout="@layout/videos_card" />
-
+                android:layout_height="wrap_content"
+                app:previewCardTitle="VIDEOS"
+                app:previewCardIcon="@drawable/ic_video"
+                app:previewContentLayout="@layout/layout_card_videos" />
 
         </LinearLayout>
     </ScrollView>
@@ -223,6 +98,7 @@
     <!-- Progress View -->
     <FrameLayout
         android:id="@+id/progress_view"
+        android:visibility="gone"
         android:background="@color/white"
         android:layout_centerInParent="true"
         android:layout_width="fill_parent"

@@ -135,7 +135,7 @@ public class PlaceDetailFragment extends Fragment {
 
     private void displayReviews(List<Review> reviews) {
         for (Review review : reviews) {
-            View row = View.inflate(getActivity(), R.layout.review_layout, null);
+            View row = View.inflate(getActivity(), R.layout.layout_review, null);
             if (row != null) {
                 TextView author = (TextView) row.findViewById(R.id.author);
                 author.setText(review.getAuthor());

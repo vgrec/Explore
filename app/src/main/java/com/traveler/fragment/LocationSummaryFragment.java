@@ -44,6 +44,7 @@ import com.traveler.models.youtube.VideosResponse;
 import com.traveler.utils.ScrimUtil;
 import com.traveler.utils.Utils;
 import com.traveler.utils.VideoUtils;
+import com.traveler.views.PreviewCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,17 +84,14 @@ public class LocationSummaryFragment extends Fragment {
     @InjectView(R.id.title_header)
     View titleHeader;
 
-    @InjectView(R.id.description_label)
-    TextView descriptionLabel;
+    @InjectView(R.id.description_card)
+    PreviewCard descriptionCard;
 
-    @InjectView(R.id.attractions_label)
-    TextView attractionsLabel;
+    @InjectView(R.id.attractions_card)
+    PreviewCard attractionsCard;
 
-    @InjectView(R.id.streetview_label)
-    TextView streetViewLabel;
-
-    @InjectView(R.id.videos_label)
-    TextView videosLabel;
+    @InjectView(R.id.videos_card)
+    PreviewCard videosCard;
 
     @InjectView(R.id.header_container)
     ViewGroup headerContainer;
@@ -141,18 +139,11 @@ public class LocationSummaryFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.streetview_card)
-    void openStreetViewActivity() {
-        Intent intent = new Intent(getActivity(), StreetViewActivity.class);
-        startActivity(intent);
-    }
-
     @OnClick(R.id.videos_card)
     void openVideosActivity() {
         Intent intent = new Intent(getActivity(), VideosActivity.class);
         startActivity(intent);
     }
-
 
     @OnClick(R.id.description)
     void openDescriptionActivity() {
@@ -349,7 +340,8 @@ public class LocationSummaryFragment extends Fragment {
             public void onGenerated(Palette palette) {
                 vibrantColor = palette.getDarkMutedColor(Color.DKGRAY);
                 titleHeader.setBackgroundColor(vibrantColor);
-                Utils.setColorForTextViewDrawable(vibrantColor, descriptionLabel, streetViewLabel, attractionsLabel, videosLabel);
+                Utils.setColorForTextViewDrawable(vibrantColor, descriptionCard.getTitleTextView(),
+                        attractionsCard.getTitleTextView(), videosCard.getTitleTextView());
                 checkTasks();
             }
         });

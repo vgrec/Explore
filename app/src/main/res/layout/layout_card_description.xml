@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/description"
+    android:background="@drawable/description_background"
+    android:maxLines="5"
+    android:layout_gravity="bottom"
+    tools:text="Using the Uber API, developers can integrate the power of Uber into 3rd party applications. Calls to the API can be made to request information on available car types, driver location expressed"
+    android:textSize="18sp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/fragment_location_summary" />
