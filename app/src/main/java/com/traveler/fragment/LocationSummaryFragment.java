@@ -27,7 +27,6 @@ import com.traveler.activity.AttractionsActivity;
 import com.traveler.activity.DescriptionActivity;
 import com.traveler.activity.ImagesActivity;
 import com.traveler.activity.PlaceDetailActivity;
-import com.traveler.activity.StreetViewActivity;
 import com.traveler.activity.VideosActivity;
 import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacade;
@@ -45,6 +44,7 @@ import com.traveler.utils.ScrimUtil;
 import com.traveler.utils.Utils;
 import com.traveler.utils.VideoUtils;
 import com.traveler.views.PreviewCard;
+import com.traveler.views.PreviewImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,8 +195,8 @@ public class LocationSummaryFragment extends Fragment {
         }
 
         for (int i = 0; i < numberOfImages; i++) {
-            ViewGroup viewGroup = (ViewGroup) placesContainer.getChildAt(i);
-            NetworkImageView imageView = (NetworkImageView) viewGroup.getChildAt(0);
+            PreviewImage previewImage = (PreviewImage) placesContainer.getChildAt(i);
+            NetworkImageView imageView = previewImage.getImageView();
             final int finalI = i;
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -210,7 +210,7 @@ public class LocationSummaryFragment extends Fragment {
             } else {
                 ImageHelper.loadImage(getActivity(), places.get(i).getIconUrl(), imageView);
             }
-            TextView textView = (TextView) viewGroup.getChildAt(1);
+            TextView textView = previewImage.getTitleTextView();
             textView.setText(places.get(i).getName());
         }
     }
@@ -278,8 +278,8 @@ public class LocationSummaryFragment extends Fragment {
         }
 
         for (int i = 0; i < numberOfImages; i++) {
-            ViewGroup viewGroup = (ViewGroup) videosContainer.getChildAt(i);
-            NetworkImageView imageView = (NetworkImageView) viewGroup.getChildAt(0);
+            PreviewImage previewImage = (PreviewImage) videosContainer.getChildAt(i);
+            NetworkImageView imageView = previewImage.getImageView();
             final int finalI = i;
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -288,7 +288,7 @@ public class LocationSummaryFragment extends Fragment {
                 }
             });
             ImageHelper.loadImage(getActivity(), videos.get(i).getThumbnailUrl(), imageView);
-            TextView textView = (TextView) viewGroup.getChildAt(1);
+            TextView textView = previewImage.getTitleTextView();
             textView.setText(videos.get(i).getTitle());
         }
     }

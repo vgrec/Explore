@@ -8,48 +8,18 @@
     android:layout_height="wrap_content"
     tools:showIn="@layout/fragment_location_summary">
 
-    <FrameLayout
+    <com.traveler.views.PreviewImage
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_marginRight="3dp"
-        android:layout_weight="1"
+        android:layout_marginEnd="3dp" />
+
+    <com.traveler.views.PreviewImage
         android:layout_width="0dp"
-        android:layout_height="wrap_content">
-
-        <com.android.volley.toolbox.NetworkImageView
-            android:scaleType="centerCrop"
-            android:src="@drawable/lac"
-            android:layout_width="fill_parent"
-            android:layout_height="120dp" />
-
-        <TextView
-            android:lines="2"
-            android:layout_gravity="bottom"
-            android:background="#77000000"
-            android:padding="4dp"
-            android:textColor="@color/white"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-    </FrameLayout>
-
-    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_marginLeft="3dp"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
+        android:layout_marginStart="3dp" />
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:scaleType="centerCrop"
-            android:src="@drawable/lac"
-            android:layout_width="fill_parent"
-            android:layout_height="120dp" />
-
-        <TextView
-            android:lines="2"
-            android:layout_gravity="bottom"
-            android:background="#77000000"
-            android:padding="4dp"
-            android:textColor="@color/white"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </FrameLayout>
 </LinearLayout>
