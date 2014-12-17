@@ -127,29 +127,6 @@ public class LocationSummaryFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.attractions_card)
-    void openAttractionsActivity() {
-        Intent intent = new Intent(getActivity(), AttractionsActivity.class);
-        intent.putExtra(Extra.LOCATION, location);
-        intent.putExtra(Extra.VIBRANT_COLOR, vibrantColor);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.videos_card)
-    void openVideosActivity() {
-        Intent intent = new Intent(getActivity(), VideosActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.description)
-    void openDescriptionActivity() {
-        if (pageDescription != null) {
-            Intent intent = new Intent(getActivity(), DescriptionActivity.class);
-            intent.putExtra(KEY_PAGE_DESCRIPTION, pageDescription);
-            startActivity(intent);
-        }
-    }
-
     @OnClick(R.id.big_image)
     void openImagesActivity() {
         if (photos.size() > 2) {
@@ -162,10 +139,54 @@ public class LocationSummaryFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setListenersForPreviewCards();
         getAttractions();
         getFlickrPhotos();
         getDescription();
         getVideos();
+    }
+
+    private void setListenersForPreviewCards() {
+        descriptionCard.setViewAllButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDescriptionActivity();
+            }
+        });
+
+        attractionsCard.setViewAllButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAttractionsActivity();
+            }
+        });
+
+        videosCard.setViewAllButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openVideosActivity();
+            }
+        });
+    }
+
+    private void openDescriptionActivity() {
+        if (pageDescription != null) {
+            Intent intent = new Intent(getActivity(), DescriptionActivity.class);
+            intent.putExtra(KEY_PAGE_DESCRIPTION, pageDescription);
+            startActivity(intent);
+        }
+    }
+
+    private void openAttractionsActivity() {
+        Intent intent = new Intent(getActivity(), AttractionsActivity.class);
+        intent.putExtra(Extra.LOCATION, location);
+        intent.putExtra(Extra.VIBRANT_COLOR, vibrantColor);
+        startActivity(intent);
+    }
+
+    private void openVideosActivity() {
+        Intent intent = new Intent(getActivity(), VideosActivity.class);
+        startActivity(intent);
     }
 
     private void getAttractions() {

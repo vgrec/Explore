@@ -21,6 +21,7 @@ import butterknife.InjectView;
 public class PreviewCard extends LinearLayout {
 
     private LayoutInflater inflater;
+    private OnClickListener viewAllButtonClickListener;
 
     @InjectView(R.id.card_title)
     TextView cardTitleTextView;
@@ -49,6 +50,15 @@ public class PreviewCard extends LinearLayout {
         inflater.inflate(R.layout.view_preview_card, this, true);
         ButterKnife.inject(this, this);
         setAttributes(context, attrs);
+
+        viewAllButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewAllButtonClickListener != null) {
+                    viewAllButtonClickListener.onClick(v);
+                }
+            }
+        });
     }
 
     private void setAttributes(Context context, AttributeSet attrs) {
@@ -72,5 +82,9 @@ public class PreviewCard extends LinearLayout {
 
     public TextView getTitleTextView() {
         return cardTitleTextView;
+    }
+
+    public void setViewAllButtonClickListener(OnClickListener listener) {
+        this.viewAllButtonClickListener = listener;
     }
 }

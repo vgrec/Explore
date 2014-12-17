@@ -25,9 +25,15 @@
 
         <Button
             android:id="@+id/view_all"
+            android:background="@drawable/view_all_background"
+            android:textColor="@color/white"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View All" />
+            android:layout_height="30dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="VIEW ALL" />
 
     </LinearLayout>
 
