@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.traveler.Extra;
 import com.traveler.R;
-import com.traveler.adapters.ImageAdapter;
+import com.traveler.adapters.ImageGalleryPagerAdapter;
 import com.traveler.models.flickr.Photo;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class ImagesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_images, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
-        viewPager.setAdapter(new ImageAdapter(getActivity(), photos));
+        viewPager.setAdapter(new ImageGalleryPagerAdapter(getActivity(), photos));
         return view;
     }
 }

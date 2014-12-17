@@ -43,7 +43,9 @@ public class AttractionsActivity extends Activity {
     }
 
     private void configureActionBar(int vibrantColor) {
-        getActionBar().setBackgroundDrawable(new ColorDrawable(vibrantColor));
+        if (getActionBar() != null) {
+            getActionBar().setBackgroundDrawable(new ColorDrawable(vibrantColor));
+        }
         TextView textView = new TextView(this);
         textView.setText("Attractions in " + city);
         textView.setTextColor(Color.WHITE);

@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +39,11 @@ import com.traveler.models.wikipedia.PageDescription;
 import com.traveler.models.youtube.Entry;
 import com.traveler.models.youtube.Video;
 import com.traveler.models.youtube.VideosResponse;
-import com.traveler.utils.ScrimUtil;
 import com.traveler.utils.Utils;
 import com.traveler.utils.VideoUtils;
 import com.traveler.views.PreviewCard;
 import com.traveler.views.PreviewImage;
+import com.traveler.views.ScrimImageHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ import butterknife.OnClick;
 public class LocationSummaryFragment extends Fragment {
 
     public static final String KEY_LOCATION = "KEY_LOCATION";
-    public static final String PAGE_DESCRIPTION = "PAGE_DESCRIPTION";
+    public static final String KEY_PAGE_DESCRIPTION = "KEY_PAGE_DESCRIPTION";
 
     private ArrayList<Photo> photos = new ArrayList<Photo>();
     private PageDescription pageDescription;
@@ -75,11 +74,11 @@ public class LocationSummaryFragment extends Fragment {
     @InjectView(R.id.location)
     TextView locationTextView;
 
-    @InjectView(R.id.big_image)
-    NetworkImageView bigImageView;
-
     @InjectView(R.id.small_image)
     ImageView smallImageView;
+
+    @InjectView(R.id.big_image_header)
+    ScrimImageHeader scrimImageHeader;
 
     @InjectView(R.id.title_header)
     View titleHeader;
@@ -92,9 +91,6 @@ public class LocationSummaryFragment extends Fragment {
 
     @InjectView(R.id.videos_card)
     PreviewCard videosCard;
-
-    @InjectView(R.id.header_container)
-    ViewGroup headerContainer;
 
     @InjectView(R.id.progress_view)
     ViewGroup progressView;
@@ -149,7 +145,7 @@ public class LocationSummaryFragment extends Fragment {
     void openDescriptionActivity() {
         if (pageDescription != null) {
             Intent intent = new Intent(getActivity(), DescriptionActivity.class);
-            intent.putExtra(PAGE_DESCRIPTION, pageDescription);
+            intent.putExtra(KEY_PAGE_DESCRIPTION, pageDescription);
             startActivity(intent);
         }
     }
@@ -166,13 +162,10 @@ public class LocationSummaryFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         getAttractions();
         getFlickrPhotos();
         getDescription();
         getVideos();
-
-        headerContainer.setBackgroundDrawable(ScrimUtil.makeCubicGradientScrimDrawable(0xaa000000, 8, Gravity.BOTTOM));
     }
 
     private void getAttractions() {
@@ -229,7 +222,8 @@ public class LocationSummaryFragment extends Fragment {
             protected void onSuccess(List<Photo> result) {
                 if (result.size() > 2) {
                     photos.addAll(result);
-                    downloadImage(result.get(0), bigImageView, Size.z);
+                    scrimImageHeader.setNumberOfPhotos(result.size());
+                    downloadImage(result.get(0), Size.z);
                     downloadImageAndProcessColor(result.get(1), smallImageView, Size.q);
                 } else {
                     checkTasks();
@@ -347,8 +341,8 @@ public class LocationSummaryFragment extends Fragment {
         });
     }
 
-    private void downloadImage(Photo photo, NetworkImageView targetImageView, Size size) {
+    private void downloadImage(Photo photo, Size size) {
         String url = String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), size);
-        ImageHelper.loadImage(getActivity(), url, targetImageView);
+        scrimImageHeader.setImageUrl(url);
     }
 }

@@ -21,6 +21,7 @@ import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.Review;
 import com.traveler.utils.Utils;
+import com.traveler.views.ScrimImageHeader;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class PlaceDetailFragment extends Fragment {
     private int vibrantColor = Color.BLUE; // default;
     private PlaceDetailsResponse placeResponse;
 
-    @InjectView(R.id.place_detail_picture)
-    NetworkImageView placeDetailImageView;
+    @InjectView(R.id.big_image_header)
+    ScrimImageHeader bigImageHeader;
 
     @InjectView(R.id.place_name)
     TextView nameTextView;
@@ -127,7 +128,8 @@ public class PlaceDetailFragment extends Fragment {
 
         if (place.getPhotos().size() > 0) {
             String url = String.format(Constants.Google.IMAGE_URL, place.getPhotos().get(0).getPhotoReference());
-            ImageHelper.loadImage(getActivity(), url, placeDetailImageView);
+            bigImageHeader.setImageUrl(url);
+            bigImageHeader.setNumberOfPhotos(place.getPhotos().size());
         }
 
         displayReviews(place.getReviews());

@@ -15,11 +15,12 @@ public class DescriptionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            PageDescription pageDescription = (PageDescription) extras.getSerializable(LocationSummaryFragment.PAGE_DESCRIPTION);
-            title = pageDescription.getTitle();
+            PageDescription pageDescription = (PageDescription) extras.getSerializable(LocationSummaryFragment.KEY_PAGE_DESCRIPTION);
             addDescriptionFragment(extras);
+            title = pageDescription.getTitle();
         } else {
             title = savedInstanceState.getString(TITLE);
         }

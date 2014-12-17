@@ -31,7 +31,7 @@ public class DescriptionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         if (getArguments() != null) {
-            pageDescription = (PageDescription) getArguments().getSerializable(LocationSummaryFragment.PAGE_DESCRIPTION);
+            pageDescription = (PageDescription) getArguments().getSerializable(LocationSummaryFragment.KEY_PAGE_DESCRIPTION);
         }
     }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/big_image"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp" />
+
+    <FrameLayout
+        android:id="@+id/scrim_background"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp" />
+
+    <TextView
+        android:id="@+id/number_of_photos"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:padding="6dp"
+        android:textSize="16sp"
+        android:layout_gravity="bottom" />
+
+</FrameLayout>

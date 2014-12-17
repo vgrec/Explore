@@ -20,13 +20,13 @@ import java.util.List;
 /**
  * @author vgrec, created on 10/24/14.
  */
-public class ImageAdapter extends PagerAdapter {
+public class ImageGalleryPagerAdapter extends PagerAdapter {
 
     private List<Photo> photos = new ArrayList<Photo>();
     private LayoutInflater inflater;
     private Context context;
 
-    public ImageAdapter(Context context, List<Photo> photos) {
+    public ImageGalleryPagerAdapter(Context context, List<Photo> photos) {
         this.context = context;
         this.photos.addAll(photos);
         inflater = LayoutInflater.from(context);

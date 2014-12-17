@@ -8,6 +8,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
+        <com.traveler.views.ScrimImageHeader
+            android:id="@+id/big_image_header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/place_detail_picture"
             android:scaleType="centerCrop"
