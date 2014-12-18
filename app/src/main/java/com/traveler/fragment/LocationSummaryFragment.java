@@ -14,14 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.Constants;
 import com.traveler.Extra;
-import com.traveler.ImageHelper;
-import com.traveler.PlaceType;
+import com.traveler.http.ImageLoader;
+import com.traveler.models.google.PlaceType;
 import com.traveler.R;
-import com.traveler.Size;
+import com.traveler.models.flickr.Size;
 import com.traveler.activity.AttractionsActivity;
 import com.traveler.activity.DescriptionActivity;
 import com.traveler.activity.ImagesActivity;
@@ -220,9 +219,9 @@ public class LocationSummaryFragment extends Fragment {
             });
             if (places.get(i).getPhotos() != null && places.get(i).getPhotos().size() > 0) {
                 String url = String.format(Constants.Google.THUMBNAIL_URL, places.get(i).getPhotos().get(0).getPhotoReference());
-                ImageHelper.loadImage(getActivity(), url, imageView);
+                ImageLoader.loadImage(getActivity(), url, imageView);
             } else {
-                ImageHelper.loadImage(getActivity(), places.get(i).getIconUrl(), imageView);
+                ImageLoader.loadImage(getActivity(), places.get(i).getIconUrl(), imageView);
             }
             TextView textView = previewImage.getTitleTextView();
             textView.setText(places.get(i).getName());
@@ -302,7 +301,7 @@ public class LocationSummaryFragment extends Fragment {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(finalI).getLink())));
                 }
             });
-            ImageHelper.loadImage(getActivity(), videos.get(i).getThumbnailUrl(), imageView);
+            ImageLoader.loadImage(getActivity(), videos.get(i).getThumbnailUrl(), imageView);
             TextView textView = previewImage.getTitleTextView();
             textView.setText(videos.get(i).getTitle());
         }
@@ -314,7 +313,6 @@ public class LocationSummaryFragment extends Fragment {
             @Override
             protected void onSuccess(DescriptionResponse result) {
                 pageDescription = result.getPageDescription();
-
                 descriptionTextView.setText(result.getPageDescription().getExtract());
                 locationTextView.setText(result.getPageDescription().getTitle());
                 checkTasks();
@@ -328,16 +326,16 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     private void downloadImageAndProcessColor(Photo photo, final ImageView imageView, Size size) {
-        ImageLoader imageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
+        com.android.volley.toolbox.ImageLoader imageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
         String url = String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), size);
-        imageLoader.get(url, new ImageLoader.ImageListener() {
+        imageLoader.get(url, new com.android.volley.toolbox.ImageLoader.ImageListener() {
 
             public void onErrorResponse(VolleyError error) {
                 imageView.setImageResource(R.drawable.ic_launcher);
                 checkTasks();
             }
 
-            public void onResponse(ImageLoader.ImageContainer response, boolean arg1) {
+            public void onResponse(com.android.volley.toolbox.ImageLoader.ImageContainer response, boolean arg1) {
                 Bitmap bitmap = response.getBitmap();
                 if (bitmap != null) {
                     smallImageView.setImageBitmap(bitmap);

@@ -1,4 +1,4 @@
-package com.traveler;
+package com.traveler.models.flickr;
 
 /**
  * q = 150 x 150

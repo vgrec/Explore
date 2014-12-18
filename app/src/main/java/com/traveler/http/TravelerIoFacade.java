@@ -1,6 +1,6 @@
 package com.traveler.http;
 
-import com.traveler.PlaceType;
+import com.traveler.models.google.PlaceType;
 import com.traveler.models.flickr.Photo;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.PlaceItemsResponse;

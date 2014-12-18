@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.Constants;
 import com.traveler.Extra;
-import com.traveler.ImageHelper;
 import com.traveler.R;
 import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacadeImpl;

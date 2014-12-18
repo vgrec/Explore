@@ -7,7 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.traveler.Constants;
-import com.traveler.PlaceType;
+import com.traveler.models.google.PlaceType;
 import com.traveler.models.flickr.Photo;
 import com.traveler.models.flickr.PhotosResponse;
 import com.traveler.models.google.PlaceDetailsResponse;
@@ -66,7 +66,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
 
     @Override
     public void getPhotos(final TaskFinishedListener<List<Photo>> listener) {
-        String url = String.format(Constants.Flickr.SEARCH_PHOTOS_URL, location);
+        String url = String.format(Constants.Flickr.SEARCH_PHOTOS_URL, location+"%20city");
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

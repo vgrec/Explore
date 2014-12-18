@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.traveler.Extra;
-import com.traveler.PlaceType;
+import com.traveler.models.google.PlaceType;
 import com.traveler.R;
 import com.traveler.activity.AttractionsActivity;
 import com.traveler.activity.PlaceDetailActivity;

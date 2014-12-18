@@ -9,9 +9,9 @@ import android.widget.ProgressBar;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.Constants;
-import com.traveler.ImageHelper;
+import com.traveler.http.ImageLoader;
 import com.traveler.R;
-import com.traveler.Size;
+import com.traveler.models.flickr.Size;
 import com.traveler.models.flickr.Photo;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class ImageGalleryPagerAdapter extends PagerAdapter {
         final NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.image);
         Photo photo = photos.get(position);
         String url = String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), Size.z);
-        ImageHelper.loadImage(context, url, imageView);
+        ImageLoader.loadImage(context, url, imageView);
         imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {

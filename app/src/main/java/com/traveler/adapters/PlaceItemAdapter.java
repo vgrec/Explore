@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.Constants;
-import com.traveler.ImageHelper;
+import com.traveler.http.ImageLoader;
 import com.traveler.R;
 import com.traveler.models.google.Place;
 
@@ -42,9 +42,9 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
 
         if (place.getPhotos() != null && place.getPhotos().size() > 0) {
             String url = String.format(Constants.Google.THUMBNAIL_URL, place.getPhotos().get(0).getPhotoReference());
-            ImageHelper.loadImage(context, url, viewHolder.placePicture);
+            ImageLoader.loadImage(context, url, viewHolder.placePicture);
         } else {
-            ImageHelper.loadImage(context, place.getIconUrl(), viewHolder.placePicture);
+            ImageLoader.loadImage(context, place.getIconUrl(), viewHolder.placePicture);
         }
     }
 

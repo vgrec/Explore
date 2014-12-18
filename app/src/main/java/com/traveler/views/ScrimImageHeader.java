@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.traveler.ImageHelper;
+import com.traveler.http.ImageLoader;
 import com.traveler.R;
 import com.traveler.utils.ScrimUtil;
 
@@ -61,6 +61,6 @@ public class ScrimImageHeader extends LinearLayout {
     }
 
     public void setImageUrl(String url) {
-        ImageHelper.loadImage(context, url, bigImage);
+        ImageLoader.loadImage(context, url, bigImage);
     }
 }

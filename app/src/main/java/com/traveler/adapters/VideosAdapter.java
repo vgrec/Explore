@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.traveler.Constants;
-import com.traveler.ImageHelper;
+import com.traveler.http.ImageLoader;
 import com.traveler.R;
 import com.traveler.models.youtube.Video;
 
@@ -40,7 +39,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
         Video video = videos.get(position);
         viewHolder.name.setText(video.getTitle());
         viewHolder.duration.setText(video.getDuration());
-        ImageHelper.loadImage(context, video.getThumbnailUrl(), viewHolder.videoThumbnail);
+        ImageLoader.loadImage(context, video.getThumbnailUrl(), viewHolder.videoThumbnail);
     }
 
     @Override

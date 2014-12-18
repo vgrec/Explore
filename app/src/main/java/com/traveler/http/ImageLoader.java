@@ -1,4 +1,4 @@
-package com.traveler;
+package com.traveler.http;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -11,7 +11,7 @@ import com.traveler.http.VolleySingleton;
  *
  * @author vgrec, created on 10/24/14.
  */
-public class ImageHelper {
+public class ImageLoader {
 
     public static void loadImage(Context context, String url, NetworkImageView imageView) {
         com.android.volley.toolbox.ImageLoader loader = VolleySingleton.getInstance(context).getImageLoader();

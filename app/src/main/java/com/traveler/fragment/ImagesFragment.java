@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class ImagesFragment extends Fragment {
 
     private ArrayList<Photo> photos = new ArrayList<Photo>();
-    private ViewPager viewPager;
 
     public static Fragment newInstance(Bundle extras) {
         ImagesFragment fragment = new ImagesFragment();
@@ -39,7 +38,7 @@ public class ImagesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_images, container, false);
-        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new ImageGalleryPagerAdapter(getActivity(), photos));
         return view;

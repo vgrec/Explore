@@ -1,4 +1,4 @@
-package com.traveler;
+package com.traveler.models.google;
 
 /**
  * @author vgrec, created on 11/4/14.
