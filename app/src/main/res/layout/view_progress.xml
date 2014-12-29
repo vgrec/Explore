@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/progress_view_container"
+    android:background="#e8e8e8"
+    android:visibility="gone"
+    tools:visibility="visible"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+
+    <LinearLayout
+        android:id="@+id/error_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#6d6d6d"
+            android:textSize="18sp"
+            android:text="@string/cant_load_attractions" />
+
+        <TextView
+            android:id="@+id/try_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_selector"
+            android:textSize="18sp"
+            android:layout_marginTop="4dp"
+            android:padding="4dp"
+            android:textColor="#16BED4"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="@string/try_again" />
+    </LinearLayout>
+
+</RelativeLayout>

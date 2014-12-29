@@ -14,5 +14,8 @@
     <string name="title_activity_place_detail">Details</string>
     <string name="title_activity_street_view">StreetViewActivity</string>
     <string name="title_activity_videos">VideosActivity</string>
+    <string name="cant_load_attractions">Could not load attractions</string>
+    <string name="cant_load_videos">Could not load videos</string>
+    <string name="try_again">TRY AGAIN</string>
 
 </resources>

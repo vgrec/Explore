@@ -7,4 +7,8 @@
         <attr name="previewContentLayout" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="ProgressView">
+        <attr name="progressViewErrorText" format="reference" />
+    </declare-styleable>
+
 </resources>

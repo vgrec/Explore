@@ -1,8 +1,19 @@
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/attractions_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="2dp"
-    android:paddingRight="2dp"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/attractions_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp" />
+
+    <com.traveler.views.ProgressView
+        android:id="@+id/progress_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</RelativeLayout>
 
 

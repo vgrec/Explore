@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
@@ -19,6 +20,7 @@ import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.Review;
 import com.traveler.utils.Utils;
+import com.traveler.views.ProgressView;
 import com.traveler.views.ScrimImageHeader;
 
 import java.util.List;
@@ -60,6 +62,9 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.reviews_container)
     ViewGroup reviewsContainer;
 
+    @InjectView(R.id.progress_view)
+    ProgressView progressView;
+
     public static Fragment newInstance(String placeId) {
         PlaceDetailFragment fragment = new PlaceDetailFragment();
         Bundle args = new Bundle();
@@ -93,15 +98,29 @@ public class PlaceDetailFragment extends Fragment {
         } else {
             updateUi();
         }
+
+        progressView.setTryAgainClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadPlaceDetailsAndUpdateUi();
+            }
+        });
     }
 
     private void downloadPlaceDetailsAndUpdateUi() {
+        progressView.show();
         TravelerIoFacadeImpl ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getPlaceDetails(placeId, new TaskFinishedListener<PlaceDetailsResponse>() {
             @Override
             protected void onSuccess(PlaceDetailsResponse result) {
+                progressView.hide();
                 placeResponse = result;
                 updateUi();
+            }
+
+            @Override
+            protected void onFailure(VolleyError error) {
+                progressView.showError();
             }
         });
     }

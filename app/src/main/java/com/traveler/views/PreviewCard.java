@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +13,7 @@ import com.traveler.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * @author vgrec, created on 12/8/14.
@@ -25,9 +25,6 @@ public class PreviewCard extends LinearLayout {
 
     @InjectView(R.id.card_title)
     TextView cardTitleTextView;
-
-    @InjectView(R.id.view_all)
-    Button viewAllButton;
 
     @InjectView(R.id.content)
     ViewGroup contentContainer;
@@ -50,15 +47,13 @@ public class PreviewCard extends LinearLayout {
         inflater.inflate(R.layout.view_preview_card, this, true);
         ButterKnife.inject(this, this);
         setAttributes(context, attrs);
+    }
 
-        viewAllButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (viewAllButtonClickListener != null) {
-                    viewAllButtonClickListener.onClick(v);
-                }
-            }
-        });
+    @OnClick(R.id.view_all)
+    public void onViewAllButtonClicked(View v) {
+        if (viewAllButtonClickListener != null) {
+            viewAllButtonClickListener.onClick(v);
+        }
     }
 
     private void setAttributes(Context context, AttributeSet attrs) {
