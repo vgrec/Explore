@@ -17,22 +17,22 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.Constants;
 import com.traveler.Extra;
-import com.traveler.http.ImageLoader;
-import com.traveler.models.google.PlaceType;
 import com.traveler.R;
-import com.traveler.models.flickr.Size;
 import com.traveler.activity.AttractionsActivity;
 import com.traveler.activity.DescriptionActivity;
 import com.traveler.activity.ImagesActivity;
 import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.activity.VideosActivity;
+import com.traveler.http.ImageLoader;
 import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.http.VolleySingleton;
 import com.traveler.models.flickr.Photo;
+import com.traveler.models.flickr.Size;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceItemsResponse;
+import com.traveler.models.google.PlaceType;
 import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.wikipedia.PageDescription;
 import com.traveler.models.youtube.Entry;
@@ -56,13 +56,10 @@ import butterknife.OnClick;
  */
 public class LocationSummaryFragment extends Fragment {
 
-    public static final String KEY_LOCATION = "KEY_LOCATION";
     public static final String KEY_PAGE_DESCRIPTION = "KEY_PAGE_DESCRIPTION";
 
     private ArrayList<Photo> photos = new ArrayList<Photo>();
     private PageDescription pageDescription;
-    private String location;
-    private int vibrantColor;
 
     private int tasksFinished;
     private int totalNumberOfTasks = 4;
@@ -101,21 +98,6 @@ public class LocationSummaryFragment extends Fragment {
     ViewGroup placesContainer;
 
     public LocationSummaryFragment() {
-    }
-
-    public static LocationSummaryFragment newInstance(String location) {
-        Bundle args = new Bundle();
-        args.putString(KEY_LOCATION, location);
-
-        LocationSummaryFragment fragment = new LocationSummaryFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        location = getArguments().getString(KEY_LOCATION);
     }
 
     @Override
@@ -178,8 +160,6 @@ public class LocationSummaryFragment extends Fragment {
 
     private void openAttractionsActivity() {
         Intent intent = new Intent(getActivity(), AttractionsActivity.class);
-        intent.putExtra(Extra.LOCATION, location);
-        intent.putExtra(Extra.VIBRANT_COLOR, vibrantColor);
         startActivity(intent);
     }
 
@@ -189,7 +169,7 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     private void getAttractions() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getPlaces(new TaskFinishedListener<PlaceItemsResponse>() {
             @Override
             protected void onSuccess(PlaceItemsResponse result) {
@@ -231,12 +211,11 @@ public class LocationSummaryFragment extends Fragment {
     private void openPlaceDetailsActivity(Place place) {
         Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
         intent.putExtra(Extra.PLACE_ID, place.getPlaceId());
-        intent.putExtra(Extra.VIBRANT_COLOR, vibrantColor);
         startActivity(intent);
     }
 
     private void getFlickrPhotos() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getPhotos(new TaskFinishedListener<List<Photo>>() {
             @Override
             protected void onSuccess(List<Photo> result) {
@@ -265,7 +244,7 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     private void getVideos() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getVideos(new TaskFinishedListener<VideosResponse>() {
             @Override
             protected void onSuccess(VideosResponse result) {
@@ -308,7 +287,7 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     private void getDescription() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(location);
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getDescription(new TaskFinishedListener<DescriptionResponse>() {
             @Override
             protected void onSuccess(DescriptionResponse result) {
@@ -351,9 +330,12 @@ public class LocationSummaryFragment extends Fragment {
         Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
-                vibrantColor = palette.getDarkMutedColor(Color.DKGRAY);
-                titleHeader.setBackgroundColor(vibrantColor);
-                Utils.setColorForTextViewDrawable(vibrantColor, descriptionCard.getTitleTextView(),
+                int darkMutedColor = palette.getDarkMutedColor(Color.DKGRAY);
+                if (getActivity() != null) {
+                    TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).setDarkMutedColor(darkMutedColor);
+                }
+                titleHeader.setBackgroundColor(darkMutedColor);
+                Utils.setColorForTextViewDrawable(darkMutedColor, descriptionCard.getTitleTextView(),
                         attractionsCard.getTitleTextView(), videosCard.getTitleTextView());
                 checkTasks();
             }

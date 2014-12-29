@@ -88,22 +88,13 @@ public class AttractionsFragment extends Fragment {
     }
 
     private void openPlaceDetailsActivity(int position) {
-        int vibrantColor;
-        if (getActivity() != null) {
-            vibrantColor = ((AttractionsActivity) getActivity()).getVibrantColor();
-        } else {
-            vibrantColor = Color.BLUE;
-        }
-
         Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
         intent.putExtra(Extra.PLACE_ID, places.get(position).getPlaceId());
-        intent.putExtra(Extra.VIBRANT_COLOR, vibrantColor);
         startActivity(intent);
     }
 
     private void downloadPlaces() {
-        String city = ((AttractionsActivity) getActivity()).getCity();
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity()).forLocation(city);
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getPlaces(new TaskFinishedListener<PlaceItemsResponse>() {
             @Override
             protected void onSuccess(PlaceItemsResponse result) {

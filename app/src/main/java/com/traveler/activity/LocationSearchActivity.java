@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.traveler.Extra;
 import com.traveler.R;
+import com.traveler.http.TravelerIoFacadeImpl;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 public class LocationSearchActivity extends Activity {
+
     @InjectView(R.id.go)
     Button goButton;
 
@@ -32,8 +33,10 @@ public class LocationSearchActivity extends Activity {
 
     @OnClick(R.id.go)
     void startLocationSummaryActivity() {
+        String location = locationEditText.getText().toString().trim();
+        TravelerIoFacadeImpl.TravelerSettings.getInstance(LocationSearchActivity.this).setLocation(location);
+
         Intent intent = new Intent(LocationSearchActivity.this, LocationSummaryActivity.class);
-        intent.putExtra(Extra.LOCATION, locationEditText.getText().toString().trim());
         startActivity(intent);
     }
 

@@ -34,7 +34,6 @@ import butterknife.InjectView;
 public class PlaceDetailFragment extends Fragment {
 
     private String placeId;
-    private int vibrantColor = Color.BLUE; // default;
     private PlaceDetailsResponse placeResponse;
 
     @InjectView(R.id.big_image_header)
@@ -61,11 +60,10 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.reviews_container)
     ViewGroup reviewsContainer;
 
-    public static Fragment newInstance(String placeId, int vibrantColor) {
+    public static Fragment newInstance(String placeId) {
         PlaceDetailFragment fragment = new PlaceDetailFragment();
         Bundle args = new Bundle();
         args.putString(Extra.PLACE_ID, placeId);
-        args.putInt(Extra.VIBRANT_COLOR, vibrantColor);
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,7 +74,6 @@ public class PlaceDetailFragment extends Fragment {
         setRetainInstance(true);
         if (getArguments() != null) {
             placeId = getArguments().getString(Extra.PLACE_ID);
-            vibrantColor = getArguments().getInt(Extra.VIBRANT_COLOR);
         }
     }
 
@@ -115,14 +112,16 @@ public class PlaceDetailFragment extends Fragment {
             return;
         }
 
+        int primaryColor = TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).getPrimaryColor();
+
         nameTextView.setText(place.getName());
-        detailsHeaderContainer.setBackgroundColor(vibrantColor);
+        detailsHeaderContainer.setBackgroundColor(primaryColor);
         addressTextView.setText(place.getAddress());
         phoneNumberTextView.setText(place.getPhoneNumber());
         ratingTextView.setText(place.getRating());
         webSiteTextView.setText(place.getWebSite());
 
-        Utils.setColorForTextViewDrawable(vibrantColor, addressTextView, phoneNumberTextView, webSiteTextView);
+        Utils.setColorForTextViewDrawable(primaryColor, addressTextView, phoneNumberTextView, webSiteTextView);
 
         if (place.getPhotos().size() > 0) {
             String url = String.format(Constants.Google.IMAGE_URL, place.getPhotos().get(0).getPhotoReference());
