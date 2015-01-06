@@ -10,6 +10,9 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceItemsResponse {
+    @JsonProperty("next_page_token")
+    private String nextPageToken;
+
     @JsonProperty("html_attributions")
     private List<String> htmlAttributions;
 
@@ -22,5 +25,9 @@ public class PlaceItemsResponse {
 
     public List<Place> getPlaces() {
         return getPlaces;
+    }
+
+    public String getNextPageToken() {
+        return nextPageToken;
     }
 }

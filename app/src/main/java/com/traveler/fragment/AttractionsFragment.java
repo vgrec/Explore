@@ -35,9 +35,17 @@ import butterknife.InjectView;
 public class AttractionsFragment extends Fragment {
 
     public static final String KEY_PLACE_TYPE = "KEY_PLACE_TYPE";
+    private final int NUMBER_OF_ITEMS_PER_PAGE = 20;
+
     private PlaceItemAdapter adapter;
     private PlaceType placeType;
     private List<Place> places = new ArrayList<Place>();
+    private int lastResultsSize;
+    private String nextPageToken = "";
+    /**
+     * Weather the data we are viewing is first, or gathered bu subsequantly requests to onLoadMore.
+     */
+    private boolean dataLoadedFirstTime;
 
     @InjectView(R.id.attractions_list)
     RecyclerView recyclerView;
@@ -79,6 +87,16 @@ public class AttractionsFragment extends Fragment {
             adapter = new PlaceItemAdapter(places);
             downloadPlaces();
         }
+
+        adapter.setListener(new PlaceItemAdapter.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                if (lastResultsSize >= NUMBER_OF_ITEMS_PER_PAGE) {
+                    downloadPlaces();
+                }
+            }
+        });
+
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -104,20 +122,48 @@ public class AttractionsFragment extends Fragment {
     }
 
     private void downloadPlaces() {
-        progressView.show();
+        showTaskInProgress();
         TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getPlaces(new TaskFinishedListener<PlaceItemsResponse>() {
             @Override
             protected void onSuccess(PlaceItemsResponse result) {
-                progressView.hide();
-                places.addAll(result.getPlaces());
-                adapter.notifyDataSetChanged();
+                hideTaskCompleted();
+                if (result != null) {
+                    nextPageToken = result.getNextPageToken();
+                    lastResultsSize = result.getPlaces().size();
+                    places.addAll(result.getPlaces());
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
             protected void onFailure(VolleyError error) {
+                adapter.setTaskInProgress(false);
                 progressView.showError();
             }
-        }, placeType);
+        }, placeType, nextPageToken);
+    }
+
+    private void showTaskInProgress() {
+        adapter.setTaskInProgress(true);
+        if (!dataLoadedFirstTime) {
+            progressView.show();
+        } else {
+            if (getActivity() != null) {
+                getActivity().setProgressBarIndeterminateVisibility(true);
+            }
+        }
+    }
+
+    private void hideTaskCompleted() {
+        adapter.setTaskInProgress(false);
+        if (!dataLoadedFirstTime) {
+            progressView.hide();
+            dataLoadedFirstTime = true;
+        } else {
+            if (getActivity() != null) {
+                getActivity().setProgressBarIndeterminateVisibility(false);
+            }
+        }
     }
 }

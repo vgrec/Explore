@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.Constants;
-import com.traveler.http.ImageLoader;
 import com.traveler.R;
+import com.traveler.http.ImageLoader;
 import com.traveler.models.google.Place;
 
 import java.util.List;
@@ -22,6 +22,12 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
 
     private List<Place> places;
     private Context context;
+    private boolean taskInProgress;
+    private OnLoadMoreListener listener;
+
+    public interface OnLoadMoreListener {
+        void onLoadMore();
+    }
 
     public PlaceItemAdapter(List<Place> places) {
         this.places = places;
@@ -46,6 +52,21 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
         } else {
             ImageLoader.loadImage(context, place.getIconUrl(), viewHolder.placePicture);
         }
+
+        loadMoreIfLastRowHit(position);
+    }
+
+    private void loadMoreIfLastRowHit(int position) {
+        boolean lastRowHit = (position == places.size() - 1);
+        if (lastRowHit && !taskInProgress) {
+            if (listener != null) {
+                listener.onLoadMore();
+            }
+        }
+    }
+
+    public void setTaskInProgress(boolean taskInProgress) {
+        this.taskInProgress = taskInProgress;
     }
 
     @Override
@@ -64,5 +85,9 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
             rating = (TextView) itemView.findViewById(R.id.rating);
             placePicture = (NetworkImageView) itemView.findViewById(R.id.place_picture);
         }
+    }
+
+    public void setListener(OnLoadMoreListener listener) {
+        this.listener = listener;
     }
 }

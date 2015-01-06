@@ -1,9 +1,8 @@
 1. handle redirects, eg "slanic moldova"
 2. Attractions -> Fragment: handle city with space eg. "tel aviv"
 3. Display attributions, on photo first/details, and on details page at bottom.
-4. Add floating action button on location details screen, bookmark, like: http://www.google.com/design/spec/style/icons.html#icons-system-icons
-http://www.google.com/design/spec/style/imagery.html#imagery-ui-integration
 5. Get attractions related to your country:, eg. Cahul, returns attractions from Galati, but flickr and wiki from MD.
 6. Search for a location that does not exists: 3lk4l3, petrostali
 7. handle rotation
 8. FOR TABLETS: http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0B71WflkWs_SAZjY3azBTRXRNNzg/patterns_actions_fab_placement8.png
+9. Detect OVER_QUERY_LIMIT to analytics

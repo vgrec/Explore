@@ -72,7 +72,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             return settings.getInt(DARK_MUTED, Color.DKGRAY);
         }
 
-        public void setPrimaryColor(int color){
+        public void setPrimaryColor(int color) {
             settings.edit().putInt(PRIMARY_COLOR, color).apply();
         }
 
@@ -120,9 +120,9 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
     }
 
     @Override
-    public void getPlaces(final TaskFinishedListener<PlaceItemsResponse> listener, PlaceType placeType) {
+    public void getPlaces(final TaskFinishedListener<PlaceItemsResponse> listener, PlaceType placeType, String nextPageToken) {
         String placeString = placeType.toString().toLowerCase();
-        String url = String.format(Constants.Google.PLACES_URL, placeString, location, placeString);
+        String url = String.format(Constants.Google.PLACES_URL, placeString, location, placeString, nextPageToken);
         url = url.replaceAll(" ", "%20");
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override

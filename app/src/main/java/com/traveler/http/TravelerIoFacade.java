@@ -20,7 +20,7 @@ public interface TravelerIoFacade {
 
     void getVideos(TaskFinishedListener<VideosResponse> listener);
 
-    void getPlaces(TaskFinishedListener<PlaceItemsResponse> listener, PlaceType placeType);
+    void getPlaces(TaskFinishedListener<PlaceItemsResponse> listener, PlaceType placeType, String nextPageToken);
 
     void getPlaceDetails(String placeId, TaskFinishedListener<PlaceDetailsResponse> listener);
 }

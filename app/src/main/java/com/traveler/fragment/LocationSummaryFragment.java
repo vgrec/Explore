@@ -177,7 +177,7 @@ public class LocationSummaryFragment extends Fragment {
                     showFirstPlaces(result.getPlaces());
                 }
             }
-        }, PlaceType.RESTAURANT);
+        }, PlaceType.RESTAURANT, "");
     }
 
     private void showFirstPlaces(final List<Place> places) {

@@ -26,7 +26,7 @@ public class Constants {
         private static final String BASE_URL = "https://maps.googleapis.com/maps/api/place";
 
         // query={place, eg "restaurant"} in {city}&key=" + PLACES_API_KEY + "&types={place}
-        public static final String PLACES_URL = BASE_URL + "/textsearch/json?query=%s in %s&key=" + PLACES_API_KEY + "&types=%s";
+        public static final String PLACES_URL = BASE_URL + "/textsearch/json?query=%s in %s&key=" + PLACES_API_KEY + "&types=%s&pagetoken=%s";
         public static final String THUMBNAIL_URL = BASE_URL + "/photo?maxwidth=" + thumbnailWidth + "&photoreference=%s&key=" + PLACES_API_KEY;
         public static final String IMAGE_URL = BASE_URL + "/photo?maxwidth=" + imageWidth + "&photoreference=%s&key=" + PLACES_API_KEY;
         public static final String PLACE_DETAILS_URL = BASE_URL + "/details/json?placeid=%s&key=" + PLACES_API_KEY;
