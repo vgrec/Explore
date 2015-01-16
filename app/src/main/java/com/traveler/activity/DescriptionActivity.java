@@ -1,13 +1,13 @@
 package com.traveler.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 import com.traveler.fragment.DescriptionFragment;
 import com.traveler.fragment.LocationSummaryFragment;
 import com.traveler.models.wikipedia.PageDescription;
 
-public class DescriptionActivity extends Activity {
+public class DescriptionActivity extends ActionBarActivity {
 
     public static final String TITLE = "TITLE";
     private String title;

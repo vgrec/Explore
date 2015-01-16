@@ -31,27 +31,28 @@
         <activity
             android:name=".activity.LocationSummaryActivity"
             android:label="@string/title_activity_location_preview"
-            android:theme="@style/ThemeTransparentActionBarOverlay" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ImagesActivity"
-            android:label="@string/title_activity_images" />
+            android:label="@string/title_activity_images"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DescriptionActivity"
             android:label="@string/title_activity_description" />
         <activity
             android:name=".activity.AttractionsActivity"
             android:label="@string/title_activity_attractions"
-            android:theme="@style/AttractionsTheme" />
+            android:theme="@style/AppTheme.Attractions" />
         <activity
             android:name=".activity.PlaceDetailActivity"
             android:label="@string/title_activity_place_detail"
-            android:theme="@style/ThemeTransparentActionBarOverlay" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.StreetViewActivity"
             android:label="@string/title_activity_street_view" />
         <activity
             android:name=".activity.VideosActivity"
-            android:label="@string/title_activity_videos"/>
+            android:label="@string/title_activity_videos" />
     </application>
 
 </manifest>

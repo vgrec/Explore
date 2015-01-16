@@ -1,8 +1,8 @@
 package com.traveler.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -14,7 +14,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
-public class LocationSearchActivity extends Activity {
+public class LocationSearchActivity extends ActionBarActivity {
 
     @InjectView(R.id.go)
     Button goButton;

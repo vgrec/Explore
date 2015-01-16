@@ -1,7 +1,7 @@
 package com.traveler.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.StreetViewPanoramaOptions;
@@ -9,7 +9,10 @@ import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
 import com.traveler.R;
 
-public class StreetViewActivity extends Activity {
+/**
+ * Not used in V1.
+ */
+public class StreetViewActivity extends ActionBarActivity {
 
     private static final LatLng SYDNEY = new LatLng(44.4267674, 26.1025384);
 
