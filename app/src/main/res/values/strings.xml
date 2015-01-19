@@ -17,5 +17,6 @@
     <string name="cant_load_attractions">Could not load attractions</string>
     <string name="cant_load_videos">Could not load videos</string>
     <string name="try_again">TRY AGAIN</string>
+    <string name="cant_load_place_details">Could not load place details</string>
 
 </resources>

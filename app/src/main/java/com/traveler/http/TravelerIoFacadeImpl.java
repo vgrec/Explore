@@ -9,7 +9,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.traveler.Constants;
-import com.traveler.models.flickr.Photo;
+import com.traveler.models.events.AttractionsErrorEvent;
+import com.traveler.models.events.PlaceDetailsErrorEvent;
+import com.traveler.models.events.VideosErrorEvent;
 import com.traveler.models.flickr.PhotosResponse;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.PlaceItemsResponse;
@@ -18,7 +20,7 @@ import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.youtube.VideosResponse;
 import com.traveler.utils.Utils;
 
-import java.util.List;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author vgrec, created on 8/22/14.
@@ -84,43 +86,42 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
     // handle redirects, eg "slanic moldova"
 
     @Override
-    public void getDescription(final TaskFinishedListener<DescriptionResponse> listener) {
+    public void getDescription() {
         String url = String.format(Constants.Wikipedia.TEXT_SEARCH_URL, location);
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 DescriptionResponse descriptionResponse = Utils.fromJson(DescriptionResponse.class, response);
-                listener.onSuccess(descriptionResponse);
+                EventBus.getDefault().post(descriptionResponse);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onFailure(error);
+//                EventBus.getDefault().post(descriptionResponse);
             }
         });
         requestQueue.add(request);
     }
 
     @Override
-    public void getPhotos(final TaskFinishedListener<List<Photo>> listener) {
+    public void getPhotos() {
         String url = String.format(Constants.Flickr.SEARCH_PHOTOS_URL, location + "%20city");
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 PhotosResponse photosResponse = Utils.fromJson(PhotosResponse.class, response);
-                listener.onSuccess(photosResponse.getPhotosResponse().getPhotos());
+                EventBus.getDefault().post(photosResponse.getPhotosResponse().getPhotos());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onFailure(error);
             }
         });
         requestQueue.add(request);
     }
 
     @Override
-    public void getPlaces(final TaskFinishedListener<PlaceItemsResponse> listener, PlaceType placeType, String nextPageToken) {
+    public void getPlaces(final PlaceType placeType, String nextPageToken) {
         String placeString = placeType.toString().toLowerCase();
         String url = String.format(Constants.Google.PLACES_URL, placeString, location, placeString, nextPageToken);
         url = url.replaceAll(" ", "%20");
@@ -128,37 +129,38 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             @Override
             public void onResponse(String response) {
                 PlaceItemsResponse placeItemsResponse = Utils.fromJson(PlaceItemsResponse.class, response);
-                listener.onSuccess(placeItemsResponse);
+                placeItemsResponse.setPlaceType(placeType);
+                EventBus.getDefault().post(placeItemsResponse);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onFailure(error);
+                EventBus.getDefault().post(new AttractionsErrorEvent(error));
             }
         });
         requestQueue.add(request);
     }
 
     @Override
-    public void getPlaceDetails(String placeId, final TaskFinishedListener<PlaceDetailsResponse> listener) {
+    public void getPlaceDetails(String placeId) {
         String url = String.format(Constants.Google.PLACE_DETAILS_URL, placeId);
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 PlaceDetailsResponse placeItemsResponse = Utils.fromJson(PlaceDetailsResponse.class, response);
-                listener.onSuccess(placeItemsResponse);
+                EventBus.getDefault().post(placeItemsResponse);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onFailure(error);
+                EventBus.getDefault().post(new PlaceDetailsErrorEvent(error));
             }
         });
         requestQueue.add(request);
     }
 
     @Override
-    public void getVideos(final TaskFinishedListener<VideosResponse> listener) {
+    public void getVideos() {
         String location = (this.location) != null ? this.location : "Berlin";
         String url = String.format(Constants.Youtube.VIDEOS_URL, "travel in " + location);
         StringRequest request = new StringRequest(url.replaceAll(" ", "%20"), new Response.Listener<String>() {
@@ -166,12 +168,12 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             @Override
             public void onResponse(String response) {
                 VideosResponse videosResponse = Utils.fromJson(VideosResponse.class, response);
-                listener.onSuccess(videosResponse);
+                EventBus.getDefault().post(videosResponse);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onFailure(error);
+                EventBus.getDefault().post(new VideosErrorEvent(error));
             }
         });
         requestQueue.add(request);

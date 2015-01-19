@@ -10,6 +10,8 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceItemsResponse {
+    private PlaceType placeType;
+
     @JsonProperty("next_page_token")
     private String nextPageToken;
 
@@ -29,5 +31,13 @@ public class PlaceItemsResponse {
 
     public String getNextPageToken() {
         return nextPageToken;
+    }
+
+    public PlaceType getPlaceType() {
+        return placeType;
+    }
+
+    public void setPlaceType(PlaceType placeType) {
+        this.placeType = placeType;
     }
 }

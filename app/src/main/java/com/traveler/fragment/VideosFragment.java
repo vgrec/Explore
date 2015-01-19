@@ -10,13 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.VolleyError;
 import com.traveler.R;
 import com.traveler.adapters.VideosAdapter;
-import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.listeners.RecyclerItemClickListener;
+import com.traveler.models.events.VideosErrorEvent;
 import com.traveler.models.youtube.Entry;
 import com.traveler.models.youtube.Video;
 import com.traveler.models.youtube.VideosResponse;
@@ -28,6 +27,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.greenrobot.event.EventBus;
 
 public class VideosFragment extends Fragment {
 
@@ -47,6 +47,7 @@ public class VideosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -88,27 +89,30 @@ public class VideosFragment extends Fragment {
     private void downloadVideos() {
         progressView.show();
         TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getVideos(new TaskFinishedListener<VideosResponse>() {
-            @Override
-            protected void onSuccess(VideosResponse result) {
-                progressView.hide();
-                if (result != null) {
-                    List<Entry> entries = result.getFeed().getEntries();
-                    List<Video> videosResponse = VideoUtils.toVideos(entries);
-                    videos.addAll(videosResponse);
-                    adapter.notifyDataSetChanged();
-                }
-            }
+        ioFacade.getVideos();
+    }
 
-            @Override
-            protected void onFailure(VolleyError error) {
-                progressView.showError();
-            }
-        });
+    public void onEvent(VideosResponse result) {
+        progressView.hide();
+        if (result != null) {
+            List<Entry> entries = result.getFeed().getEntries();
+            List<Video> videosResponse = VideoUtils.toVideos(entries);
+            videos.addAll(videosResponse);
+            adapter.notifyDataSetChanged();
+        }
+    }
 
+    public void onEvent(VideosErrorEvent errorEvent) {
+        progressView.showError();
     }
 
     private void openPlayVideoActivity(int position) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position).getLink())));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

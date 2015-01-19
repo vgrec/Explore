@@ -9,15 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.VolleyError;
 import com.traveler.Extra;
 import com.traveler.R;
 import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.adapters.PlaceItemAdapter;
-import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.listeners.RecyclerItemClickListener;
+import com.traveler.models.events.AttractionsErrorEvent;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceItemsResponse;
 import com.traveler.models.google.PlaceType;
@@ -28,6 +27,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author vgrec, created on 11/3/14.
@@ -69,6 +69,7 @@ public class AttractionsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         placeType = (PlaceType) getArguments().getSerializable(KEY_PLACE_TYPE);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -124,24 +125,26 @@ public class AttractionsFragment extends Fragment {
     private void downloadPlaces() {
         showTaskInProgress();
         TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getPlaces(new TaskFinishedListener<PlaceItemsResponse>() {
-            @Override
-            protected void onSuccess(PlaceItemsResponse result) {
-                hideTaskCompleted();
-                if (result != null) {
-                    nextPageToken = result.getNextPageToken();
-                    lastResultsSize = result.getPlaces().size();
-                    places.addAll(result.getPlaces());
-                    adapter.notifyDataSetChanged();
-                }
-            }
+        ioFacade.getPlaces(placeType, nextPageToken);
+    }
 
-            @Override
-            protected void onFailure(VolleyError error) {
-                adapter.setTaskInProgress(false);
-                progressView.showError();
+    // On attractions received
+    public void onEvent(PlaceItemsResponse result) {
+        if (result != null) {
+            if (result.getPlaceType() != placeType) {
+                return;
             }
-        }, placeType, nextPageToken);
+            hideTaskCompleted();
+            nextPageToken = result.getNextPageToken();
+            lastResultsSize = result.getPlaces().size();
+            places.addAll(result.getPlaces());
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void onEvent(AttractionsErrorEvent error) {
+        adapter.setTaskInProgress(false);
+        progressView.showError();
     }
 
     private void showTaskInProgress() {
@@ -165,5 +168,11 @@ public class AttractionsFragment extends Fragment {
                 getActivity().setProgressBarIndeterminateVisibility(false);
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
-import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacadeImpl;
+import com.traveler.models.events.PlaceDetailsErrorEvent;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.Review;
@@ -27,6 +26,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author vgrec, created on 11/17/14.
@@ -79,6 +79,7 @@ public class PlaceDetailFragment extends Fragment {
         setRetainInstance(true);
         if (getArguments() != null) {
             placeId = getArguments().getString(Extra.PLACE_ID);
+            EventBus.getDefault().register(this);
         }
     }
 
@@ -107,22 +108,20 @@ public class PlaceDetailFragment extends Fragment {
         });
     }
 
+    public void onEvent(PlaceDetailsResponse result) {
+        progressView.hide();
+        placeResponse = result;
+        updateUi();
+    }
+
+    public void onEvent(PlaceDetailsErrorEvent error) {
+        progressView.showError();
+    }
+
     private void downloadPlaceDetailsAndUpdateUi() {
         progressView.show();
         TravelerIoFacadeImpl ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getPlaceDetails(placeId, new TaskFinishedListener<PlaceDetailsResponse>() {
-            @Override
-            protected void onSuccess(PlaceDetailsResponse result) {
-                progressView.hide();
-                placeResponse = result;
-                updateUi();
-            }
-
-            @Override
-            protected void onFailure(VolleyError error) {
-                progressView.showError();
-            }
-        });
+        ioFacade.getPlaceDetails(placeId);
     }
 
     private void updateUi() {
@@ -166,7 +165,13 @@ public class PlaceDetailFragment extends Fragment {
         }
     }
 
-//    Intent intent = new Intent(Intent.ACTION_DIAL);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    //    Intent intent = new Intent(Intent.ACTION_DIAL);
 //    intent.setData(Uri.parse("1234567890"))
 //    startActivity(intent);
 }

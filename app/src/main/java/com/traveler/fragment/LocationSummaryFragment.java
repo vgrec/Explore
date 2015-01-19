@@ -24,10 +24,10 @@ import com.traveler.activity.ImagesActivity;
 import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.activity.VideosActivity;
 import com.traveler.http.ImageLoader;
-import com.traveler.http.TaskFinishedListener;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.http.VolleySingleton;
+import com.traveler.models.events.ErrorEvent;
 import com.traveler.models.flickr.Photo;
 import com.traveler.models.flickr.Size;
 import com.traveler.models.google.Place;
@@ -50,6 +50,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author vgrec, created on 8/22/14.
@@ -101,6 +102,12 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location_summary, container, false);
@@ -128,63 +135,81 @@ public class LocationSummaryFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setListenersForPreviewCards();
-        getAttractions();
-        getFlickrPhotos();
-        getDescription();
-        getVideos();
+
+        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
+        ioFacade.getPlaces(PlaceType.RESTAURANT, "");
+        ioFacade.getPhotos();
+        ioFacade.getDescription();
+        ioFacade.getVideos();
     }
 
     private void setListenersForPreviewCards() {
         descriptionCard.setViewAllButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDescriptionActivity();
+                // open description
+                if (pageDescription != null) {
+                    Intent intent = new Intent(getActivity(), DescriptionActivity.class);
+                    intent.putExtra(KEY_PAGE_DESCRIPTION, pageDescription);
+                    startActivity(intent);
+                }
             }
         });
 
         attractionsCard.setViewAllButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAttractionsActivity();
+                // open attractions
+                Intent intent = new Intent(getActivity(), AttractionsActivity.class);
+                startActivity(intent);
             }
         });
 
         videosCard.setViewAllButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openVideosActivity();
+                // open videos
+                Intent intent = new Intent(getActivity(), VideosActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void openDescriptionActivity() {
-        if (pageDescription != null) {
-            Intent intent = new Intent(getActivity(), DescriptionActivity.class);
-            intent.putExtra(KEY_PAGE_DESCRIPTION, pageDescription);
-            startActivity(intent);
+    // On attractions received
+    public void onEvent(PlaceItemsResponse result) {
+        if (result != null && result.getPlaceType() == PlaceType.RESTAURANT) {
+            showFirstPlaces(result.getPlaces());
         }
     }
 
-    private void openAttractionsActivity() {
-        Intent intent = new Intent(getActivity(), AttractionsActivity.class);
-        startActivity(intent);
+    // On wikipedia description received
+    public void onEvent(DescriptionResponse result) {
+        pageDescription = result.getPageDescription();
+        descriptionTextView.setText(result.getPageDescription().getExtract());
+        locationTextView.setText(result.getPageDescription().getTitle());
     }
 
-    private void openVideosActivity() {
-        Intent intent = new Intent(getActivity(), VideosActivity.class);
-        startActivity(intent);
+    // On Flickr photos received
+    public void onEvent(List<Photo> result) {
+        if (result.size() > 2) {
+            photos.addAll(result);
+            scrimImageHeader.setNumberOfPhotos(result.size());
+            downloadImage(result.get(0), Size.z);
+            downloadImageAndProcessColor(result.get(1), smallImageView, Size.q);
+        }
     }
 
-    private void getAttractions() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getPlaces(new TaskFinishedListener<PlaceItemsResponse>() {
-            @Override
-            protected void onSuccess(PlaceItemsResponse result) {
-                if (result != null) {
-                    showFirstPlaces(result.getPlaces());
-                }
-            }
-        }, PlaceType.RESTAURANT, "");
+    // On youtube videos received
+    public void onEvent(VideosResponse result) {
+        if (result != null) {
+            List<Entry> entries = result.getFeed().getEntries();
+            List<Video> videos = VideoUtils.toVideos(entries);
+            showFirstVideos(videos);
+        }
+    }
+
+    public void onEvent(ErrorEvent error){
+
     }
 
     private void showFirstPlaces(final List<Place> places) {
@@ -221,53 +246,11 @@ public class LocationSummaryFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void getFlickrPhotos() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getPhotos(new TaskFinishedListener<List<Photo>>() {
-            @Override
-            protected void onSuccess(List<Photo> result) {
-                if (result.size() > 2) {
-                    photos.addAll(result);
-                    scrimImageHeader.setNumberOfPhotos(result.size());
-                    downloadImage(result.get(0), Size.z);
-                    downloadImageAndProcessColor(result.get(1), smallImageView, Size.q);
-                } else {
-                    checkTasks();
-                }
-            }
-
-            @Override
-            protected void onFailure(VolleyError error) {
-                checkTasks();
-            }
-        });
-    }
-
     private void checkTasks() {
         tasksFinished++;
         if (tasksFinished == totalNumberOfTasks) {
             progressView.setVisibility(View.GONE);
         }
-    }
-
-    private void getVideos() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getVideos(new TaskFinishedListener<VideosResponse>() {
-            @Override
-            protected void onSuccess(VideosResponse result) {
-                if (result != null) {
-                    List<Entry> entries = result.getFeed().getEntries();
-                    List<Video> videos = VideoUtils.toVideos(entries);
-                    showFirstVideos(videos);
-                }
-                checkTasks();
-            }
-
-            @Override
-            protected void onFailure(VolleyError error) {
-                checkTasks();
-            }
-        });
     }
 
     private void showFirstVideos(final List<Video> videos) {
@@ -293,23 +276,6 @@ public class LocationSummaryFragment extends Fragment {
         }
     }
 
-    private void getDescription() {
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getDescription(new TaskFinishedListener<DescriptionResponse>() {
-            @Override
-            protected void onSuccess(DescriptionResponse result) {
-                pageDescription = result.getPageDescription();
-                descriptionTextView.setText(result.getPageDescription().getExtract());
-                locationTextView.setText(result.getPageDescription().getTitle());
-                checkTasks();
-            }
-
-            @Override
-            protected void onFailure(VolleyError error) {
-                checkTasks();
-            }
-        });
-    }
 
     private void downloadImageAndProcessColor(Photo photo, final ImageView imageView, Size size) {
         com.android.volley.toolbox.ImageLoader imageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
@@ -350,5 +316,11 @@ public class LocationSummaryFragment extends Fragment {
     private void downloadImage(Photo photo, Size size) {
         String url = String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), size);
         scrimImageHeader.setImageUrl(url);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
