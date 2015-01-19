@@ -140,7 +140,7 @@ public class PlaceDetailFragment extends Fragment {
         ratingTextView.setText(place.getRating());
         webSiteTextView.setText(place.getWebSite());
 
-        Utils.setColorForTextViewDrawable(primaryColor, addressTextView, phoneNumberTextView, webSiteTextView);
+        Utils.setColorForTextViewDrawable(Color.parseColor("#7CAF00"), addressTextView, phoneNumberTextView, webSiteTextView);
 
         if (place.getPhotos().size() > 0) {
             String url = String.format(Constants.Google.IMAGE_URL, place.getPhotos().get(0).getPhotoReference());

@@ -108,6 +108,13 @@ public class LocationSummaryFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Utils.setColorForTextViewDrawable(Color.parseColor("#7CAF00"), descriptionCard.getTitleTextView(),
+                attractionsCard.getTitleTextView(), videosCard.getTitleTextView());
+    }
+
     @OnClick(R.id.big_image)
     void openImagesActivity() {
         if (photos.size() > 2) {
@@ -335,8 +342,6 @@ public class LocationSummaryFragment extends Fragment {
                     TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).setDarkMutedColor(darkMutedColor);
                 }
                 titleHeader.setBackgroundColor(darkMutedColor);
-                Utils.setColorForTextViewDrawable(darkMutedColor, descriptionCard.getTitleTextView(),
-                        attractionsCard.getTitleTextView(), videosCard.getTitleTextView());
                 checkTasks();
             }
         });
