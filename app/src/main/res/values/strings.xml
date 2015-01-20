@@ -18,5 +18,12 @@
     <string name="cant_load_videos">Could not load videos</string>
     <string name="try_again">TRY AGAIN</string>
     <string name="cant_load_place_details">Could not load place details</string>
+    <string name="title_section1">Recent Searches</string>
+    <string name="title_section2">Favorite Places</string>
+    <string name="title_section3">About</string>
+    <string name="title_section4">Terms of Use</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
 
 </resources>

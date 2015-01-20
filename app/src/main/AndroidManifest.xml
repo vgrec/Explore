@@ -20,7 +20,7 @@
             android:value="AIzaSyBsBWRCsTwJUHyHloJE5kqTJIqYPRQLvZA" />
 
         <activity
-            android:name=".activity.LocationSearchActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

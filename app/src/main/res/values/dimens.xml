@@ -6,4 +6,6 @@
     <dimen name="tabs_indicator_height">4dp</dimen>
     <dimen name="actionbar_text_size">9sp</dimen>
 
+    <dimen name="navigation_drawer_width">240dp</dimen>
+
 </resources>
