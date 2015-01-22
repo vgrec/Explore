@@ -23,14 +23,23 @@ public class FavoritePlacesFragment extends Fragment {
     @InjectView(R.id.favorite_places)
     TextView locationsTextView;
 
+    private StringBuilder sb = new StringBuilder();
+
     public FavoritePlacesFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_places, container, false);
         ButterKnife.inject(this, view);
+        locationsTextView.setText(sb.toString());
         return view;
     }
 
@@ -70,7 +79,7 @@ public class FavoritePlacesFragment extends Fragment {
         List<Location> localities = dataSource.getLocalities();
         List<Location> places = dataSource.getPlaces();
 
-        StringBuilder sb = new StringBuilder();
+
 
         sb.append("LOCALITIES:\n");
         for (Location location : localities) {
