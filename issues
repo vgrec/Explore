@@ -6,3 +6,4 @@
 7. handle rotation
 8. FOR TABLETS: http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0B71WflkWs_SAZjY3azBTRXRNNzg/patterns_actions_fab_placement8.png
 9. Detect OVER_QUERY_LIMIT to analytics
+ - add shadow in location summary screen: to green buttons (perhaps), and to the block that surrounds the fotos and title.

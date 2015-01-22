@@ -1,5 +1,6 @@
 package com.traveler.activity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
@@ -19,5 +20,9 @@ public class LocationSummaryActivity extends ActionBarActivity {
                     .add(R.id.container, new LocationSummaryFragment())
                     .commit();
         }
+
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(R.color.transparent));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 }
