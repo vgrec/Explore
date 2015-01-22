@@ -118,7 +118,7 @@ public class LocationSummaryFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Utils.setColorForTextViewDrawable(Color.parseColor("#7CAF00"), descriptionCard.getTitleTextView(),
+        Utils.setColorForTextViewDrawable(getResources().getColor(R.color.colorPrimary), descriptionCard.getTitleTextView(),
                 attractionsCard.getTitleTextView(), videosCard.getTitleTextView());
     }
 
@@ -208,7 +208,7 @@ public class LocationSummaryFragment extends Fragment {
         }
     }
 
-    public void onEvent(ErrorEvent error){
+    public void onEvent(ErrorEvent error) {
 
     }
 

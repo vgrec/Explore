@@ -31,7 +31,7 @@
         <activity
             android:name=".activity.LocationSummaryActivity"
             android:label="@string/title_activity_location_preview"
-            android:theme="@style/AppTheme.TransparentActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ImagesActivity"
             android:label="@string/title_activity_images"

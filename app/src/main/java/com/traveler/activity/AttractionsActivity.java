@@ -1,7 +1,6 @@
 package com.traveler.activity;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -27,14 +26,14 @@ public class AttractionsActivity extends ActionBarActivity {
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setTextColor(Color.WHITE);
         tabs.setIndicatorColor(Color.WHITE);
-        tabs.setBackgroundColor(primaryColor);
+        tabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         tabs.setDividerColor(getResources().getColor(android.R.color.transparent));
         tabs.setTextSize(getResources().getDimensionPixelSize(R.dimen.tabs_text_size));
         tabs.setIndicatorHeight(getResources().getDimensionPixelOffset(R.dimen.tabs_indicator_height));
         tabs.setViewPager(pager);
         setTitle("Attractions in " + TravelerIoFacadeImpl.TravelerSettings.getInstance(this).getLocation());
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(primaryColor));
+//            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(primaryColor));
         }
     }
 }

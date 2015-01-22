@@ -22,7 +22,7 @@ public class LocationSummaryActivity extends ActionBarActivity {
         }
 
 //        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(R.color.transparent));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
     }
 }
