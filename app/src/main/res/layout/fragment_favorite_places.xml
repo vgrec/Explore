@@ -5,7 +5,13 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/favorite_places"
         android:text="Favorite places"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/show"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
