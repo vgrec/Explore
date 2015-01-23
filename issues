@@ -9,3 +9,4 @@
  - add shadow in location summary screen: to green buttons (perhaps), and to the block that surrounds the fotos and title.
  - from nav drawer select  "favorites" -> go back -> select once again favorites: you can't open because currentPosition = position in NavDrawer.
  - Actionbar color and buttons maybe like here: https://play.google.com/store/apps/details?id=com.life360.android.safetymapd
+ - Shopping, Theaters tabs don't display data.
