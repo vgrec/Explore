@@ -38,11 +38,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         switch (position) {
             case 0:
                 replaceWith(new ExploreFragment());
-                setTitle(R.string.app_name);
                 break;
             case 1:
                 replaceWith(new FavoritePlacesFragment());
-                setTitle(R.string.favorite_places);
                 break;
         }
     }

@@ -32,6 +32,12 @@ public class ExploreFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.app_name);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
         ButterKnife.inject(this, view);
