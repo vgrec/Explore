@@ -10,6 +10,11 @@ import com.traveler.R;
 
 import butterknife.ButterKnife;
 
+/**
+ * Provide search suggestions in EditText, rather than separate screen.
+ * putting it on hold for now...
+ */
+@Deprecated
 public class RecentSearchesFragment extends Fragment {
 
     public RecentSearchesFragment() {

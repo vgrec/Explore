@@ -3,43 +3,40 @@ package com.traveler.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.traveler.R;
+import com.traveler.adapters.FavoriteLocationsAdapter;
 import com.traveler.db.LocationsDataSource;
+import com.traveler.listeners.RecyclerItemClickListener;
 import com.traveler.models.db.Location;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 public class FavoritePlacesFragment extends Fragment {
 
-    @InjectView(R.id.favorite_places)
-    TextView locationsTextView;
+    private List<Location> locations = new ArrayList<>();
 
-    private StringBuilder sb = new StringBuilder();
+    @InjectView(R.id.favorites)
+    RecyclerView recyclerView;
+
 
     public FavoritePlacesFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_places, container, false);
         ButterKnife.inject(this, view);
-        locationsTextView.setText(sb.toString());
         return view;
     }
 
@@ -47,55 +44,31 @@ public class FavoritePlacesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // testing
-
-        Location l1 = new Location();
-        l1.setTitle("Germany");
-        l1.setType(Location.Type.LOCALITY);
-        l1.setImageUrl("http://bff.com");
-
-        Location l2 = new Location();
-        l2.setTitle("Chisinau");
-        l2.setType(Location.Type.LOCALITY);
-        l2.setImageUrl("http://chisinau.com");
-
-        Location l3 = new Location();
-        l3.setTitle("Restaurant Bovarie");
-        l3.setType(Location.Type.PLACE);
-        l3.setImageUrl("http://bovarie.com");
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.number_of_columns)));
+        FavoriteLocationsAdapter adapter = new FavoriteLocationsAdapter(locations);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        openPlaceDetailsActivity(locations.get(position));
+                    }
+                })
+        );
 
         LocationsDataSource dataSource = new LocationsDataSource(getActivity());
         dataSource.open();
-        dataSource.addLocation(l1);
-        dataSource.addLocation(l2);
-        dataSource.addLocation(l3);
+
+        locations.clear();
+        locations.addAll(dataSource.getLocalities());
+        adapter.notifyDataSetChanged();
+
         dataSource.close();
     }
 
-    @OnClick(R.id.show)
-    void onClick() {
-        LocationsDataSource dataSource = new LocationsDataSource(getActivity());
-        dataSource.open();
-        List<Location> localities = dataSource.getLocalities();
-        List<Location> places = dataSource.getPlaces();
+    private void openPlaceDetailsActivity(Location location) {
 
-
-
-        sb.append("LOCALITIES:\n");
-        for (Location location : localities) {
-            sb.append(location.getTitle() + "\n");
-            sb.append(location.getImageUrl() + "\n");
-            sb.append(location.getType().toString() + "\n");
-        }
-
-        sb.append("\nPLACES:\n");
-        for (Location location : places) {
-            sb.append(location.getTitle() + "\n");
-            sb.append(location.getImageUrl() + "\n");
-            sb.append(location.getType().toString() + "\n");
-        }
-        dataSource.close();
-
-        locationsTextView.setText(sb.toString());
     }
+
+
 }

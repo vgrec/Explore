@@ -58,7 +58,7 @@
 
 
             <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/pink_icon"
+                android:id="@+id/add_to_favorites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_icon="@drawable/ic_bookmark"

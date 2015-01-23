@@ -14,7 +14,10 @@
     <color name="colorPrimaryDark">#4A23B9</color>
     <color name="colorAccent">#11424242</color>
     <color name="main">#fff</color>
-    <color name="view_all_pressed">#9874FC</color>
+
+    <color name="view_all_pressed">#FA5F5F</color>
+    <color name="view_all_normal">#FA7A7A</color>
+
 
     <color name="teal">#009688</color>
     <color name="light_teal">#b2dfdb</color>

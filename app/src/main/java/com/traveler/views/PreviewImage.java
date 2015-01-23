@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.R;
+import com.traveler.http.ImageLoader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -16,6 +17,8 @@ import butterknife.InjectView;
  * @author vgrec, created on 12/16/14.
  */
 public class PreviewImage extends LinearLayout {
+
+    private Context context;
 
     @InjectView(R.id.preview_title)
     TextView titleTextView;
@@ -37,16 +40,17 @@ public class PreviewImage extends LinearLayout {
     }
 
     private void init(Context context) {
+        this.context = context;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_preview_image, this, true);
         ButterKnife.inject(this, this);
     }
 
-    public TextView getTitleTextView() {
-        return titleTextView;
+    public void setText(String title) {
+        titleTextView.setText(title);
     }
 
-    public NetworkImageView getImageView() {
-        return imageView;
+    public void setUrl(String iconUrl) {
+        ImageLoader.loadImage(context, iconUrl, imageView);
     }
 }

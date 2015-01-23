@@ -43,7 +43,7 @@ public class AttractionsFragment extends Fragment {
     private int lastResultsSize;
     private String nextPageToken = "";
     /**
-     * Weather the data we are viewing is first, or gathered bu subsequantly requests to onLoadMore.
+     * Whether the data we are viewing is first, or gathered by subsequently requests to onLoadMore.
      */
     private boolean dataLoadedFirstTime;
 

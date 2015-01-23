@@ -69,7 +69,6 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.explore),
-                        getString(R.string.recent_searches),
                         getString(R.string.favorite_places),
                         getString(R.string.about),
                         getString(R.string.terms_of_use)

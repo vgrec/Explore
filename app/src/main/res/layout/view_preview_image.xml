@@ -7,7 +7,7 @@
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/preview_image"
         android:layout_width="fill_parent"
-        android:layout_height="110dp"
+        android:layout_height="@dimen/preview_image_height"
         android:scaleType="centerCrop" />
 
     <TextView

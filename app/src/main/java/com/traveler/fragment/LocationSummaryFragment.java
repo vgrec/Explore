@@ -221,9 +221,8 @@ public class LocationSummaryFragment extends Fragment {
 
         for (int i = 0; i < numberOfImages; i++) {
             PreviewImage previewImage = (PreviewImage) placesContainer.getChildAt(i);
-            NetworkImageView imageView = previewImage.getImageView();
             final int finalI = i;
-            imageView.setOnClickListener(new View.OnClickListener() {
+            previewImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     openPlaceDetailsActivity(places.get(finalI));
@@ -231,12 +230,11 @@ public class LocationSummaryFragment extends Fragment {
             });
             if (places.get(i).getPhotos() != null && places.get(i).getPhotos().size() > 0) {
                 String url = String.format(Constants.Google.THUMBNAIL_URL, places.get(i).getPhotos().get(0).getPhotoReference());
-                ImageLoader.loadImage(getActivity(), url, imageView);
+                previewImage.setUrl(url);
             } else {
-                ImageLoader.loadImage(getActivity(), places.get(i).getIconUrl(), imageView);
+                previewImage.setUrl(places.get(i).getIconUrl());
             }
-            TextView textView = previewImage.getTitleTextView();
-            textView.setText(places.get(i).getName());
+            previewImage.setText(places.get(i).getName());
         }
     }
 
@@ -262,17 +260,15 @@ public class LocationSummaryFragment extends Fragment {
 
         for (int i = 0; i < numberOfImages; i++) {
             PreviewImage previewImage = (PreviewImage) videosContainer.getChildAt(i);
-            NetworkImageView imageView = previewImage.getImageView();
             final int finalI = i;
-            imageView.setOnClickListener(new View.OnClickListener() {
+            previewImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(finalI).getLink())));
                 }
             });
-            ImageLoader.loadImage(getActivity(), videos.get(i).getThumbnailUrl(), imageView);
-            TextView textView = previewImage.getTitleTextView();
-            textView.setText(videos.get(i).getTitle());
+            previewImage.setUrl(videos.get(i).getThumbnailUrl());
+            previewImage.setText(videos.get(i).getTitle());
         }
     }
 
@@ -303,11 +299,12 @@ public class LocationSummaryFragment extends Fragment {
         Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
-                int darkMutedColor = palette.getDarkMutedColor(Color.DKGRAY);
                 if (getActivity() != null) {
-                    TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).setDarkMutedColor(darkMutedColor);
+                    TravelerIoFacadeImpl.TravelerSettings settings = TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity());
+                    settings.setDarkMutedColor(palette.getDarkVibrantColor(Color.DKGRAY));
+
                 }
-                titleHeader.setBackgroundColor(darkMutedColor);
+                titleHeader.setBackgroundColor(palette.getDarkVibrantColor(Color.DKGRAY));
                 checkTasks();
             }
         });

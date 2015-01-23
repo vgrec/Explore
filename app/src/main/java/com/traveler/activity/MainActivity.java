@@ -10,7 +10,6 @@ import com.traveler.R;
 import com.traveler.fragment.ExploreFragment;
 import com.traveler.fragment.FavoritePlacesFragment;
 import com.traveler.fragment.NavigationDrawerFragment;
-import com.traveler.fragment.RecentSearchesFragment;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -39,12 +38,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         switch (position) {
             case 0:
                 replaceWith(new ExploreFragment());
+                setTitle(R.string.app_name);
                 break;
             case 1:
-                replaceWith(new RecentSearchesFragment());
-                break;
-            case 2:
                 replaceWith(new FavoritePlacesFragment());
+                setTitle(R.string.favorite_places);
                 break;
         }
     }
