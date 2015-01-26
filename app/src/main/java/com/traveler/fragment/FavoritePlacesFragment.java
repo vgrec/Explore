@@ -1,5 +1,6 @@
 package com.traveler.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.traveler.Extra;
 import com.traveler.R;
-import com.traveler.adapters.FavoriteLocationsAdapter;
-import com.traveler.db.LocationsDataSource;
+import com.traveler.activity.PlaceDetailActivity;
+import com.traveler.adapters.SavedPlacesAdapter;
+import com.traveler.db.SavedPlacesDataSource;
 import com.traveler.listeners.RecyclerItemClickListener;
-import com.traveler.models.db.Location;
+import com.traveler.models.db.SavedPlace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,7 @@ import butterknife.InjectView;
 
 public class FavoritePlacesFragment extends Fragment {
 
-    private List<Location> locations = new ArrayList<>();
+    private List<SavedPlace> savedPlaces = new ArrayList<>();
 
     @InjectView(R.id.favorites)
     RecyclerView recyclerView;
@@ -51,30 +54,30 @@ public class FavoritePlacesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.number_of_columns)));
-        FavoriteLocationsAdapter adapter = new FavoriteLocationsAdapter(locations);
+        SavedPlacesAdapter adapter = new SavedPlacesAdapter(savedPlaces);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        openPlaceDetailsActivity(locations.get(position));
+                        openPlaceDetailsActivity(savedPlaces.get(position));
                     }
                 })
         );
 
-        LocationsDataSource dataSource = new LocationsDataSource(getActivity());
+        SavedPlacesDataSource dataSource = new SavedPlacesDataSource(getActivity());
         dataSource.open();
 
-        locations.clear();
-        locations.addAll(dataSource.getLocalities());
+        savedPlaces.clear();
+        savedPlaces.addAll(dataSource.getPlaces());
         adapter.notifyDataSetChanged();
 
         dataSource.close();
     }
 
-    private void openPlaceDetailsActivity(Location location) {
-
+    private void openPlaceDetailsActivity(SavedPlace savedPlace) {
+        Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
+        intent.putExtra(Extra.PLACE_ID, savedPlace.getPlaceId());
+        startActivity(intent);
     }
-
-
 }

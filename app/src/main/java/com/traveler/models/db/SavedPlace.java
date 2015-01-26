@@ -3,20 +3,12 @@ package com.traveler.models.db;
 /**
  * @author vgrec, created on 1/22/15.
  */
-public class Location {
-
-    /**
-     * LOCALITY = Country or City
-     * PLACE = concrete place, eg. "Restaurant Bonviery"
-     */
-    public enum Type {
-        LOCALITY, PLACE
-    }
+public class SavedPlace {
 
     private long id;
+    private String placeId;
     private String imageUrl;
     private String title;
-    private Type type;
 
     public long getId() {
         return id;
@@ -42,11 +34,11 @@ public class Location {
         this.title = title;
     }
 
-    public Type getType() {
-        return type;
+    public String getPlaceId() {
+        return placeId;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
     }
 }

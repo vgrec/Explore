@@ -6,15 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
-import com.traveler.models.db.Location;
+import com.traveler.models.db.SavedPlace;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.traveler.db.DatabaseHelper.COLUMN_ID;
 import static com.traveler.db.DatabaseHelper.COLUMN_IMAGE_URL;
+import static com.traveler.db.DatabaseHelper.COLUMN_PLACE_ID;
 import static com.traveler.db.DatabaseHelper.COLUMN_TITLE;
-import static com.traveler.db.DatabaseHelper.COLUMN_TYPE;
 import static com.traveler.db.DatabaseHelper.TABLE_SAVED_LOCATIONS;
 
 /**
@@ -22,19 +22,19 @@ import static com.traveler.db.DatabaseHelper.TABLE_SAVED_LOCATIONS;
  *
  * @author vgrec, created on 1/22/15.
  */
-public class LocationsDataSource {
+public class SavedPlacesDataSource {
 
     private SQLiteDatabase database;
     private DatabaseHelper dbHelper;
 
     private String[] allColumns = {
             COLUMN_ID,
+            COLUMN_PLACE_ID,
             COLUMN_IMAGE_URL,
             COLUMN_TITLE,
-            COLUMN_TYPE
     };
 
-    public LocationsDataSource(Context context) {
+    public SavedPlacesDataSource(Context context) {
         dbHelper = new DatabaseHelper(context);
     }
 
@@ -46,48 +46,38 @@ public class LocationsDataSource {
         dbHelper.close();
     }
 
-    public long addLocation(Location location) {
+    public long savePlace(SavedPlace savedPlace) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_IMAGE_URL, location.getImageUrl());
-        values.put(COLUMN_TITLE, location.getTitle());
-        values.put(COLUMN_TYPE, location.getType().toString());
+        values.put(COLUMN_PLACE_ID, savedPlace.getPlaceId());
+        values.put(COLUMN_IMAGE_URL, savedPlace.getImageUrl());
+        values.put(COLUMN_TITLE, savedPlace.getTitle());
 
         return database.insert(TABLE_SAVED_LOCATIONS, null, values);
-    }
-
-    public List<Location> getPlaces() {
-        return getLocations(Location.Type.PLACE);
-    }
-
-    public List<Location> getLocalities() {
-        return getLocations(Location.Type.LOCALITY);
     }
 
     /**
      * Returns a list of Locations depending of Location.Type
      */
-    private List<Location> getLocations(Location.Type type) {
-        List<Location> locations = new ArrayList<>();
-
-        String where = COLUMN_TYPE + "=" + "'" + type.toString() + "'";
-        Cursor cursor = database.query(TABLE_SAVED_LOCATIONS, allColumns, where, null, null, null, null);
+    public List<SavedPlace> getPlaces() {
+        List<SavedPlace> savedPlaces = new ArrayList<>();
+        Cursor cursor = database.query(TABLE_SAVED_LOCATIONS, allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Location location = cursorToLocation(cursor);
-            locations.add(location);
+            SavedPlace savedPlace = cursorToLocation(cursor);
+            savedPlaces.add(savedPlace);
             cursor.moveToNext();
         }
         cursor.close();
-        return locations;
+        return savedPlaces;
     }
 
-    private Location cursorToLocation(Cursor cursor) {
-        Location location = new Location();
-        location.setId(cursor.getLong(0));
-        location.setImageUrl(cursor.getString(1));
-        location.setTitle(cursor.getString(2));
-        location.setType(Location.Type.valueOf(cursor.getString(3)));
-        return location;
+    private SavedPlace cursorToLocation(Cursor cursor) {
+        SavedPlace savedPlace = new SavedPlace();
+        savedPlace.setId(cursor.getLong(0));
+        savedPlace.setPlaceId(cursor.getString(1));
+        savedPlace.setImageUrl(cursor.getString(2));
+        savedPlace.setTitle(cursor.getString(3));
+        return savedPlace;
     }
 }

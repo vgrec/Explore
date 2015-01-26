@@ -1,7 +1,6 @@
 package com.traveler.fragment;
 
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,7 +12,9 @@ import android.widget.TextView;
 import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
+import com.traveler.db.SavedPlacesDataSource;
 import com.traveler.http.TravelerIoFacadeImpl;
+import com.traveler.models.db.SavedPlace;
 import com.traveler.models.events.PlaceDetailsErrorEvent;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -107,6 +109,25 @@ public class PlaceDetailFragment extends Fragment {
             }
         });
     }
+
+    @OnClick(R.id.add_to_favorites)
+    void addPlaceToFavorites() {
+        if (placeResponse != null) {
+            Place place = placeResponse.getPlace();
+            if (place != null) {
+                SavedPlace savedPlace = new SavedPlace();
+                savedPlace.setPlaceId(placeId);
+                savedPlace.setTitle(place.getName());
+                savedPlace.setImageUrl(place.getPhotos().size() > 0 ? place.getPhotos().get(0).getPhotoReference() : null);
+
+                SavedPlacesDataSource dataSource = new SavedPlacesDataSource(getActivity());
+                dataSource.open();
+                dataSource.savePlace(savedPlace);
+                dataSource.close();
+            }
+        }
+    }
+
 
     public void onEvent(PlaceDetailsResponse result) {
         progressView.hide();

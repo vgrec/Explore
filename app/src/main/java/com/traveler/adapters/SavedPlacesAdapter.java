@@ -5,8 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.traveler.Constants;
 import com.traveler.R;
-import com.traveler.models.db.Location;
+import com.traveler.models.db.SavedPlace;
 import com.traveler.views.PreviewImage;
 
 import java.util.List;
@@ -14,12 +15,12 @@ import java.util.List;
 /**
  * @author vgrec, created on 1/23/15.
  */
-public class FavoriteLocationsAdapter extends RecyclerView.Adapter<FavoriteLocationsAdapter.ViewHolder> {
+public class SavedPlacesAdapter extends RecyclerView.Adapter<SavedPlacesAdapter.ViewHolder> {
 
-    private List<Location> locations;
+    private List<SavedPlace> savedPlaces;
 
-    public FavoriteLocationsAdapter(List<Location> locations) {
-        this.locations = locations;
+    public SavedPlacesAdapter(List<SavedPlace> savedPlaces) {
+        this.savedPlaces = savedPlaces;
     }
 
     @Override
@@ -30,14 +31,14 @@ public class FavoriteLocationsAdapter extends RecyclerView.Adapter<FavoriteLocat
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Location location = locations.get(position);
-        holder.previewImage.setUrl(location.getImageUrl());
-        holder.previewImage.setText(location.getTitle());
+        SavedPlace savedPlace = savedPlaces.get(position);
+        holder.previewImage.setUrl(String.format(Constants.Google.IMAGE_URL, savedPlace.getImageUrl()));
+        holder.previewImage.setText(savedPlace.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return locations.size();
+        return savedPlaces.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -16,17 +16,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_SAVED_LOCATIONS = "SavedLocations";
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_PLACE_ID = "place_id";
     public static final String COLUMN_IMAGE_URL = "image_url";
     public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_TYPE = "type";
 
     private static final String DATABASE_CREATE =
             "create table " + TABLE_SAVED_LOCATIONS
                     + "("
                     + COLUMN_ID + " integer primary key autoincrement, "
+                    + COLUMN_PLACE_ID + " text not null, "
                     + COLUMN_IMAGE_URL + " text, "
-                    + COLUMN_TITLE + " text not null, "
-                    + COLUMN_TYPE + " text not null"
+                    + COLUMN_TITLE + " text not null"
                     + ");";
 
     public DatabaseHelper(Context context) {
