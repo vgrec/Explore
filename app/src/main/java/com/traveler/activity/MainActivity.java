@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.traveler.R;
 import com.traveler.fragment.ExploreFragment;
-import com.traveler.fragment.FavoritePlacesFragment;
+import com.traveler.fragment.SavedPlacesFragment;
 import com.traveler.fragment.NavigationDrawerFragment;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 replaceWith(new ExploreFragment());
                 break;
             case 1:
-                replaceWith(new FavoritePlacesFragment());
+                replaceWith(new SavedPlacesFragment());
                 break;
         }
     }

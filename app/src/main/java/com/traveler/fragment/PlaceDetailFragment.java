@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.traveler.Constants;
 import com.traveler.Extra;
@@ -111,18 +112,23 @@ public class PlaceDetailFragment extends Fragment {
     }
 
     @OnClick(R.id.add_to_favorites)
-    void addPlaceToFavorites() {
+    void addOrRemovePlaceFromFavorites() {
         if (placeResponse != null) {
             Place place = placeResponse.getPlace();
             if (place != null) {
-                SavedPlace savedPlace = new SavedPlace();
-                savedPlace.setPlaceId(placeId);
-                savedPlace.setTitle(place.getName());
-                savedPlace.setImageUrl(place.getPhotos().size() > 0 ? place.getPhotos().get(0).getPhotoReference() : null);
-
                 SavedPlacesDataSource dataSource = new SavedPlacesDataSource(getActivity());
                 dataSource.open();
-                dataSource.savePlace(savedPlace);
+                if (dataSource.isPlaceSaved(placeId)) {
+                    dataSource.removePlace(placeId);
+                    Toast.makeText(getActivity(), "Removed", 1000).show();
+                } else {
+                    SavedPlace savedPlace = new SavedPlace();
+                    savedPlace.setPlaceId(placeId);
+                    savedPlace.setTitle(place.getName());
+                    savedPlace.setImageUrl(place.getPhotos().size() > 0 ? place.getPhotos().get(0).getPhotoReference() : null);
+                    dataSource.savePlace(savedPlace);
+                    Toast.makeText(getActivity(), "Added", 1000).show();
+                }
                 dataSource.close();
             }
         }

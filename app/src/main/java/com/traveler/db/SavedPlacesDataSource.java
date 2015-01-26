@@ -64,7 +64,7 @@ public class SavedPlacesDataSource {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            SavedPlace savedPlace = cursorToLocation(cursor);
+            SavedPlace savedPlace = cursorToSavedPlace(cursor);
             savedPlaces.add(savedPlace);
             cursor.moveToNext();
         }
@@ -72,12 +72,28 @@ public class SavedPlacesDataSource {
         return savedPlaces;
     }
 
-    private SavedPlace cursorToLocation(Cursor cursor) {
+    private SavedPlace cursorToSavedPlace(Cursor cursor) {
         SavedPlace savedPlace = new SavedPlace();
         savedPlace.setId(cursor.getLong(0));
         savedPlace.setPlaceId(cursor.getString(1));
         savedPlace.setImageUrl(cursor.getString(2));
         savedPlace.setTitle(cursor.getString(3));
         return savedPlace;
+    }
+
+    public boolean isPlaceSaved(String placeId) {
+        boolean isPlaceSaved = false;
+        String where = COLUMN_PLACE_ID + "=" + "'" + placeId + "'";
+        Cursor cursor = database.query(TABLE_SAVED_LOCATIONS, allColumns, where, null, null, null, null);
+        if (cursor != null) {
+            isPlaceSaved = cursor.getCount() > 0;
+            cursor.close();
+        }
+        return isPlaceSaved;
+    }
+
+    public boolean removePlace(String placeId) {
+        String where = COLUMN_PLACE_ID + "=" + "'" + placeId + "'";
+        return database.delete(TABLE_SAVED_LOCATIONS, where, null) > 0;
     }
 }

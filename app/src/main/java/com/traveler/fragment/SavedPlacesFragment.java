@@ -24,15 +24,16 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class FavoritePlacesFragment extends Fragment {
+public class SavedPlacesFragment extends Fragment {
 
     private List<SavedPlace> savedPlaces = new ArrayList<>();
+    SavedPlacesAdapter adapter = new SavedPlacesAdapter(savedPlaces);
 
     @InjectView(R.id.favorites)
     RecyclerView recyclerView;
 
 
-    public FavoritePlacesFragment() {
+    public SavedPlacesFragment() {
         // Required empty public constructor
     }
 
@@ -40,6 +41,18 @@ public class FavoritePlacesFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle(R.string.favorite_places);
+        displaySavedPlaces();
+    }
+
+    private void displaySavedPlaces() {
+        SavedPlacesDataSource dataSource = new SavedPlacesDataSource(getActivity());
+        dataSource.open();
+
+        savedPlaces.clear();
+        savedPlaces.addAll(dataSource.getPlaces());
+        adapter.notifyDataSetChanged();
+
+        dataSource.close();
     }
 
     @Override
@@ -52,9 +65,7 @@ public class FavoritePlacesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.number_of_columns)));
-        SavedPlacesAdapter adapter = new SavedPlacesAdapter(savedPlaces);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
@@ -64,15 +75,6 @@ public class FavoritePlacesFragment extends Fragment {
                     }
                 })
         );
-
-        SavedPlacesDataSource dataSource = new SavedPlacesDataSource(getActivity());
-        dataSource.open();
-
-        savedPlaces.clear();
-        savedPlaces.addAll(dataSource.getPlaces());
-        adapter.notifyDataSetChanged();
-
-        dataSource.close();
     }
 
     private void openPlaceDetailsActivity(SavedPlace savedPlace) {
