@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.traveler.views.TypefacedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_item"
+    android:textSize="14sp"
+    android:paddingLeft="10dp"
+    android:drawablePadding="20dp"
+    android:textColor="#DE000000"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="48dp" />
+

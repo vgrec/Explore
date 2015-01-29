@@ -71,10 +71,9 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         List<NavigationDrawerItem> items = new ArrayList<NavigationDrawerItem>() {{
-            add(new NavigationDrawerItem(getString(R.string.explore), R.drawable.ic_location));
-            add(new NavigationDrawerItem(getString(R.string.favorite_places), R.drawable.ic_bookmark));
-            add(new NavigationDrawerItem(getString(R.string.about), R.drawable.ic_phone));
-            add(new NavigationDrawerItem(getString(R.string.terms_of_use), R.drawable.ic_location));
+            add(new NavigationDrawerItem(getString(R.string.explore), R.drawable.ic_explore));
+            add(new NavigationDrawerItem(getString(R.string.favorite_places), R.drawable.ic_favorite));
+            add(new NavigationDrawerItem(getString(R.string.about), R.drawable.ic_info));
         }};
 
         mDrawerListView.setAdapter(new NavigationDrawerAdapter(getActivity(), items));
@@ -219,7 +218,7 @@ public class NavigationDrawerFragment extends Fragment {
         @Override
         public View getView(int position, View view, ViewGroup parent) {
             if (view == null) {
-                view = inflater.inflate(R.layout.fragment_drawer_list_item, parent, false);
+                view = inflater.inflate(R.layout.item_drawer_list, parent, false);
             }
             TextView textView = (TextView) view.findViewById(R.id.drawer_item);
             textView.setText(items.get(position).title);

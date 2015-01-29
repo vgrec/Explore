@@ -11,4 +11,8 @@
         <attr name="progressViewErrorText" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="TypefacedTextView">
+        <attr name="font" format="string" />
+    </declare-styleable>
+
 </resources>
