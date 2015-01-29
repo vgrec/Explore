@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.traveler.R;
+import com.traveler.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.List;
 public class NavigationDrawerFragment extends Fragment {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
+    private static final int ABOUT_ITEM_POSITION = 2;
 
     private NavigationDrawerCallbacks mCallbacks;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -35,6 +37,7 @@ public class NavigationDrawerFragment extends Fragment {
     private View mFragmentContainerView;
     private int mCurrentSelectedPosition = 0;
     private static View view;
+    private NavigationDrawerAdapter adapter;
 
     public NavigationDrawerFragment() {
     }
@@ -76,7 +79,9 @@ public class NavigationDrawerFragment extends Fragment {
             add(new NavigationDrawerItem(getString(R.string.about), R.drawable.ic_info));
         }};
 
-        mDrawerListView.setAdapter(new NavigationDrawerAdapter(getActivity(), items));
+        adapter = new NavigationDrawerAdapter(getActivity(), items);
+        adapter.setSelectedItemPosition(mCurrentSelectedPosition);
+        mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -122,6 +127,11 @@ public class NavigationDrawerFragment extends Fragment {
         if (mCurrentSelectedPosition == position) {
             return;
         }
+
+        if (adapter != null) {
+            adapter.setSelectedItemPosition(position);
+        }
+
         mCurrentSelectedPosition = position;
 
         if (mDrawerListView != null) {
@@ -208,6 +218,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         private LayoutInflater inflater;
         private List<NavigationDrawerItem> items;
+        private int selectedItemPosition;
 
         public NavigationDrawerAdapter(Context context, List<NavigationDrawerItem> items) {
             super(context, 0, items);
@@ -223,7 +234,25 @@ public class NavigationDrawerFragment extends Fragment {
             TextView textView = (TextView) view.findViewById(R.id.drawer_item);
             textView.setText(items.get(position).title);
             textView.setCompoundDrawablesWithIntrinsicBounds(items.get(position).icon, 0, 0, 0);
+
+            if (position == selectedItemPosition) {
+                int selectedColor = view.getContext().getResources().getColor(R.color.teal);
+                textView.setTextColor(selectedColor);
+                Utils.setColorForTextViewDrawable(selectedColor, textView);
+            } else {
+                textView.setTextColor(view.getContext().getResources().getColor(R.color.drawer_item));
+                Utils.setColorForTextViewDrawable(view.getContext().getResources().getColor(R.color.default_icon_color), textView);
+            }
+
             return view;
+        }
+
+        public int getSelectedItemPosition() {
+            return selectedItemPosition;
+        }
+
+        public void setSelectedItemPosition(int selectedItemPosition) {
+            this.selectedItemPosition = selectedItemPosition;
         }
     }
 }

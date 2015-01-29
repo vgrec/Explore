@@ -4,7 +4,7 @@
     android:textSize="14sp"
     android:paddingLeft="10dp"
     android:drawablePadding="20dp"
-    android:textColor="#DE000000"
+    android:textColor="@color/drawer_item"
     android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="48dp" />

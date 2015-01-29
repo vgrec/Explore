@@ -34,6 +34,8 @@
     <color name="dark_grey">#424242</color>
     <color name="transparent_white">#22ffffff</color>
     <color name="light_pink">#FCE6E9</color>
+    <color name="default_icon_color">#333333</color>
+    <color name="drawer_item">#DE000000</color>
 
     <!-- 669900 -->
 
