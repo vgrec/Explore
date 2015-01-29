@@ -1,6 +1,7 @@
 package com.traveler.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,8 +17,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.traveler.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -29,6 +34,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private int mCurrentSelectedPosition = 0;
+    private static View view;
 
     public NavigationDrawerFragment() {
     }
@@ -63,16 +69,15 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.explore),
-                        getString(R.string.favorite_places),
-                        getString(R.string.about),
-                        getString(R.string.terms_of_use)
-                }));
+
+        List<NavigationDrawerItem> items = new ArrayList<NavigationDrawerItem>() {{
+            add(new NavigationDrawerItem(getString(R.string.explore), R.drawable.ic_location));
+            add(new NavigationDrawerItem(getString(R.string.favorite_places), R.drawable.ic_bookmark));
+            add(new NavigationDrawerItem(getString(R.string.about), R.drawable.ic_phone));
+            add(new NavigationDrawerItem(getString(R.string.terms_of_use), R.drawable.ic_location));
+        }};
+
+        mDrawerListView.setAdapter(new NavigationDrawerAdapter(getActivity(), items));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -185,5 +190,41 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    /**
+     * The entity that represents a navigation drawer item: Icon + Title
+     */
+    private static class NavigationDrawerItem {
+        String title;
+        int icon;
+
+        private NavigationDrawerItem(String title, int icon) {
+            this.title = title;
+            this.icon = icon;
+        }
+    }
+
+    private static class NavigationDrawerAdapter extends ArrayAdapter<NavigationDrawerItem> {
+
+        private LayoutInflater inflater;
+        private List<NavigationDrawerItem> items;
+
+        public NavigationDrawerAdapter(Context context, List<NavigationDrawerItem> items) {
+            super(context, 0, items);
+            this.items = items;
+            inflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            if (view == null) {
+                view = inflater.inflate(R.layout.fragment_drawer_list_item, parent, false);
+            }
+            TextView textView = (TextView) view.findViewById(R.id.drawer_item);
+            textView.setText(items.get(position).title);
+            textView.setCompoundDrawablesWithIntrinsicBounds(items.get(position).icon, 0, 0, 0);
+            return view;
+        }
     }
 }

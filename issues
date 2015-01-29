@@ -9,3 +9,5 @@
  - from nav drawer select  "favorites" -> go back -> select once again favorites: you can't open because currentPosition = position in NavDrawer.
  - Actionbar color and buttons maybe like here: https://play.google.com/store/apps/details?id=com.life360.android.safetymapd
  - Shopping, Theaters tabs don't display data.
+ - don't show phone number, link, if no data
+ - Rounded corners for images on main screen like this: http://assets0.materialup.com/designs/previews/000/000/180/thumb/open-uri20141218-11-1jit6wz.png?1418896932
