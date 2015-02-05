@@ -1,14 +1,12 @@
 package com.traveler.activity;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import com.traveler.R;
 import com.traveler.fragment.LocationSummaryFragment;
 
 
-public class LocationSummaryActivity extends ActionBarActivity {
+public class LocationSummaryActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

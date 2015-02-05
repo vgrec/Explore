@@ -1,12 +1,11 @@
 package com.traveler.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import com.traveler.Extra;
 import com.traveler.fragment.PlaceDetailFragment;
 
-public class PlaceDetailActivity extends ActionBarActivity {
+public class PlaceDetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

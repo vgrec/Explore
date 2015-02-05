@@ -1,12 +1,12 @@
 package com.traveler.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 import com.traveler.R;
 import com.traveler.fragment.VideosFragment;
 
-public class VideosActivity extends ActionBarActivity {
+public class VideosActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

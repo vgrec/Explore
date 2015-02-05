@@ -3,7 +3,6 @@ package com.traveler.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -11,12 +10,12 @@ import com.traveler.R;
 import com.traveler.adapters.AttractionsPagerAdapter;
 import com.traveler.http.TravelerIoFacadeImpl;
 
-public class AttractionsActivity extends ActionBarActivity {
+public class AttractionsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attractions);
 
         int primaryColor = TravelerIoFacadeImpl.TravelerSettings.getInstance(this).getPrimaryColor();

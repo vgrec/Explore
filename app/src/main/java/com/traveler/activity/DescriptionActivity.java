@@ -7,7 +7,7 @@ import com.traveler.fragment.DescriptionFragment;
 import com.traveler.fragment.LocationSummaryFragment;
 import com.traveler.models.wikipedia.PageDescription;
 
-public class DescriptionActivity extends ActionBarActivity {
+public class DescriptionActivity extends BaseActivity {
 
     public static final String TITLE = "TITLE";
     private String title;
