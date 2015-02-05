@@ -12,13 +12,13 @@ import com.traveler.http.TravelerIoFacadeImpl;
 
 public class AttractionsActivity extends BaseActivity {
 
+    public static final String TITLE = "TITLE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attractions);
-
-        int primaryColor = TravelerIoFacadeImpl.TravelerSettings.getInstance(this).getPrimaryColor();
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new AttractionsPagerAdapter(getFragmentManager()));
@@ -30,7 +30,13 @@ public class AttractionsActivity extends BaseActivity {
         tabs.setTextSize(getResources().getDimensionPixelSize(R.dimen.tabs_text_size));
         tabs.setIndicatorHeight(getResources().getDimensionPixelOffset(R.dimen.tabs_indicator_height));
         tabs.setViewPager(pager);
-        setTitle("Attractions in " + TravelerIoFacadeImpl.TravelerSettings.getInstance(this).getLocation());
+
+        String title = null;
+        if (getIntent() != null) {
+            title = getIntent().getStringExtra(TITLE);
+        }
+
+        setTitle("Attractions in " + (title != null ? title : TravelerIoFacadeImpl.TravelerSettings.getInstance(this).getLocation()));
         if (getSupportActionBar() != null) {
 //            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(primaryColor));
         }

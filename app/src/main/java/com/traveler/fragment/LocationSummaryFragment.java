@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.NetworkImageView;
 import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
@@ -23,7 +22,6 @@ import com.traveler.activity.DescriptionActivity;
 import com.traveler.activity.ImagesActivity;
 import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.activity.VideosActivity;
-import com.traveler.http.ImageLoader;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.http.VolleySingleton;
@@ -161,6 +159,9 @@ public class LocationSummaryFragment extends Fragment {
             public void onClick(View v) {
                 // open attractions
                 Intent intent = new Intent(getActivity(), AttractionsActivity.class);
+                if (pageDescription != null) {
+                    intent.putExtra(AttractionsActivity.TITLE, pageDescription.getTitle());
+                }
                 startActivity(intent);
             }
         });
