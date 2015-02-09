@@ -124,7 +124,7 @@ public class LocationSummaryFragment extends Fragment {
     void openImagesActivity() {
         if (photos.size() > 2) {
             Intent intent = new Intent(getActivity(), ImagesActivity.class);
-            intent.putExtra(Extra.PHOTOS, photos);
+            intent.putExtra(Extra.PHOTOS, Utils.flickrPhotosToUrls(photos));
             startActivity(intent);
         }
     }

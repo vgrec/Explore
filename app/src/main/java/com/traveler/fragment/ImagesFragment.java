@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.traveler.Extra;
 import com.traveler.R;
 import com.traveler.adapters.ImageGalleryPagerAdapter;
-import com.traveler.models.flickr.Photo;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  */
 public class ImagesFragment extends Fragment {
 
-    private ArrayList<Photo> photos = new ArrayList<Photo>();
+    private ArrayList<String> urls = new ArrayList<String>();
 
     public static Fragment newInstance(Bundle extras) {
         ImagesFragment fragment = new ImagesFragment();
@@ -31,7 +30,7 @@ public class ImagesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            photos.addAll((ArrayList<Photo>) getArguments().getSerializable(Extra.PHOTOS));
+            urls.addAll(getArguments().getStringArrayList(Extra.PHOTOS));
         }
     }
 
@@ -40,7 +39,7 @@ public class ImagesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_images, container, false);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
-        viewPager.setAdapter(new ImageGalleryPagerAdapter(getActivity(), photos));
+        viewPager.setAdapter(new ImageGalleryPagerAdapter(getActivity(), urls));
         return view;
     }
 }

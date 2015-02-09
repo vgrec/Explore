@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.traveler.http.ImageLoader;
 import com.traveler.R;
+import com.traveler.http.ImageLoader;
 import com.traveler.utils.ScrimUtil;
 
 import butterknife.ButterKnife;
@@ -56,6 +56,10 @@ public class ScrimImageHeader extends LinearLayout {
     }
 
     public void setNumberOfPhotos(int number) {
+        if (number <= 1) {
+            return;
+        }
+
         numberOfPhotos.setText(number + " photos");
         numberOfPhotos.setVisibility(View.VISIBLE);
     }

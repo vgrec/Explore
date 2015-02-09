@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
+import com.traveler.activity.ImagesActivity;
 import com.traveler.db.SavedPlacesDataSource;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.models.db.SavedPlace;
@@ -122,6 +124,25 @@ public class PlaceDetailFragment extends Fragment {
         });
     }
 
+    @OnClick(R.id.big_image_header)
+    void openImagesActivity() {
+        if (placeResponse == null) {
+            return;
+        }
+
+        Place place = placeResponse.getPlace();
+        if (place == null) {
+            return;
+        }
+
+        if (place.getPhotos().size() > 0) {
+            Intent intent = new Intent(getActivity(), ImagesActivity.class);
+            intent.putExtra(Extra.PHOTOS, Utils.googlePhotosToUrls(place.getPhotos()));
+            startActivity(intent);
+        }
+    }
+
+
     @OnClick(R.id.add_to_favorites)
     void addOrRemovePlaceFromFavorites() {
         if (placeResponse != null) {
@@ -132,7 +153,7 @@ public class PlaceDetailFragment extends Fragment {
                 if (dataSource.isPlaceSaved(placeId)) {
                     dataSource.removePlace(placeId);
                     animateRemoveFromFavorites();
-                    Toast.makeText(getActivity(), "Removed from favorites", 1000).show();
+                    Toast.makeText(getActivity(), "Removed from favorites", Toast.LENGTH_SHORT).show();
                 } else {
                     SavedPlace savedPlace = new SavedPlace();
                     savedPlace.setPlaceId(placeId);
@@ -140,7 +161,7 @@ public class PlaceDetailFragment extends Fragment {
                     savedPlace.setImageUrl(place.getPhotos().size() > 0 ? place.getPhotos().get(0).getPhotoReference() : null);
                     dataSource.savePlace(savedPlace);
                     animateAddToFavorites();
-                    Toast.makeText(getActivity(), "Added to favorites", 1000).show();
+                    Toast.makeText(getActivity(), "Added to favorites", Toast.LENGTH_SHORT).show();
                 }
                 dataSource.close();
             }
@@ -173,7 +194,6 @@ public class PlaceDetailFragment extends Fragment {
         animatorSet.play(bounceAnimX).with(bounceAnimY);
         animatorSet.start();
     }
-
 
 
     public void onEvent(PlaceDetailsResponse result) {

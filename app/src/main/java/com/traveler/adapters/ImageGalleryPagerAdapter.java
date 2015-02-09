@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.traveler.Constants;
-import com.traveler.http.ImageLoader;
 import com.traveler.R;
-import com.traveler.models.flickr.Size;
-import com.traveler.models.flickr.Photo;
+import com.traveler.http.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,19 +19,19 @@ import java.util.List;
  */
 public class ImageGalleryPagerAdapter extends PagerAdapter {
 
-    private List<Photo> photos = new ArrayList<Photo>();
+    private List<String> urls = new ArrayList<String>();
     private LayoutInflater inflater;
     private Context context;
 
-    public ImageGalleryPagerAdapter(Context context, List<Photo> photos) {
+    public ImageGalleryPagerAdapter(Context context, List<String> urls) {
         this.context = context;
-        this.photos.addAll(photos);
+        this.urls.addAll(urls);
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return photos.size();
+        return urls.size();
     }
 
     @Override
@@ -42,9 +39,8 @@ public class ImageGalleryPagerAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.item_image, container, false);
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         final NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.image);
-        Photo photo = photos.get(position);
-        String url = String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), Size.z);
-        ImageLoader.loadImage(context, url, imageView);
+
+        ImageLoader.loadImage(context, urls.get(position), imageView);
         imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
@@ -70,6 +66,6 @@ public class ImageGalleryPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object o) {
-         return view.equals(o);
+        return view.equals(o);
     }
 }
