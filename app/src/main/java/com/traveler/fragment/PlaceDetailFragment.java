@@ -1,15 +1,21 @@
 package com.traveler.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
@@ -37,6 +43,8 @@ import de.greenrobot.event.EventBus;
 
 // http://blog.syedgakbar.com/2012/07/changing-color-of-the-drawable-or-imageview-at-runtime-in-android/
 public class PlaceDetailFragment extends Fragment {
+
+    private static final OvershootInterpolator OVERSHOOT_INTERPOLATOR = new OvershootInterpolator(2);
 
     private String placeId;
     private PlaceDetailsResponse placeResponse;
@@ -67,6 +75,9 @@ public class PlaceDetailFragment extends Fragment {
 
     @InjectView(R.id.progress_view)
     ProgressView progressView;
+
+    @InjectView(R.id.add_to_favorites)
+    FloatingActionButton floatingActionButton;
 
     public static Fragment newInstance(String placeId) {
         PlaceDetailFragment fragment = new PlaceDetailFragment();
@@ -120,19 +131,49 @@ public class PlaceDetailFragment extends Fragment {
                 dataSource.open();
                 if (dataSource.isPlaceSaved(placeId)) {
                     dataSource.removePlace(placeId);
-                    Toast.makeText(getActivity(), "Removed", 1000).show();
+                    animateRemoveFromFavorites();
+                    Toast.makeText(getActivity(), "Removed from favorites", 1000).show();
                 } else {
                     SavedPlace savedPlace = new SavedPlace();
                     savedPlace.setPlaceId(placeId);
                     savedPlace.setTitle(place.getName());
                     savedPlace.setImageUrl(place.getPhotos().size() > 0 ? place.getPhotos().get(0).getPhotoReference() : null);
                     dataSource.savePlace(savedPlace);
-                    Toast.makeText(getActivity(), "Added", 1000).show();
+                    animateAddToFavorites();
+                    Toast.makeText(getActivity(), "Added to favorites", 1000).show();
                 }
                 dataSource.close();
             }
         }
     }
+
+    private void animateRemoveFromFavorites() {
+        bounceAnimation(R.drawable.ic_heart_outline_grey);
+    }
+
+    private void animateAddToFavorites() {
+        bounceAnimation(R.drawable.ic_heart_red);
+    }
+
+    private void bounceAnimation(final int onAnimationStartImageResource) {
+        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator bounceAnimX = ObjectAnimator.ofFloat(floatingActionButton, "scaleX", 0.95f, 1f);
+        bounceAnimX.setDuration(400);
+        bounceAnimX.setInterpolator(OVERSHOOT_INTERPOLATOR);
+
+        ObjectAnimator bounceAnimY = ObjectAnimator.ofFloat(floatingActionButton, "scaleY", 0.95f, 1f);
+        bounceAnimY.setDuration(400);
+        bounceAnimY.setInterpolator(OVERSHOOT_INTERPOLATOR);
+        bounceAnimY.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                floatingActionButton.setImageResource(onAnimationStartImageResource);
+            }
+        });
+        animatorSet.play(bounceAnimX).with(bounceAnimY);
+        animatorSet.start();
+    }
+
 
 
     public void onEvent(PlaceDetailsResponse result) {
@@ -157,6 +198,8 @@ public class PlaceDetailFragment extends Fragment {
             return;
         }
 
+        updateAddToFavoritesIcon(place.getPlaceId());
+
         int primaryColor = TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).getPrimaryColor();
 
         nameTextView.setText(place.getName());
@@ -175,6 +218,17 @@ public class PlaceDetailFragment extends Fragment {
         }
 
         displayReviews(place.getReviews());
+    }
+
+    private void updateAddToFavoritesIcon(String placeId) {
+        SavedPlacesDataSource dataSource = new SavedPlacesDataSource(getActivity());
+        dataSource.open();
+        if (dataSource.isPlaceSaved(placeId)) {
+            floatingActionButton.setImageResource(R.drawable.ic_heart_red);
+        } else {
+            floatingActionButton.setImageResource(R.drawable.ic_heart_outline_grey);
+        }
+        dataSource.close();
     }
 
     private void displayReviews(List<Review> reviews) {
