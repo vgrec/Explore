@@ -8,5 +8,6 @@
 
     <dimen name="navigation_drawer_width">270dp</dimen>
     <dimen name="preview_image_height">115dp</dimen>
+    <dimen name="header_image">260dp</dimen>
 
 </resources>

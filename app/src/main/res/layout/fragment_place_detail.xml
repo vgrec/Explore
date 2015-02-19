@@ -2,124 +2,119 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <com.traveler.views.ScrimImageHeader
+            android:id="@+id/big_image_header"
+            android:layout_below="@id/toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/place_detail_picture"
+            android:scaleType="centerCrop"
+            android:src="@drawable/lac"
+            android:layout_width="fill_parent"
+            android:layout_height="240dp" />
+
+        <LinearLayout
+            android:id="@+id/details_header_container"
+            android:layout_marginTop="1dp"
+            android:layout_below="@id/place_detail_picture"
+            tools:background="#424242"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <com.traveler.views.ScrimImageHeader
-                android:id="@+id/big_image_header"
+            <TextView
+                android:id="@+id/place_name"
+                tools:text="Residence ds fdsf dsf dsf ds fds fdsfdd"
+                android:textSize="26sp"
+                android:textColor="@android:color/white"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
-            <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/place_detail_picture"
-                android:scaleType="centerCrop"
-                android:src="@drawable/lac"
+            <TextView
+                android:id="@+id/rating"
+                tools:text="Rating: 5 stars"
+                android:textColor="@android:color/white"
                 android:layout_width="fill_parent"
-                android:layout_height="240dp" />
+                android:layout_height="wrap_content" />
 
+        </LinearLayout>
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_to_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/grey"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="-36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@id/place_detail_picture"
+            android:layout_marginRight="20dp" />
+
+        <LinearLayout
+            android:layout_below="@id/details_header_container"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/place_address"
+                tools:text="Address 34/34 Residence"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawableStart="@drawable/ic_location"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/phone_number"
+                tools:text="+796 87454758"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawableStart="@drawable/ic_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/web_site"
+                tools:text="http://google.com"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textSize="18sp"
+                android:drawableLeft="@drawable/ic_website"
+                android:drawableStart="@drawable/ic_website"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+
+            <!-- Content added programatically -->
             <LinearLayout
-                android:id="@+id/details_header_container"
-                android:layout_marginTop="1dp"
-                android:layout_below="@id/place_detail_picture"
-                tools:background="#424242"
-                android:orientation="vertical"
-                android:paddingTop="20dp"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp"
-                android:paddingBottom="6dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/place_name"
-                    tools:text="Residence ds fdsf dsf dsf ds fds fdsfdd"
-                    android:textSize="26sp"
-                    android:textColor="@android:color/white"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/rating"
-                    tools:text="Rating: 5 stars"
-                    android:textColor="@android:color/white"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/add_to_favorites"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_colorPressed="@color/grey"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="-36dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignBottom="@id/place_detail_picture"
-                android:layout_marginRight="20dp" />
-
-            <LinearLayout
-                android:layout_below="@id/details_header_container"
+                android:id="@+id/reviews_container"
+                android:padding="12dp"
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/place_address"
-                    tools:text="Address 34/34 Residence"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
-                    android:drawableLeft="@drawable/ic_location"
-                    android:drawableStart="@drawable/ic_location"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/phone_number"
-                    tools:text="+796 87454758"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
-                    android:drawableLeft="@drawable/ic_phone"
-                    android:drawableStart="@drawable/ic_phone"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/web_site"
-                    tools:text="http://google.com"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:textSize="18sp"
-                    android:drawableLeft="@drawable/ic_website"
-                    android:drawableStart="@drawable/ic_website"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+        </LinearLayout>
 
 
-                <!-- Content added programatically -->
-                <LinearLayout
-                    android:id="@+id/reviews_container"
-                    android:padding="12dp"
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>
 
     <com.traveler.views.ProgressView
         android:id="@+id/progress_view"
