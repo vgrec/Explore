@@ -21,6 +21,7 @@ import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
 import com.traveler.activity.ImagesActivity;
+import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.db.SavedPlacesDataSource;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.models.db.SavedPlace;
@@ -29,7 +30,6 @@ import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.Review;
 import com.traveler.utils.Utils;
-import com.traveler.views.ProgressView;
 import com.traveler.views.ScrimImageHeader;
 
 import java.util.List;
@@ -75,9 +75,6 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.reviews_container)
     ViewGroup reviewsContainer;
 
-    @InjectView(R.id.progress_view)
-    ProgressView progressView;
-
     @InjectView(R.id.add_to_favorites)
     FloatingActionButton floatingActionButton;
 
@@ -116,12 +113,14 @@ public class PlaceDetailFragment extends Fragment {
             updateUi();
         }
 
-        progressView.setTryAgainClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                downloadPlaceDetailsAndUpdateUi();
-            }
-        });
+        if (getActivity() != null) {
+            ((PlaceDetailActivity) getActivity()).getProgressView().setTryAgainClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    downloadPlaceDetailsAndUpdateUi();
+                }
+            });
+        }
     }
 
     @OnClick(R.id.big_image_header)
@@ -197,20 +196,39 @@ public class PlaceDetailFragment extends Fragment {
 
 
     public void onEvent(PlaceDetailsResponse result) {
-        progressView.hide();
+        hideProgressView();
         placeResponse = result;
         updateUi();
     }
 
     public void onEvent(PlaceDetailsErrorEvent error) {
-        progressView.showError();
+        showProgressViewError();
     }
 
     private void downloadPlaceDetailsAndUpdateUi() {
-        progressView.show();
+        showProgressView();
         TravelerIoFacadeImpl ioFacade = new TravelerIoFacadeImpl(getActivity());
         ioFacade.getPlaceDetails(placeId);
     }
+
+    private void hideProgressView() {
+        if(getActivity()!=null) {
+            ((PlaceDetailActivity) getActivity()).getProgressView().hide();
+        }
+    }
+
+    private void showProgressViewError() {
+        if(getActivity()!=null) {
+            ((PlaceDetailActivity) getActivity()).getProgressView().showError();
+        }
+    }
+
+    private void showProgressView() {
+        if(getActivity()!=null) {
+            ((PlaceDetailActivity) getActivity()).getProgressView().show();
+        }
+    }
+
 
     private void updateUi() {
         Place place = placeResponse.getPlace();

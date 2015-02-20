@@ -10,16 +10,25 @@ import com.traveler.Extra;
 import com.traveler.R;
 import com.traveler.fragment.PlaceDetailFragment;
 import com.traveler.views.NotifyingScrollView;
+import com.traveler.views.ProgressView;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class PlaceDetailActivity extends BaseActivity implements NotifyingScrollView.OnScrollChangedListener {
 
     private Drawable actionBarBackgroundDrawable;
     private Toolbar toolbar;
 
+    @InjectView(R.id.progress_view)
+    ProgressView progressView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_details);
+        ButterKnife.inject(this);
+
         setTitle("");
         String placeId = getIntent().getStringExtra(Extra.PLACE_ID);
 
@@ -61,5 +70,9 @@ public class PlaceDetailActivity extends BaseActivity implements NotifyingScroll
             ratio = (float) Math.min(Math.max(scrollPosition, 0), headerHeight) / headerHeight;
 
         updateActionBarTransparency(ratio);
+    }
+
+    public ProgressView getProgressView() {
+        return progressView;
     }
 }

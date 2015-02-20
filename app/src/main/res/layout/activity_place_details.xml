@@ -17,6 +17,13 @@
 
     </com.traveler.views.NotifyingScrollView>
 
+    <com.traveler.views.ProgressView
+        android:id="@+id/progress_view"
+        android:layout_centerInParent="true"
+        app:progressViewErrorText="@string/cant_load_place_details"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="fill_parent"
