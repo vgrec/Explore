@@ -131,8 +131,10 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             @Override
             public void onResponse(String response) {
                 PlaceItemsResponse placeItemsResponse = Utils.fromJson(PlaceItemsResponse.class, response);
-                placeItemsResponse.setPlaceType(placeType);
-                EventBus.getDefault().post(placeItemsResponse);
+                if (placeItemsResponse != null && placeItemsResponse.getPlaces().size() > 0) {
+                    placeItemsResponse.setPlaceType(placeType);
+                    EventBus.getDefault().post(placeItemsResponse);
+                }
             }
         }, new Response.ErrorListener() {
             @Override

@@ -213,7 +213,7 @@ public class LocationSummaryFragment extends Fragment {
     // On attractions received
     public void onEvent(PlaceItemsResponse result) {
         if (result != null && result.getPlaceType() == PlaceType.RESTAURANT) {
-            places = result.getPlaces();
+            places.addAll(result.getPlaces());
             showFirstPlaces();
         }
     }
@@ -253,7 +253,11 @@ public class LocationSummaryFragment extends Fragment {
     private void showLocationShortDescription() {
         descriptionTextView.setText(pageDescription.getExtract());
         locationTextView.setText(pageDescription.getTitle());
-        descriptionCard.setVisibility(View.VISIBLE);
+
+        // if there's some description, then show the card
+        if (pageDescription.getExtract() != null && pageDescription.getExtract().length() > 0) {
+            descriptionCard.setVisibility(View.VISIBLE);
+        }
     }
 
     private void downloadFlickrPhotos() {
