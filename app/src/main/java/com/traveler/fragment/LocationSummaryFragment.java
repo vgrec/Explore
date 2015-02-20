@@ -3,7 +3,6 @@ package com.traveler.fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
@@ -20,12 +19,13 @@ import com.traveler.R;
 import com.traveler.activity.AttractionsActivity;
 import com.traveler.activity.DescriptionActivity;
 import com.traveler.activity.ImagesActivity;
+import com.traveler.activity.LocationSummaryActivity;
 import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.activity.VideosActivity;
 import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.http.VolleySingleton;
-import com.traveler.models.events.ErrorEvent;
+import com.traveler.models.events.FlickrPhotosErrorEvent;
 import com.traveler.models.flickr.Photo;
 import com.traveler.models.flickr.Size;
 import com.traveler.models.google.Place;
@@ -57,11 +57,10 @@ public class LocationSummaryFragment extends Fragment {
 
     public static final String KEY_PAGE_DESCRIPTION = "KEY_PAGE_DESCRIPTION";
 
-    private ArrayList<Photo> photos = new ArrayList<Photo>();
+    private ArrayList<Photo> photos;
     private PageDescription pageDescription;
-
-    private int tasksFinished;
-    private int totalNumberOfTasks = 4;
+    private List<Place> places;
+    private List<Video> videos;
 
     @InjectView(R.id.description)
     TextView descriptionTextView;
@@ -87,8 +86,8 @@ public class LocationSummaryFragment extends Fragment {
     @InjectView(R.id.videos_card)
     PreviewCard videosCard;
 
-    @InjectView(R.id.progress_view)
-    ViewGroup progressView;
+    @InjectView(R.id.separator_line)
+    View separatorLine;
 
     @InjectView(R.id.videos_container)
     ViewGroup videosContainer;
@@ -102,6 +101,7 @@ public class LocationSummaryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         EventBus.getDefault().register(this);
     }
 
@@ -122,7 +122,7 @@ public class LocationSummaryFragment extends Fragment {
 
     @OnClick(R.id.big_image)
     void openImagesActivity() {
-        if (photos.size() > 2) {
+        if (photos != null && photos.size() > 2) {
             Intent intent = new Intent(getActivity(), ImagesActivity.class);
             intent.putExtra(Extra.PHOTOS, Utils.flickrPhotosToUrls(photos));
             startActivity(intent);
@@ -134,11 +134,45 @@ public class LocationSummaryFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         setListenersForPreviewCards();
 
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
-        ioFacade.getPlaces(PlaceType.RESTAURANT, "");
-        ioFacade.getPhotos();
-        ioFacade.getDescription();
-        ioFacade.getVideos();
+        final TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
+
+        if (getActivity() != null) {
+            ((LocationSummaryActivity) getActivity()).getProgressView().setTryAgainClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showProgressView();
+                    ioFacade.getFlickrPhotos();
+                    ioFacade.getPlaces(PlaceType.RESTAURANT, "");
+                    ioFacade.getDescription();
+                    ioFacade.getVideos();
+                }
+            });
+        }
+
+        if (photos == null) {
+            showProgressView();
+            ioFacade.getFlickrPhotos();
+        } else {
+            downloadFlickrPhotos();
+        }
+
+        if (places == null) {
+            ioFacade.getPlaces(PlaceType.RESTAURANT, "");
+        } else {
+            showFirstPlaces();
+        }
+
+        if (pageDescription == null) {
+            ioFacade.getDescription();
+        } else {
+            showLocationShortDescription();
+        }
+
+        if (videos == null) {
+            ioFacade.getVideos();
+        } else {
+            showFirstVideos();
+        }
     }
 
     private void setListenersForPreviewCards() {
@@ -179,46 +213,63 @@ public class LocationSummaryFragment extends Fragment {
     // On attractions received
     public void onEvent(PlaceItemsResponse result) {
         if (result != null && result.getPlaceType() == PlaceType.RESTAURANT) {
-            showFirstPlaces(result.getPlaces());
+            places = result.getPlaces();
+            showFirstPlaces();
         }
     }
 
     // On wikipedia description received
     public void onEvent(DescriptionResponse result) {
         pageDescription = result.getPageDescription();
-        descriptionTextView.setText(result.getPageDescription().getExtract());
-        locationTextView.setText(result.getPageDescription().getTitle());
+        showLocationShortDescription();
     }
 
     // On Flickr photos received
     public void onEvent(List<Photo> result) {
         if (result.size() > 2) {
+            photos = new ArrayList<>();
             photos.addAll(result);
-            scrimImageHeader.setNumberOfPhotos(result.size());
-            downloadImage(result.get(0), Size.z);
-            downloadImageAndProcessColor(result.get(1), smallImageView, Size.q);
+            downloadFlickrPhotos();
+        } else {
+            separatorLine.setVisibility(View.GONE);
         }
+        hideProgressView();
     }
 
     // On youtube videos received
     public void onEvent(VideosResponse result) {
         if (result != null) {
             List<Entry> entries = result.getFeed().getEntries();
-            List<Video> videos = VideoUtils.toVideos(entries);
-            showFirstVideos(videos);
+            videos = VideoUtils.toVideos(entries);
+            showFirstVideos();
         }
     }
 
-    public void onEvent(ErrorEvent error) {
 
+    public void onEvent(FlickrPhotosErrorEvent error) {
+        showProgressViewError();
     }
 
-    private void showFirstPlaces(final List<Place> places) {
+    private void showLocationShortDescription() {
+        descriptionTextView.setText(pageDescription.getExtract());
+        locationTextView.setText(pageDescription.getTitle());
+        descriptionCard.setVisibility(View.VISIBLE);
+    }
+
+    private void downloadFlickrPhotos() {
+        if (photos != null) {
+            scrimImageHeader.setNumberOfPhotos(photos.size());
+            downloadImage(photos.get(0), Size.z);
+            downloadImageAndProcessColor(photos.get(1), smallImageView, Size.q);
+        }
+    }
+
+    private void showFirstPlaces() {
         int numberOfImages = placesContainer.getChildCount();
-        if (places.size() < numberOfImages) {
-            // TODO: hide attractions card
+        if (places == null || places.size() < numberOfImages) {
             return;
         }
+        attractionsCard.setVisibility(View.VISIBLE);
 
         for (int i = 0; i < numberOfImages; i++) {
             PreviewImage previewImage = (PreviewImage) placesContainer.getChildAt(i);
@@ -245,19 +296,12 @@ public class LocationSummaryFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void checkTasks() {
-        tasksFinished++;
-        if (tasksFinished == totalNumberOfTasks) {
-            progressView.setVisibility(View.GONE);
-        }
-    }
-
-    private void showFirstVideos(final List<Video> videos) {
+    private void showFirstVideos() {
         int numberOfImages = videosContainer.getChildCount();
         if (videos.size() < numberOfImages) {
-            // TODO: hide videos card
             return;
         }
+        videosCard.setVisibility(View.VISIBLE);
 
         for (int i = 0; i < numberOfImages; i++) {
             PreviewImage previewImage = (PreviewImage) videosContainer.getChildAt(i);
@@ -281,7 +325,6 @@ public class LocationSummaryFragment extends Fragment {
 
             public void onErrorResponse(VolleyError error) {
                 imageView.setImageResource(R.drawable.ic_launcher);
-                checkTasks();
             }
 
             public void onResponse(com.android.volley.toolbox.ImageLoader.ImageContainer response, boolean arg1) {
@@ -289,8 +332,6 @@ public class LocationSummaryFragment extends Fragment {
                 if (bitmap != null) {
                     smallImageView.setImageBitmap(bitmap);
                     generatePaletteAndSetColor(bitmap);
-                } else {
-                    checkTasks();
                 }
             }
         });
@@ -302,11 +343,10 @@ public class LocationSummaryFragment extends Fragment {
             public void onGenerated(Palette palette) {
                 if (getActivity() != null) {
                     TravelerIoFacadeImpl.TravelerSettings settings = TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity());
-                    settings.setDarkMutedColor(palette.getDarkVibrantColor(Color.DKGRAY));
+                    settings.setDarkMutedColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
 
                 }
-                titleHeader.setBackgroundColor(palette.getDarkVibrantColor(Color.DKGRAY));
-                checkTasks();
+                titleHeader.setBackgroundColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
             }
         });
     }
@@ -320,5 +360,23 @@ public class LocationSummaryFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void hideProgressView() {
+        if (getActivity() != null) {
+            ((LocationSummaryActivity) getActivity()).getProgressView().hide();
+        }
+    }
+
+    private void showProgressViewError() {
+        if (getActivity() != null) {
+            ((LocationSummaryActivity) getActivity()).getProgressView().showError();
+        }
+    }
+
+    private void showProgressView() {
+        if (getActivity() != null) {
+            ((LocationSummaryActivity) getActivity()).getProgressView().show();
+        }
     }
 }

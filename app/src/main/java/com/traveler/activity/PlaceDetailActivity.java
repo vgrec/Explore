@@ -55,7 +55,6 @@ public class PlaceDetailActivity extends BaseActivity implements NotifyingScroll
         }
     }
 
-
     private void updateActionBarTransparency(float scrollRatio) {
         int newAlpha = (int) (scrollRatio * 255);
         actionBarBackgroundDrawable.setAlpha(newAlpha);

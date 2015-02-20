@@ -18,6 +18,7 @@
     <string name="cant_load_videos">Could not load videos</string>
     <string name="try_again">TRY AGAIN</string>
     <string name="cant_load_place_details">Could not load place details</string>
+    <string name="cant_load_place_summary">Could not load place summary</string>
     <string name="explore">Explore</string>
     <string name="recent_searches">Recent Searches</string>
     <string name="favorite_places">Favorite Places</string>

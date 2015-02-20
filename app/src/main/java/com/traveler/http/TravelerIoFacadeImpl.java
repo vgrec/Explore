@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.traveler.Constants;
 import com.traveler.models.events.AttractionsErrorEvent;
+import com.traveler.models.events.FlickrPhotosErrorEvent;
 import com.traveler.models.events.PlaceDetailsErrorEvent;
 import com.traveler.models.events.VideosErrorEvent;
 import com.traveler.models.flickr.PhotosResponse;
@@ -104,7 +105,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
     }
 
     @Override
-    public void getPhotos() {
+    public void getFlickrPhotos() {
         String url = String.format(Constants.Flickr.SEARCH_PHOTOS_URL, location + "%20city");
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -115,6 +116,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                EventBus.getDefault().post(new FlickrPhotosErrorEvent(error));
             }
         });
         requestQueue.add(request);

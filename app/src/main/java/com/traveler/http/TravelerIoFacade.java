@@ -9,7 +9,7 @@ public interface TravelerIoFacade {
 
     void getDescription();
 
-    void getPhotos();
+    void getFlickrPhotos();
 
     void getVideos();
 

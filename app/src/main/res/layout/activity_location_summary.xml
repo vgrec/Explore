@@ -19,9 +19,8 @@
 
     <com.traveler.views.ProgressView
         android:id="@+id/progress_view"
-        android:visibility="gone"
         android:layout_centerInParent="true"
-        app:progressViewErrorText="@string/cant_load_place_details"
+        app:progressViewErrorText="@string/cant_load_place_summary"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 

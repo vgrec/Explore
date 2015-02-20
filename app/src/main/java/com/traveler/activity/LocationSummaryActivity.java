@@ -9,6 +9,10 @@ import android.widget.ScrollView;
 import com.traveler.R;
 import com.traveler.fragment.LocationSummaryFragment;
 import com.traveler.views.NotifyingScrollView;
+import com.traveler.views.ProgressView;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class LocationSummaryActivity extends BaseActivity implements NotifyingScrollView.OnScrollChangedListener {
@@ -16,10 +20,14 @@ public class LocationSummaryActivity extends BaseActivity implements NotifyingSc
     private Drawable actionBarBackgroundDrawable;
     private Toolbar toolbar;
 
+    @InjectView(R.id.progress_view)
+    ProgressView progressView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_summary);
+        ButterKnife.inject(this);
         setTitle("");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         actionBarBackgroundDrawable = toolbar.getBackground();
@@ -58,5 +66,9 @@ public class LocationSummaryActivity extends BaseActivity implements NotifyingSc
             ratio = (float) Math.min(Math.max(scrollPosition, 0), headerHeight) / headerHeight;
 
         updateActionBarTransparency(ratio);
+    }
+
+    public ProgressView getProgressView() {
+        return progressView;
     }
 }
