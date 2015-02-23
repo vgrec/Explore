@@ -213,6 +213,7 @@ public class LocationSummaryFragment extends Fragment {
     // On attractions received
     public void onEvent(PlaceItemsResponse result) {
         if (result != null && result.getPlaceType() == PlaceType.RESTAURANT) {
+            places = new ArrayList<>();
             places.addAll(result.getPlaces());
             showFirstPlaces();
         }

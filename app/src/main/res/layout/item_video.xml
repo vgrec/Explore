@@ -17,7 +17,7 @@
             android:id="@+id/video_thumbnail"
             android:src="@drawable/lac"
             android:scaleType="centerCrop"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="80dp" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:textSize="12sp"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:text="12:30"
+            tools:text="12:30"
             android:layout_gravity="right|bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
