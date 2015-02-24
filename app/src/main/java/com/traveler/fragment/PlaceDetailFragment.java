@@ -1,9 +1,5 @@
 package com.traveler.fragment;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +24,7 @@ import com.traveler.models.events.PlaceDetailsErrorEvent;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceDetailsResponse;
 import com.traveler.models.google.Review;
+import com.traveler.utils.AnimationUtils;
 import com.traveler.utils.Utils;
 import com.traveler.views.ScrimImageHeader;
 
@@ -45,8 +41,6 @@ import de.greenrobot.event.EventBus;
 
 // http://blog.syedgakbar.com/2012/07/changing-color-of-the-drawable-or-imageview-at-runtime-in-android/
 public class PlaceDetailFragment extends Fragment {
-
-    private static final OvershootInterpolator OVERSHOOT_INTERPOLATOR = new OvershootInterpolator(2);
 
     private String placeId;
     private PlaceDetailsResponse placeResponse;
@@ -168,32 +162,12 @@ public class PlaceDetailFragment extends Fragment {
     }
 
     private void animateRemoveFromFavorites() {
-        bounceAnimation(R.drawable.ic_heart_outline_grey);
+        AnimationUtils.bounceAnimation(floatingActionButton, R.drawable.ic_heart_outline_grey);
     }
 
     private void animateAddToFavorites() {
-        bounceAnimation(R.drawable.ic_heart_red);
+        AnimationUtils.bounceAnimation(floatingActionButton, R.drawable.ic_heart_red);
     }
-
-    private void bounceAnimation(final int onAnimationStartImageResource) {
-        AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator bounceAnimX = ObjectAnimator.ofFloat(floatingActionButton, "scaleX", 0.95f, 1f);
-        bounceAnimX.setDuration(400);
-        bounceAnimX.setInterpolator(OVERSHOOT_INTERPOLATOR);
-
-        ObjectAnimator bounceAnimY = ObjectAnimator.ofFloat(floatingActionButton, "scaleY", 0.95f, 1f);
-        bounceAnimY.setDuration(400);
-        bounceAnimY.setInterpolator(OVERSHOOT_INTERPOLATOR);
-        bounceAnimY.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                floatingActionButton.setImageResource(onAnimationStartImageResource);
-            }
-        });
-        animatorSet.play(bounceAnimX).with(bounceAnimY);
-        animatorSet.start();
-    }
-
 
     public void onEvent(PlaceDetailsResponse result) {
         hideProgressView();
@@ -212,19 +186,19 @@ public class PlaceDetailFragment extends Fragment {
     }
 
     private void hideProgressView() {
-        if(getActivity()!=null) {
+        if (getActivity() != null) {
             ((PlaceDetailActivity) getActivity()).getProgressView().hide();
         }
     }
 
     private void showProgressViewError() {
-        if(getActivity()!=null) {
+        if (getActivity() != null) {
             ((PlaceDetailActivity) getActivity()).getProgressView().showError();
         }
     }
 
     private void showProgressView() {
-        if(getActivity()!=null) {
+        if (getActivity() != null) {
             ((PlaceDetailActivity) getActivity()).getProgressView().show();
         }
     }
