@@ -27,6 +27,7 @@ import com.traveler.models.google.Review;
 import com.traveler.utils.AnimationUtils;
 import com.traveler.utils.Utils;
 import com.traveler.views.ScrimImageHeader;
+import com.traveler.views.SmartTextView;
 
 import java.util.List;
 
@@ -52,16 +53,16 @@ public class PlaceDetailFragment extends Fragment {
     TextView nameTextView;
 
     @InjectView(R.id.place_address)
-    TextView addressTextView;
+    SmartTextView addressTextView;
 
     @InjectView(R.id.phone_number)
-    TextView phoneNumberTextView;
+    SmartTextView phoneNumberTextView;
 
     @InjectView(R.id.rating)
-    TextView ratingTextView;
+    SmartTextView ratingTextView;
 
     @InjectView(R.id.web_site)
-    TextView webSiteTextView;
+    SmartTextView webSiteTextView;
 
     @InjectView(R.id.details_header_container)
     ViewGroup detailsHeaderContainer;
@@ -216,9 +217,9 @@ public class PlaceDetailFragment extends Fragment {
 
         nameTextView.setText(place.getName());
         detailsHeaderContainer.setBackgroundColor(primaryColor);
+        ratingTextView.setText(place.getRating());
         addressTextView.setText(place.getAddress());
         phoneNumberTextView.setText(place.getPhoneNumber());
-        ratingTextView.setText(place.getRating());
         webSiteTextView.setText(place.getWebSite());
 
         Utils.setColorForTextViewDrawable(getResources().getColor(R.color.colorPrimary), addressTextView, phoneNumberTextView, webSiteTextView);
