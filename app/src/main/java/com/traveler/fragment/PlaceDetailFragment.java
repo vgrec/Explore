@@ -258,7 +258,6 @@ public class PlaceDetailFragment extends Fragment {
                 TextView text = (TextView) row.findViewById(R.id.text);
                 text.setText(review.getText());
                 RatingBar ratingBar = (RatingBar) row.findViewById(R.id.rating_bar);
-                ratingBar.setNumStars(5);
                 ratingBar.setRating(Float.valueOf(review.getRating()));
                 reviewsContainer.addView(row);
             }
