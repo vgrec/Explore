@@ -217,7 +217,12 @@ public class PlaceDetailFragment extends Fragment {
 
         nameTextView.setText(place.getName());
         detailsHeaderContainer.setBackgroundColor(primaryColor);
-        placeRatingBar.setRating(Float.valueOf(place.getRating()));
+
+        if (place.getRating() != null) {
+            placeRatingBar.setRating(Float.valueOf(place.getRating()));
+            placeRatingBar.setVisibility(View.VISIBLE);
+        }
+
         addressTextView.setText(place.getAddress());
         phoneNumberTextView.setText(place.getPhoneNumber());
         webSiteTextView.setText(place.getWebSite());
