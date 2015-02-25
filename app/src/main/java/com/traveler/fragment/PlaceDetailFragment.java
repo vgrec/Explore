@@ -58,8 +58,8 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.phone_number)
     SmartTextView phoneNumberTextView;
 
-    @InjectView(R.id.rating)
-    SmartTextView ratingTextView;
+    @InjectView(R.id.rating_bar)
+    RatingBar placeRatingBar;
 
     @InjectView(R.id.web_site)
     SmartTextView webSiteTextView;
@@ -217,7 +217,7 @@ public class PlaceDetailFragment extends Fragment {
 
         nameTextView.setText(place.getName());
         detailsHeaderContainer.setBackgroundColor(primaryColor);
-        ratingTextView.setText(place.getRating());
+        placeRatingBar.setRating(Float.valueOf(place.getRating()));
         addressTextView.setText(place.getAddress());
         phoneNumberTextView.setText(place.getPhoneNumber());
         webSiteTextView.setText(place.getWebSite());

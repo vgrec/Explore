@@ -39,16 +39,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <com.traveler.views.SmartTextView
-            android:id="@+id/rating"
-            android:visibility="gone"
-            tools:text="Rating: 5 stars"
-            android:textColor="@android:color/white"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
         <RatingBar
-            android:id="@+id/ratingbar"
+            android:id="@+id/rating_bar"
             style="@style/AverageRatingBar"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="-1dp"

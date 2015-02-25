@@ -10,8 +10,8 @@
 
     <style name="AverageRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/average_rating_bar</item>
-        <item name="android:minHeight">24dp</item>
-        <item name="android:maxHeight">24dp</item>
+        <item name="android:minHeight">22dp</item>
+        <item name="android:maxHeight">22dp</item>
     </style>
 
 </resources>
