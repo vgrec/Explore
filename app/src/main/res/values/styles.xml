@@ -8,6 +8,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!--
+        Drawable settings in http://romannurik.github.io/AndroidAssetStudio:
+            - trim
+            - padding 0%
+            - size 8dp
+            - padding around icon 1dp
+    -->
     <style name="AverageRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/average_rating_bar</item>
         <item name="android:minHeight">22dp</item>
