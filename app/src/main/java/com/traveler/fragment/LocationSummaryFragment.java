@@ -231,10 +231,12 @@ public class LocationSummaryFragment extends Fragment {
             photos = new ArrayList<>();
             photos.addAll(result);
             downloadFlickrPhotos();
+            // in case result is greater than 2, then the progress view is hidden after the
+            // Palette generated the color for header title.
         } else {
             separatorLine.setVisibility(View.GONE);
+            hideProgressView();
         }
-        hideProgressView();
     }
 
     // On youtube videos received
@@ -266,6 +268,8 @@ public class LocationSummaryFragment extends Fragment {
             scrimImageHeader.setNumberOfPhotos(photos.size());
             downloadImage(photos.get(0), Size.z);
             downloadImageAndProcessColor(photos.get(1), smallImageView, Size.q);
+        } else {
+            hideProgressView();
         }
     }
 
@@ -330,6 +334,7 @@ public class LocationSummaryFragment extends Fragment {
 
             public void onErrorResponse(VolleyError error) {
                 imageView.setImageResource(R.drawable.ic_launcher);
+                hideProgressView();
             }
 
             public void onResponse(com.android.volley.toolbox.ImageLoader.ImageContainer response, boolean arg1) {
@@ -338,6 +343,9 @@ public class LocationSummaryFragment extends Fragment {
                     smallImageView.setImageBitmap(bitmap);
                     generatePaletteAndSetColor(bitmap);
                 }
+//                else {
+//                    hideProgressView();
+//                }
             }
         });
     }
@@ -352,6 +360,7 @@ public class LocationSummaryFragment extends Fragment {
 
                 }
                 titleHeader.setBackgroundColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
+                hideProgressView();
             }
         });
     }
