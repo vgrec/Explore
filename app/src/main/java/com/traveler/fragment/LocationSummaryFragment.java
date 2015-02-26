@@ -254,13 +254,23 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     private void showLocationShortDescription() {
-        descriptionTextView.setText(pageDescription.getExtract());
+        String article = pageDescription.getExtract();
+        descriptionTextView.setText(article);
         locationTextView.setText(pageDescription.getTitle());
 
         // if there's some description, then show the card
-        if (pageDescription.getExtract() != null && pageDescription.getExtract().length() > 0) {
+        if (article != null && article.length() > 0 && distinctArticleFound(pageDescription.getTitle(), article)) {
             descriptionCard.setVisibility(View.VISIBLE);
         }
+    }
+
+    /**
+     * Sometimes a search term on Wikipedia will refer to multiple articles,
+     * and the result will return something like "Baile may refert to: Baile Felix, Baile Balneare, etc".
+     * If such a response is received, then we hide description.
+     */
+    private boolean distinctArticleFound(String title, String content) {
+        return !(content.startsWith(title + " may refer to:"));
     }
 
     private void downloadFlickrPhotos() {
