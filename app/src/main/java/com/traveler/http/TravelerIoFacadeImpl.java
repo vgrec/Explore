@@ -124,8 +124,9 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
 
     @Override
     public void getPlaces(final PlaceType placeType, String nextPageToken) {
-        String placeString = placeType.toString().toLowerCase();
-        String url = String.format(Constants.Google.PLACES_URL, placeString, location, placeString, nextPageToken);
+        String queryString = placeType.getQuery();
+        String placeTypeString = placeType.getPlaceType();
+        String url = String.format(Constants.Google.PLACES_URL, queryString, location, placeTypeString, nextPageToken);
         url = url.replaceAll(" ", "%20");
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
