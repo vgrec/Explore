@@ -259,7 +259,7 @@ public class LocationSummaryFragment extends Fragment {
         locationTextView.setText(pageDescription.getTitle());
 
         // if there's some description, then show the card
-        if (article != null && article.length() > 0 && distinctArticleFound(pageDescription.getTitle(), article)) {
+        if (article != null && article.length() > 0 && validArticleFound(pageDescription.getTitle(), article)) {
             descriptionCard.setVisibility(View.VISIBLE);
         }
     }
@@ -269,8 +269,10 @@ public class LocationSummaryFragment extends Fragment {
      * and the result will return something like "Baile may refert to: Baile Felix, Baile Balneare, etc".
      * If such a response is received, then we hide description.
      */
-    private boolean distinctArticleFound(String title, String content) {
-        return !(content.startsWith(title + " may refer to:"));
+    private boolean validArticleFound(String title, String content) {
+        boolean distinctArticle = !(content.startsWith(title + " may refer to:"));
+        boolean noRedirect = !(content.startsWith("This is a redirect from a page name that"));
+        return distinctArticle && noRedirect;
     }
 
     private void downloadFlickrPhotos() {

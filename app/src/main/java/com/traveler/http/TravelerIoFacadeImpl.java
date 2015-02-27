@@ -88,7 +88,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
 
     @Override
     public void getDescription() {
-        String url = String.format(Constants.Wikipedia.TEXT_SEARCH_URL, location);
+        String url = String.format(Constants.Wikipedia.TEXT_SEARCH_URL, location.replaceAll(" ", "%20"));
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
