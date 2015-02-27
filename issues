@@ -7,8 +7,9 @@
 - Fix: status bar to use color secondary in Lollipop
 - Fix: From nav drawer select  "favorites" -> go back -> select once again favorites: you can't open because currentPosition = position in NavDrawer.
 - Ads in Attractions and Place details.
+- Add about text
 - Add terms and conditions in nav drawer
-- Change app name
+- Change app name: Explore - Discover beautiful places to visit!
 - Make icon
 - Increase quota query limit
 
