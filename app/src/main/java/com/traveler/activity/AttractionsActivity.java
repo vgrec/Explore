@@ -37,8 +37,5 @@ public class AttractionsActivity extends BaseActivity {
         }
 
         setTitle("Attractions in " + (title != null ? title : TravelerIoFacadeImpl.TravelerSettings.getInstance(this).getLocation()));
-        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(primaryColor));
-        }
     }
 }
