@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PhotosResponse {
     @JsonProperty("photos")
-    private Photos photos;
+    private FlickrPhotos flickrPhotos;
 
-    public Photos getPhotosResponse() {
-        return photos;
+    public FlickrPhotos getPhotosResponse() {
+        return flickrPhotos;
     }
 }

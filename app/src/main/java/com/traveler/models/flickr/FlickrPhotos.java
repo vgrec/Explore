@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Photos {
+public class FlickrPhotos {
     private String page;
     private int pages;
 
@@ -14,7 +14,7 @@ public class Photos {
     private int perPage;
 
     @JsonProperty("photo")
-    private List<Photo> photos;
+    private List<FlickrPhoto> flickrPhotos;
 
     public String getPage() {
         return page;
@@ -28,7 +28,7 @@ public class Photos {
         return perPage;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public List<FlickrPhoto> getFlickrPhotos() {
+        return flickrPhotos;
     }
 }

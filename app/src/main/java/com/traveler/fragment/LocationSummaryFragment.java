@@ -26,7 +26,7 @@ import com.traveler.http.TravelerIoFacade;
 import com.traveler.http.TravelerIoFacadeImpl;
 import com.traveler.http.VolleySingleton;
 import com.traveler.models.events.FlickrPhotosErrorEvent;
-import com.traveler.models.flickr.Photo;
+import com.traveler.models.flickr.FlickrPhoto;
 import com.traveler.models.flickr.Size;
 import com.traveler.models.google.Place;
 import com.traveler.models.google.PlaceItemsResponse;
@@ -57,7 +57,7 @@ public class LocationSummaryFragment extends Fragment {
 
     public static final String KEY_PAGE_DESCRIPTION = "KEY_PAGE_DESCRIPTION";
 
-    private ArrayList<Photo> photos;
+    private ArrayList<FlickrPhoto> flickrPhotos;
     private PageDescription pageDescription;
     private List<Place> places;
     private List<Video> videos;
@@ -122,9 +122,9 @@ public class LocationSummaryFragment extends Fragment {
 
     @OnClick(R.id.big_image)
     void openImagesActivity() {
-        if (photos != null && photos.size() > 2) {
+        if (flickrPhotos != null && flickrPhotos.size() > 2) {
             Intent intent = new Intent(getActivity(), ImagesActivity.class);
-            intent.putExtra(Extra.PHOTOS, Utils.flickrPhotosToUrls(photos));
+            intent.putExtra(Extra.PHOTOS, Utils.flickrPhotosToUrls(flickrPhotos));
             startActivity(intent);
         }
     }
@@ -149,7 +149,7 @@ public class LocationSummaryFragment extends Fragment {
             });
         }
 
-        if (photos == null) {
+        if (flickrPhotos == null) {
             showProgressView();
             ioFacade.getFlickrPhotos();
         } else {
@@ -226,10 +226,10 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     // On Flickr photos received
-    public void onEvent(List<Photo> result) {
+    public void onEvent(List<FlickrPhoto> result) {
         if (result.size() > 2) {
-            photos = new ArrayList<>();
-            photos.addAll(result);
+            flickrPhotos = new ArrayList<>();
+            flickrPhotos.addAll(result);
             downloadFlickrPhotos();
             // in case result is greater than 2, then the progress view is hidden after the
             // Palette generated the color for header title.
@@ -276,10 +276,10 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     private void downloadFlickrPhotos() {
-        if (photos != null) {
-            scrimImageHeader.setNumberOfPhotos(photos.size());
-            downloadImage(photos.get(0), Size.z);
-            downloadImageAndProcessColor(photos.get(1), smallImageView, Size.q);
+        if (flickrPhotos != null) {
+            scrimImageHeader.setNumberOfPhotos(flickrPhotos.size());
+            downloadImage(flickrPhotos.get(0), Size.z);
+            downloadImageAndProcessColor(flickrPhotos.get(1), smallImageView, Size.q);
         } else {
             hideProgressView();
         }
@@ -339,9 +339,9 @@ public class LocationSummaryFragment extends Fragment {
     }
 
 
-    private void downloadImageAndProcessColor(Photo photo, final ImageView imageView, Size size) {
+    private void downloadImageAndProcessColor(FlickrPhoto flickrPhoto, final ImageView imageView, Size size) {
         com.android.volley.toolbox.ImageLoader imageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
-        String url = String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), size);
+        String url = String.format(Constants.Flickr.PHOTO_URL, flickrPhoto.getFarm(), flickrPhoto.getServer(), flickrPhoto.getId(), flickrPhoto.getSecret(), size);
         imageLoader.get(url, new com.android.volley.toolbox.ImageLoader.ImageListener() {
 
             public void onErrorResponse(VolleyError error) {
@@ -377,8 +377,8 @@ public class LocationSummaryFragment extends Fragment {
         });
     }
 
-    private void downloadImage(Photo photo, Size size) {
-        String url = String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), size);
+    private void downloadImage(FlickrPhoto flickrPhoto, Size size) {
+        String url = String.format(Constants.Flickr.PHOTO_URL, flickrPhoto.getFarm(), flickrPhoto.getServer(), flickrPhoto.getId(), flickrPhoto.getSecret(), size);
         scrimImageHeader.setImageUrl(url);
     }
 

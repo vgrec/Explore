@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.traveler.Constants;
-import com.traveler.models.flickr.Photo;
+import com.traveler.models.flickr.FlickrPhoto;
 import com.traveler.models.flickr.Size;
 import com.traveler.models.google.GooglePhoto;
 
@@ -49,10 +49,10 @@ public class Utils {
     }
 
 
-    public static ArrayList<String> flickrPhotosToUrls(ArrayList<Photo> photos) {
+    public static ArrayList<String> flickrPhotosToUrls(ArrayList<FlickrPhoto> flickrPhotos) {
         ArrayList<String> urls = new ArrayList<>();
-        for (Photo photo : photos) {
-            urls.add(String.format(Constants.Flickr.PHOTO_URL, photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret(), Size.z));
+        for (FlickrPhoto flickrPhoto : flickrPhotos) {
+            urls.add(String.format(Constants.Flickr.PHOTO_URL, flickrPhoto.getFarm(), flickrPhoto.getServer(), flickrPhoto.getId(), flickrPhoto.getSecret(), Size.z));
         }
         return urls;
     }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Photo implements Serializable {
+public class FlickrPhoto implements Serializable {
     private String id;
     private String secret;
     private String server;

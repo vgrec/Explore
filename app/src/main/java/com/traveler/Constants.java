@@ -11,6 +11,9 @@ public class Constants {
     }
 
     public class Flickr {
+        // Flickr API keys and their terms of use:
+        // http://stackoverflow.com/a/10362918/1271435
+
         private static final String API_KEY = "97e9fc9835ab601cee0fe21fce7b11aa";
         private static final String BASE_URL = "https://api.flickr.com/services/rest/";
         public static final String SEARCH_PHOTOS_URL = BASE_URL + "?method=flickr.photos.search&api_key=" + API_KEY + "&format=json&nojsoncallback=1&per_page=" + IMAGES_PER_PAGE + "&license=4,5,6&sort=relevance&text=%s";
@@ -38,30 +41,11 @@ public class Constants {
         public static final String VIDEOS_URL = "http://gdata.youtube.com/feeds/base/videos?q=%s&alt=json&max-results=" + max;
     }
 
-    // ==================
-    //
-
-    // formatted_address
-    // international_phone_number
-    // formatted_phone_number
-    // name
-    // opening hours {open_now, weekday_text}
-    // photos
-    // rating
-    // reviews
-    // website
-
-
     // =============================================================================================
     // We collect information from various sources like
     // Google Places, Google Translate, Youtube, Google Books, Flickr, Eventbrite, Expedia, Forecast.io, Wikipedia, Google Maps and Google Street View.
 
-    // api key:
-    // AIzaSyBVcUHbF6cYBhgUBWUvLGLuwx6B8-tSj24
-
-
     // https://developers.google.com/places/training/autocomplete-android
-
 
     // Details google
     // https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJj57Sam5aqEcRTHQWXLfcDjk&key=AIzaSyBVcUHbF6cYBhgUBWUvLGLuwx6B8-tSj24
@@ -70,10 +54,10 @@ public class Constants {
     // https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRsAAAAivj_hV3wnoOQeOAIziW8dzA1dbMW49embKN0F49aJCzmoN8uOCFEFNzoN_hnj6fMmLdcntBU061SFO_0IySeR8eYl_ziMe0xW2VVQMYWbHVXsP1bANuh74YDvyPgZnBoAhymKQkM1tDxmB2HYfyV4hIQqnHDwjU_ZxW6EtFTDoTn6RoUSQcZORA8IgZM3ql1yZzZ3iZIAhk&key=AIzaSyBVcUHbF6cYBhgUBWUvLGLuwx6B8-tSj24
 
     // ============= Flickr
-    // https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=76e55981bd5910ca10a65dfead917d7a&text=Saharna&license=4%2C5&sort=relevance&format=json&nojsoncallback=1&api_sig=f7a64fb60fdff1b16ce5d5cb5aac3909
+    // https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=97e9fc9835ab601cee0fe21fce7b11aa&text=Saharna&license=4%2C5&sort=relevance&format=json&nojsoncallback=1&api_sig=f7a64fb60fdff1b16ce5d5cb5aac3909
 
     // Get Photo By Id:
-    // https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=76e55981bd5910ca10a65dfead917d7a&photo_id=190157681&format=json&nojsoncallback=1&api_sig=cb40aac2fd7b3fe82800e2e05acabe42
+    // https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=AIzaSyBVcUHbF6cYBhgUBWUvLGLuwx6B8-tSj24&photo_id=190157681&format=json&nojsoncallback=1&api_sig=cb40aac2fd7b3fe82800e2e05acabe42
 
 
     // Museum:

@@ -111,7 +111,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             @Override
             public void onResponse(String response) {
                 PhotosResponse photosResponse = Utils.fromJson(PhotosResponse.class, response);
-                EventBus.getDefault().post(photosResponse.getPhotosResponse().getPhotos());
+                EventBus.getDefault().post(photosResponse.getPhotosResponse().getFlickrPhotos());
             }
         }, new Response.ErrorListener() {
             @Override
