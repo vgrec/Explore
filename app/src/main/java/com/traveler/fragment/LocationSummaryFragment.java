@@ -369,9 +369,8 @@ public class LocationSummaryFragment extends Fragment {
                 if (getActivity() != null) {
                     TravelerIoFacadeImpl.TravelerSettings settings = TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity());
                     settings.setDarkMutedColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
-
+                    titleHeader.setBackgroundColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
                 }
-                titleHeader.setBackgroundColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
                 hideProgressView();
             }
         });
