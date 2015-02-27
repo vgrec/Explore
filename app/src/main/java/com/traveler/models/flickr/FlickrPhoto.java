@@ -10,6 +10,7 @@ public class FlickrPhoto implements Serializable {
     private String secret;
     private String server;
     private String farm;
+    private String title;
 
     public String getId() {
         return id;
@@ -27,4 +28,7 @@ public class FlickrPhoto implements Serializable {
         return farm;
     }
 
+    public String getTitle() {
+        return title;
+    }
 }

@@ -1,8 +1,34 @@
-3. Display attributions, on photo first/details, and on details page at bottom.
-7. handle rotation
-8. FOR TABLETS: http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0B71WflkWs_SAZjY3azBTRXRNNzg/patterns_actions_fab_placement8.png
-9. Detect OVER_QUERY_LIMIT to analytics
- - add shadow in location summary screen: to green buttons (perhaps), and to the block that surrounds the fotos and title.
- - from nav drawer select  "favorites" -> go back -> select once again favorites: you can't open because currentPosition = position in NavDrawer.
- - Actionbar color and buttons maybe like here: https://play.google.com/store/apps/details?id=com.life360.android.safetymapd
- - Rounded corners for images on main screen like this: http://assets0.materialup.com/designs/previews/000/000/180/thumb/open-uri20141218-11-1jit6wz.png?1418896932
+# For Release:
+- Search autocomplete
+- Make clickable: address, phone, link.
+- In PlaceDetails screen, add title "Reviews"
+- Design Explore screen
+- Add an image header in nav drawer (use Toolbar)
+- Fix: status bar to use color secondary in Lollipop
+- Fix: From nav drawer select  "favorites" -> go back -> select once again favorites: you can't open because currentPosition = position in NavDrawer.
+- Ads in Attractions and Place details.
+- Add terms and conditions in nav drawer
+- Change app name
+- Make icon
+- Increase quota query limit
+
+# Next version:
+- Display title/attributions on Flickr/Google photos (ImagesActivity)
+- Display google attributions (if any) in Place details screen
+- Save in favorites the Pallet color according to each place
+- Default image for missing attraction images (eg. zoo, museum)
+- Default image in LocationSummaryFragment for locality, when no image from Flickr returned.
+- In Attractions Activity display rating bar for place items.
+- Animations for Lollipop (when opening the Image gallery)
+- DESIGN FOR TABLETS: http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0B71WflkWs_SAZjY3azBTRXRNNzg/patterns_actions_fab_placement8.png
+
+
+# Nice to have:
+- Save the whole Place in Favorites, not only ids.
+- Google Analytics
+- Increase image caching
+- Zoom of images
+
+# Future ideas
+- Have info about weather
+- Have info about hotels

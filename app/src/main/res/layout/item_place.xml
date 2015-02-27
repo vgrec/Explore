@@ -21,11 +21,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
+    <!-- Hidden in first version. Display RatingBar instead in the next v. -->
     <TextView
         android:id="@+id/rating"
+        android:visibility="gone"
         android:layout_toRightOf="@id/place_picture"
         android:layout_below="@id/name"
-        android:text="Rating: 4.5"
+        tools:text="Rating: 4.5"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
