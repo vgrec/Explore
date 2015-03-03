@@ -13,6 +13,8 @@ import com.traveler.models.flickr.Size;
 import com.traveler.models.google.GooglePhoto;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,5 +65,13 @@ public class Utils {
             urls.add(String.format(Constants.Google.IMAGE_URL, photo.getPhotoReference()));
         }
         return urls;
+    }
+
+    public static String encodeAsUrl(String input) {
+        try {
+            return URLEncoder.encode(input, "utf8");
+        } catch (UnsupportedEncodingException e) {
+            return input;
+        }
     }
 }

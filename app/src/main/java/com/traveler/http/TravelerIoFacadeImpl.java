@@ -7,6 +7,8 @@ import android.graphics.Color;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.traveler.Constants;
 import com.traveler.models.events.AttractionsErrorEvent;
@@ -20,6 +22,15 @@ import com.traveler.models.google.PlaceType;
 import com.traveler.models.wikipedia.DescriptionResponse;
 import com.traveler.models.youtube.VideosResponse;
 import com.traveler.utils.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import de.greenrobot.event.EventBus;
 
@@ -182,5 +193,30 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             }
         });
         requestQueue.add(request);
+    }
+
+    @Override
+    public ArrayList<String> autocomplete(String input) {
+        ArrayList<String> resultList = null;
+
+        String url = String.format(Constants.Google.AUTOCOMPLETE_URL, Utils.encodeAsUrl(input));
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JsonObjectRequest request = new JsonObjectRequest(url, null, future, future);
+        requestQueue.add(request);
+
+        try {
+            JSONObject response = future.get(10, TimeUnit.SECONDS);
+            JSONArray predictions = response.getJSONArray("predictions");
+
+            // Extract the Place descriptions from the results
+            resultList = new ArrayList<String>(predictions.length());
+            for (int i = 0; i < predictions.length(); i++) {
+                resultList.add(predictions.getJSONObject(i).getString("description"));
+            }
+
+        } catch (InterruptedException | ExecutionException | TimeoutException | JSONException e) {
+            e.printStackTrace();
+        }
+        return resultList;
     }
 }

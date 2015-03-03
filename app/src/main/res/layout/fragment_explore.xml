@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/location"
+        <AutoCompleteTextView
+            android:id="@+id/location_autocomplete"
             android:hint="@string/city"
             android:text="Berlin"
             android:singleLine="true"

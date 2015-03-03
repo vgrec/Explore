@@ -7,11 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.traveler.R;
 import com.traveler.activity.LocationSummaryActivity;
+import com.traveler.adapters.PlacesAutoCompleteAdapter;
 import com.traveler.http.TravelerIoFacadeImpl;
 
 import butterknife.ButterKnife;
@@ -24,8 +26,8 @@ public class ExploreFragment extends Fragment {
     @InjectView(R.id.go)
     Button goButton;
 
-    @InjectView(R.id.location)
-    EditText locationEditText;
+    @InjectView(R.id.location_autocomplete)
+    AutoCompleteTextView autoCompleteView;
 
     public ExploreFragment() {
         // Required empty public constructor
@@ -49,17 +51,30 @@ public class ExploreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // TODO: for testing
 //        goButton.setEnabled(false);
+
+        autoCompleteView.setAdapter(new PlacesAutoCompleteAdapter(getActivity(), R.layout.item_autocomplete));
+        autoCompleteView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String location = (String) adapterView.getItemAtPosition(position);
+                startSummaryActivity(location);
+            }
+        });
     }
 
     @OnClick(R.id.go)
     void startLocationSummaryActivity() {
-        String location = locationEditText.getText().toString().trim();
+        String location = autoCompleteView.getText().toString().trim();
+        startSummaryActivity(location);
+    }
+
+    private void startSummaryActivity(String location) {
         TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).setLocation(location);
         Intent intent = new Intent(getActivity(), LocationSummaryActivity.class);
         startActivity(intent);
     }
 
-    @OnTextChanged(R.id.location)
+    @OnTextChanged(R.id.location_autocomplete)
     void onTextChanged(CharSequence charSequence) {
         goButton.setEnabled(charSequence.length() > 0);
     }

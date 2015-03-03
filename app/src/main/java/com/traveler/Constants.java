@@ -40,6 +40,7 @@ public class Constants {
         public static final String THUMBNAIL_URL = BASE_URL + "/photo?maxwidth=" + thumbnailWidth + "&photoreference=%s&key=" + PLACES_API_KEY;
         public static final String IMAGE_URL = BASE_URL + "/photo?maxwidth=" + imageWidth + "&photoreference=%s&key=" + PLACES_API_KEY;
         public static final String PLACE_DETAILS_URL = BASE_URL + "/details/json?placeid=%s&key=" + PLACES_API_KEY;
+        public static final String AUTOCOMPLETE_URL = BASE_URL + "/autocomplete/json?key=" + PLACES_API_KEY + "&input=%s";
 
         // Examples
 
