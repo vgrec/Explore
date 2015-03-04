@@ -211,7 +211,8 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             // Extract the Place descriptions from the results
             resultList = new ArrayList<String>(predictions.length());
             for (int i = 0; i < predictions.length(); i++) {
-                resultList.add(predictions.getJSONObject(i).getString("description"));
+                JSONArray terms = predictions.getJSONObject(i).getJSONArray("terms");
+                resultList.add(terms.getJSONObject(0).getString("value"));
             }
 
         } catch (InterruptedException | ExecutionException | TimeoutException | JSONException e) {
