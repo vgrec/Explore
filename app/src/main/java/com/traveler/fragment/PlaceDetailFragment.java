@@ -1,7 +1,10 @@
 package com.traveler.fragment;
 
 import android.app.Fragment;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -58,11 +61,11 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.phone_number)
     SmartTextView phoneNumberTextView;
 
-    @InjectView(R.id.rating_bar)
-    RatingBar placeRatingBar;
-
     @InjectView(R.id.web_site)
     SmartTextView webSiteTextView;
+
+    @InjectView(R.id.rating_bar)
+    RatingBar placeRatingBar;
 
     @InjectView(R.id.details_header_container)
     ViewGroup detailsHeaderContainer;
@@ -116,6 +119,39 @@ public class PlaceDetailFragment extends Fragment {
                 }
             });
         }
+    }
+
+    @OnClick(R.id.place_address)
+    void showPlaceAddressOnMap() {
+
+    }
+
+    @OnClick(R.id.phone_number)
+    void openDialNumberScreen() {
+
+        // for example, tablets don't have telephony
+        if (!isTelephonySupported()) {
+            return;
+        }
+
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + placeResponse.getPlace().getPhoneNumber()));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            // Could not find any activity that takes an ACTION_DIAL intent.
+            // Do nothing.
+        }
+    }
+
+    private boolean isTelephonySupported() {
+        return getActivity() != null && getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
+    }
+
+
+    @OnClick(R.id.web_site)
+    void openPlaceWebSite() {
+
     }
 
     @OnClick(R.id.big_image_header)
@@ -269,8 +305,4 @@ public class PlaceDetailFragment extends Fragment {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
-    //    Intent intent = new Intent(Intent.ACTION_DIAL);
-//    intent.setData(Uri.parse("1234567890"))
-//    startActivity(intent);
 }
