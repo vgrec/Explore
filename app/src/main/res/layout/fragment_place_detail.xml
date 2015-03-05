@@ -121,10 +121,23 @@
             android:layout_height="wrap_content" />
 
 
+        <TextView
+            android:id="@+id/reviews_title"
+            style="@style/TextView.Category"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="6dp"
+            android:drawableLeft="@drawable/ic_reviews"
+            android:drawablePadding="8dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="@string/card_title_reviews" />
+
         <!-- Content added programatically -->
         <LinearLayout
             android:id="@+id/reviews_container"
-            android:padding="12dp"
+            android:padding="10dp"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />

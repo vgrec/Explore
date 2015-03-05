@@ -56,6 +56,9 @@ public class PlaceDetailFragment extends Fragment {
     @InjectView(R.id.place_name)
     TextView nameTextView;
 
+    @InjectView(R.id.reviews_title)
+    TextView reviewsTextView;
+
     @InjectView(R.id.place_address)
     SmartTextView addressTextView;
 
@@ -300,6 +303,10 @@ public class PlaceDetailFragment extends Fragment {
     }
 
     private void displayReviews(List<Review> reviews) {
+        if (reviews.size() > 0) {
+            reviewsTextView.setVisibility(View.VISIBLE);
+        }
+
         for (Review review : reviews) {
             View row = View.inflate(getActivity(), R.layout.layout_review, null);
             if (row != null) {

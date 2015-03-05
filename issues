@@ -1,5 +1,4 @@
 # For Release:
-- In PlaceDetails screen, add title "Reviews"
 - Show "No Favorites", in fav screen.
 - Add an image header in nav drawer (use Toolbar)
 - Design Explore screen
@@ -19,6 +18,7 @@
 - Default image for missing attraction images (eg. zoo, museum)
 - Default image in LocationSummaryFragment for locality, when no image from Flickr returned.
 - In Attractions Activity display rating bar for place items.
+- Show all reviews
 - Animations for Lollipop (when opening the Image gallery)
 - DESIGN FOR TABLETS: http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0B71WflkWs_SAZjY3azBTRXRNNzg/patterns_actions_fab_placement8.png
 

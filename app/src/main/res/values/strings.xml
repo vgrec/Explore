@@ -30,5 +30,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_map">Map</string>
     <string name="maps_not_available">Could not display the map.</string>
+    <string name="card_title_reviews">REVIEWS</string>
 
 </resources>
