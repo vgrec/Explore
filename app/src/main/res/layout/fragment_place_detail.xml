@@ -80,6 +80,7 @@
         <com.traveler.views.SmartTextView
             android:id="@+id/place_address"
             tools:text="Address 34/34 Residence"
+            android:background="@drawable/place_attribute_background"
             android:drawablePadding="14dp"
             android:paddingTop="8dp"
             android:paddingBottom="6dp"
@@ -93,6 +94,7 @@
         <com.traveler.views.SmartTextView
             android:id="@+id/phone_number"
             tools:text="+796 87454758"
+            android:background="@drawable/place_attribute_background"
             android:drawablePadding="14dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
@@ -106,6 +108,7 @@
         <com.traveler.views.SmartTextView
             android:id="@+id/web_site"
             tools:text="http://google.com"
+            android:background="@drawable/place_attribute_background"
             android:drawablePadding="14dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
