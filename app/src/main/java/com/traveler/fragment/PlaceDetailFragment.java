@@ -19,6 +19,7 @@ import com.traveler.Constants;
 import com.traveler.Extra;
 import com.traveler.R;
 import com.traveler.activity.ImagesActivity;
+import com.traveler.activity.MapActivity;
 import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.db.SavedPlacesDataSource;
 import com.traveler.http.TravelerIoFacadeImpl;
@@ -123,7 +124,15 @@ public class PlaceDetailFragment extends Fragment {
 
     @OnClick(R.id.place_address)
     void showPlaceAddressOnMap() {
+        String lat = placeResponse.getPlace().getGeometry().getLocation().getLat();
+        String lng = placeResponse.getPlace().getGeometry().getLocation().getLng();
+        String address = placeResponse.getPlace().getAddress();
 
+        Intent intent = new Intent(getActivity(), MapActivity.class);
+        intent.putExtra(ExploreMapFragment.KEY_LATITUDE, lat);
+        intent.putExtra(ExploreMapFragment.KEY_LONGITUDE, lng);
+        intent.putExtra(ExploreMapFragment.KEY_ADDRESS, address);
+        startActivity(intent);
     }
 
     @OnClick(R.id.phone_number)
@@ -136,7 +145,7 @@ public class PlaceDetailFragment extends Fragment {
 
         try {
             Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:" + placeResponse.getPlace().getPhoneNumber()));
+            intent.setData(Uri.parse("tel:" + placeResponse.getPlace().getPhoneNumber().replaceAll(" ", "")));
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
             // Could not find any activity that takes an ACTION_DIAL intent.
