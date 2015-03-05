@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/main"
     android:layout_width="match_parent"
@@ -12,4 +13,14 @@
         android:paddingLeft="2dp"
         android:paddingRight="2dp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/empty_view"
+        android:background="@color/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:text="@string/no_favorites" />
+
+</FrameLayout>

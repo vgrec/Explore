@@ -31,5 +31,6 @@
     <string name="title_activity_map">Map</string>
     <string name="maps_not_available">Could not display the map.</string>
     <string name="card_title_reviews">REVIEWS</string>
+    <string name="no_favorites">No favorites yet!</string>
 
 </resources>

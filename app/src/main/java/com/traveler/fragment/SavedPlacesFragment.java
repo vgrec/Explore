@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.traveler.Extra;
 import com.traveler.R;
@@ -32,6 +33,9 @@ public class SavedPlacesFragment extends Fragment {
     @InjectView(R.id.favorites)
     RecyclerView recyclerView;
 
+    @InjectView(R.id.empty_view)
+    TextView emptyView;
+
 
     public SavedPlacesFragment() {
         // Required empty public constructor
@@ -48,8 +52,13 @@ public class SavedPlacesFragment extends Fragment {
         SavedPlacesDataSource dataSource = new SavedPlacesDataSource(getActivity());
         dataSource.open();
 
+        List<SavedPlace> places = dataSource.getPlaces();
+        if (places.size() <= 0) {
+            emptyView.setVisibility(View.VISIBLE);
+        }
+
         savedPlaces.clear();
-        savedPlaces.addAll(dataSource.getPlaces());
+        savedPlaces.addAll(places);
         adapter.notifyDataSetChanged();
 
         dataSource.close();
