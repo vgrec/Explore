@@ -16,15 +16,4 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="AppTheme.TransparentActionBar" parent="AppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
-        <!--<item name="android:actionBarStyle">@style/TransparentActionBar</item>-->
-    </style>
-
-    <style name="TransparentActionBar">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-
-
 </resources>
