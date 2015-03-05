@@ -151,7 +151,12 @@ public class PlaceDetailFragment extends Fragment {
 
     @OnClick(R.id.web_site)
     void openPlaceWebSite() {
-
+        try {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(placeResponse.getPlace().getWebSite()));
+            startActivity(browserIntent);
+        } catch (Exception e) {
+            // just in case the supplied address from the server is not valid.
+        }
     }
 
     @OnClick(R.id.big_image_header)
