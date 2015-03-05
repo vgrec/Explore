@@ -1,8 +1,8 @@
 # For Release:
 - In PlaceDetails screen, add title "Reviews"
 - Show "No Favorites", in fav screen.
-- Design Explore screen
 - Add an image header in nav drawer (use Toolbar)
+- Design Explore screen
 - Fix: status bar to use color secondary in Lollipop
 - Fix: From nav drawer select  "favorites" -> go back -> select once again favorites: you can't open because currentPosition = position in NavDrawer.
 - Add about text
@@ -26,6 +26,7 @@
 # Nice to have:
 - Save the whole Place in Favorites, not only ids.
 - Google Analytics
+- Crashlitycs
 - Increase image caching
 - Zoom of images
 
