@@ -30,7 +30,6 @@ import java.util.List;
 public class NavigationDrawerFragment extends Fragment {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-    private static final int ABOUT_ITEM_POSITION = 2;
 
     private NavigationDrawerCallbacks mCallbacks;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -38,7 +37,6 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private int mCurrentSelectedPosition = 0;
-    private static View view;
     private NavigationDrawerAdapter adapter;
 
     public NavigationDrawerFragment() {
@@ -66,8 +64,8 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        ViewGroup navigationDrawerHeader = (ViewGroup) view.findViewById(R.id.navigation_drawer_header);
-        navigationDrawerHeader.setBackgroundDrawable(ScrimUtil.makeCubicGradientScrimDrawable(0xaa000000, 8, Gravity.BOTTOM));
+        ViewGroup scrimBackground = (ViewGroup) view.findViewById(R.id.scrim_background);
+        scrimBackground.setBackgroundDrawable(ScrimUtil.makeCubicGradientScrimDrawable(0xaa000000, 8, Gravity.BOTTOM));
 
         mDrawerListView = (ListView) view.findViewById(R.id.navigation_drawer_list);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,7 +85,7 @@ public class NavigationDrawerFragment extends Fragment {
         adapter.setSelectedItemPosition(mCurrentSelectedPosition);
         mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+        return view;
     }
 
     /**
