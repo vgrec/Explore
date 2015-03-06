@@ -1,9 +1,47 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:choiceMode="singleChoice"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="0dp"
-    android:background="@color/main"
-    tools:context=".NavigationDrawerFragment" />
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/navigation_drawer_header"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp">
+
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/awesome" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Discover beautiful places to visit"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore"
+            android:layout_above="@id/subtitle" />
+
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/navigation_drawer_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="@color/main"
+        tools:context=".NavigationDrawerFragment" />
+
+</LinearLayout>
