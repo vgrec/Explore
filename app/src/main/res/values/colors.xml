@@ -14,6 +14,7 @@
     <color name="colorPrimaryDark">#007A6F</color>
     <color name="colorAccent">#11424242</color>
     <color name="main">#fff</color>
+    <color name="window_background">#e8e8e8</color>
 
     <color name="view_all_pressed">#FA5F5F</color>
     <color name="view_all_normal">#FA7A7A</color>
@@ -22,6 +23,7 @@
     <color name="teal">#009688</color>
     <color name="light_teal">#b2dfdb</color>
     <color name="black">#000000</color>
+    <color name="black_light">#424242</color>
     <color name="red">#e51c23</color>
     <color name="pink">#e91e63</color>
     <color name="purple">#9c27b0</color>
