@@ -40,6 +40,7 @@ dependencies {
     compile 'com.jpardogo.materialtabstrip:library:1.0.4'
     compile 'com.getbase:floatingactionbutton:1.1.0'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.afollestad:material-dialogs:0.6.3.5'
 }
 
 

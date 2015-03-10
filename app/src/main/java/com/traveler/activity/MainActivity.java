@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.traveler.R;
 import com.traveler.fragment.ExploreFragment;
 import com.traveler.fragment.NavigationDrawerFragment;
@@ -49,7 +51,21 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             case 1:
                 replaceWith(new SavedPlacesFragment());
                 break;
+            case 2:
+                showAboutDialog();
+                break;
         }
+    }
+
+    private void showAboutDialog() {
+        new MaterialDialog.Builder(this)
+                .icon(getResources().getDrawable(R.drawable.ic_launcher))
+                .title(R.string.about)
+                .content(Html.fromHtml(getString(R.string.about_text)))
+                .contentColorRes(R.color.dark_grey)
+                .positiveText(R.string.ok)
+                .positiveColorRes(R.color.teal)
+                .show();
     }
 
     /**
