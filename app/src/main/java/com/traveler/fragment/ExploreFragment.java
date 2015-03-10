@@ -53,8 +53,7 @@ public class ExploreFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // TODO: for testing
-//        goButton.setEnabled(false);
+        goButton.setEnabled(false);
 
         autoCompleteView.setAdapter(new PlacesAutoCompleteAdapter(getActivity(), R.layout.item_autocomplete));
         autoCompleteView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
