@@ -50,7 +50,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 replaceWith(new SavedPlacesFragment());
                 break;
         }
-        setCheckedItem(position);
     }
 
     /**
