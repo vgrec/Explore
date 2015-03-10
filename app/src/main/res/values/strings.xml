@@ -34,6 +34,6 @@
     <string name="no_favorites">No favorites yet!</string>
     <string name="logo">Discover beautiful places to visit</string>
     <string name="ok">OK</string>
-    <string name="about_text"><![CDATA[<b>Explore</b> is a simple app that allows you quickly discover beautiful places to visit. <br /> <br />Don\'t know where to spend your next vacation? Use <b>Explore</b> to find out! <br/> <br/> Developed by Veaceslav Grec.]]></string>
+    <string name="about_text"><![CDATA[<b>Explore</b> is a simple app that allows you quickly discover beautiful places to visit. <br /> <br />Don\'t know where to spend your next vacation? Use <b>Explore</b> to find out!]]></string>
 
 </resources>
