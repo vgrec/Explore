@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="TypographyDashes">
+
+    <!-- the Local LogLevel for Analytics -->
+    <string name="ga_logLevel">verbose</string>
+
+    <!-- Percentage of events to include in reports -->
+    <string name="ga_sampleFrequency">100.0</string>
+
+    <string name="ga_trackingId">UA-XXXXXXX-Y</string>
+
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!-- catch and report uncaught exceptions from the app -->
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <!-- How long a session exists before giving up -->
+    <integer name="ga_sessionTimeout">300</integer>
+
+    <!-- Treat events as test events and don't send to google -->
+    <!--<bool name="ga_dryRun">false</bool>-->
+
+    <!-- The screen names that will appear in reports -->
+    <string name="com.traveler.fragment.ExploreFragment">Explore Fragment</string>
+    <string name="com.traveler.fragment.SavedPlacesFragment">Favorites Fragment</string>
+    <string name="com.traveler.activity.DescriptionActivity">Description Activity</string>
+    <string name="com.traveler.activity.AttractionsActivity">Attractions Activity</string>
+    <string name="com.traveler.activity.VideosActivity">Videos Activity</string>
+    <string name="com.traveler.activity.PlaceDetailActivity">Place Details Activity</string>
+    <string name="com.traveler.activity.MapActivity">Map Activity</string>
+</resources>

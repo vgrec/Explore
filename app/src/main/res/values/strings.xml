@@ -4,7 +4,7 @@
     <string name="app_name">Explore</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="city">City</string>
+    <string name="country_or_city">Country or City</string>
     <string name="i_want_to_visit">I want to visit:</string>
     <string name="go">Go</string>
     <string name="title_activity_location_preview">Summary</string>
