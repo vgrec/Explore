@@ -50,6 +50,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 replaceWith(new SavedPlacesFragment());
                 break;
         }
+        setCheckedItem(position);
     }
 
     /**
@@ -68,6 +69,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             navigationDrawerFragment.closeDrawer();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public void setCheckedItem(int position) {
+        if (navigationDrawerFragment != null) {
+            navigationDrawerFragment.setItemChecked(position);
+            navigationDrawerFragment.setSelectedItemPosition(position);
         }
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.traveler.Extra;
 import com.traveler.R;
+import com.traveler.activity.MainActivity;
 import com.traveler.activity.PlaceDetailActivity;
 import com.traveler.adapters.SavedPlacesAdapter;
 import com.traveler.db.SavedPlacesDataSource;
@@ -44,8 +45,11 @@ public class SavedPlacesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.favorite_places);
-        displaySavedPlaces();
+        if (getActivity() != null) {
+            getActivity().setTitle(R.string.favorite_places);
+            ((MainActivity) getActivity()).setCheckedItem(1);
+            displaySavedPlaces();
+        }
     }
 
     private void displaySavedPlaces() {

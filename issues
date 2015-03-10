@@ -1,5 +1,4 @@
 # For Release:
-- Fix: From nav drawer select  "favorites" -> go back -> select once again favorites: you can't open because currentPosition = position in NavDrawer.
 - Design Explore screen
 - Add about text
 - Add terms and conditions in nav drawer

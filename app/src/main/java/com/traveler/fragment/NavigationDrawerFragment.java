@@ -125,25 +125,20 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        // Prevent adding the same fragment twice
-        if (mCurrentSelectedPosition == position) {
-            return;
-        }
-
-        if (adapter != null) {
-            adapter.setSelectedItemPosition(position);
-        }
-
+        setSelectedItemPosition(position);
         mCurrentSelectedPosition = position;
 
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
-        }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+    }
+
+    public void setSelectedItemPosition(int position) {
+        if (adapter != null) {
+            adapter.setSelectedItemPosition(position);
         }
     }
 
@@ -191,6 +186,12 @@ public class NavigationDrawerFragment extends Fragment {
 
     public void closeDrawer() {
         mDrawerLayout.closeDrawer(mFragmentContainerView);
+    }
+
+    public void setItemChecked(int position) {
+        if (mDrawerListView != null) {
+            mDrawerListView.setItemChecked(position, true);
+        }
     }
 
     /**
@@ -247,10 +248,6 @@ public class NavigationDrawerFragment extends Fragment {
             }
 
             return view;
-        }
-
-        public int getSelectedItemPosition() {
-            return selectedItemPosition;
         }
 
         public void setSelectedItemPosition(int selectedItemPosition) {

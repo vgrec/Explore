@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.traveler.R;
 import com.traveler.activity.LocationSummaryActivity;
+import com.traveler.activity.MainActivity;
 import com.traveler.adapters.PlacesAutoCompleteAdapter;
 import com.traveler.http.TravelerIoFacadeImpl;
 
@@ -36,7 +37,10 @@ public class ExploreFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.app_name);
+        if (getActivity() != null) {
+            getActivity().setTitle(R.string.app_name);
+            ((MainActivity)getActivity()).setCheckedItem(0);
+        }
     }
 
     @Override
