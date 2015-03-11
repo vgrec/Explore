@@ -271,8 +271,9 @@ public class LocationSummaryFragment extends Fragment {
      */
     private boolean validArticleFound(String title, String content) {
         boolean distinctArticle = !(content.startsWith(title + " may refer to:"));
+        boolean originalArticle = !(content.startsWith(title + " usually refers to:"));
         boolean noRedirect = !(content.startsWith("This is a redirect from a page name that"));
-        return distinctArticle && noRedirect;
+        return distinctArticle && originalArticle && noRedirect;
     }
 
     private void downloadFlickrPhotos() {
