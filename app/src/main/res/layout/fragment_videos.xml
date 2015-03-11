@@ -11,7 +11,7 @@
         android:paddingRight="2dp" />
 
 
-    <com.traveler.views.ProgressView
+    <com.explore.views.ProgressView
         android:id="@+id/progress_view"
         app:progressViewErrorText="@string/cant_load_videos"
         android:layout_width="fill_parent"

@@ -1,0 +1,28 @@
+package com.explore.models.google;
+
+/**
+ * @author vgrec, created on 11/4/14.
+ */
+public enum PlaceType {
+    MUSEUM("museum", "museum"),
+    RESTAURANT("restaurant", "restaurant"),
+    SHOPPING("shops", "shopping_mall"),
+    ZOO("zoo", "zoo"),
+    CINEMA("theater", "movie_theater");
+
+    private String query;
+    private String type;
+
+    PlaceType(String query, String type) {
+        this.query = query;
+        this.type = type;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public String getPlaceType() {
+        return type;
+    }
+}

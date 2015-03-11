@@ -7,14 +7,14 @@
     android:layout_height="wrap_content"
     tools:showIn="@layout/fragment_location_summary">
 
-    <com.traveler.views.PreviewImage
+    <com.explore.views.PreviewImage
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginRight="3dp"
         android:layout_marginEnd="3dp" />
 
-    <com.traveler.views.PreviewImage
+    <com.explore.views.PreviewImage
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

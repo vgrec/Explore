@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.traveler.views.ScrimImageHeader
+    <com.explore.views.ScrimImageHeader
         android:id="@+id/big_image_header"
         android:layout_below="@id/toolbar"
         android:layout_width="fill_parent"
@@ -77,7 +77,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <com.traveler.views.SmartTextView
+        <com.explore.views.SmartTextView
             android:id="@+id/place_address"
             tools:text="Address 34/34 Residence"
             android:background="@drawable/place_attribute_background"
@@ -91,7 +91,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <com.traveler.views.SmartTextView
+        <com.explore.views.SmartTextView
             android:id="@+id/phone_number"
             tools:text="+796 87454758"
             android:background="@drawable/place_attribute_background"
@@ -105,7 +105,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <com.traveler.views.SmartTextView
+        <com.explore.views.SmartTextView
             android:id="@+id/web_site"
             tools:text="http://google.com"
             android:background="@drawable/place_attribute_background"

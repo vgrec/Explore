@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.traveler.views.NotifyingScrollView
+    <com.explore.views.NotifyingScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,9 +15,9 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
 
-    </com.traveler.views.NotifyingScrollView>
+    </com.explore.views.NotifyingScrollView>
 
-    <com.traveler.views.ProgressView
+    <com.explore.views.ProgressView
         android:id="@+id/progress_view"
         android:layout_centerInParent="true"
         app:progressViewErrorText="@string/cant_load_place_details"

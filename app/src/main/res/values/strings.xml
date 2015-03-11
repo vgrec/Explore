@@ -38,6 +38,6 @@
     <string name="about_text"><![CDATA[<b>Explore</b> is a simple app that helps you discover beautiful places to visit. <br /> <br />Don\'t know where to spend your next vacation? Use <b>Explore</b> to find out!]]></string>
 
     <string name="maps_debug">AIzaSyBsBWRCsTwJUHyHloJE5kqTJIqYPRQLvZA</string>
-    <string name="maps_release">AIzaSyCmCYpwGnQIOtr5-pYGUDkpivaoOZqCQfE</string>
+    <string name="maps_release">AIzaSyCDNeUzfjtTXWVKj91GznaFagnEpanOsa4</string>
 
 </resources>

@@ -23,11 +23,11 @@
     <!--<bool name="ga_dryRun">false</bool>-->
 
     <!-- The screen names that will appear in reports -->
-    <string name="com.traveler.fragment.ExploreFragment">Explore Fragment</string>
-    <string name="com.traveler.fragment.SavedPlacesFragment">Favorites Fragment</string>
-    <string name="com.traveler.activity.DescriptionActivity">Description Activity</string>
-    <string name="com.traveler.activity.AttractionsActivity">Attractions Activity</string>
-    <string name="com.traveler.activity.VideosActivity">Videos Activity</string>
-    <string name="com.traveler.activity.PlaceDetailActivity">Place Details Activity</string>
-    <string name="com.traveler.activity.MapActivity">Map Activity</string>
+    <string name="com.explore.fragment.ExploreFragment">Explore Fragment</string>
+    <string name="com.explore.fragment.SavedPlacesFragment">Favorites Fragment</string>
+    <string name="com.explore.activity.DescriptionActivity">Description Activity</string>
+    <string name="com.explore.activity.AttractionsActivity">Attractions Activity</string>
+    <string name="com.explore.activity.VideosActivity">Videos Activity</string>
+    <string name="com.explore.activity.PlaceDetailActivity">Place Details Activity</string>
+    <string name="com.explore.activity.MapActivity">Map Activity</string>
 </resources>

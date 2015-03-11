@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.traveler.views.ScrimImageHeader
+            <com.explore.views.ScrimImageHeader
                 android:id="@+id/big_image_header"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
@@ -54,7 +54,7 @@
 
             </LinearLayout>
 
-            <com.traveler.views.PreviewCard
+            <com.explore.views.PreviewCard
                 android:id="@+id/description_card"
                 android:visibility="gone"
                 tools:visibility="visible"
@@ -64,7 +64,7 @@
                 app:previewCardIcon="@drawable/ic_description"
                 app:previewContentLayout="@layout/layout_card_description" />
 
-            <com.traveler.views.PreviewCard
+            <com.explore.views.PreviewCard
                 android:id="@+id/attractions_card"
                 android:visibility="gone"
                 tools:visibility="visible"
@@ -74,7 +74,7 @@
                 app:previewCardIcon="@drawable/ic_theatre"
                 app:previewContentLayout="@layout/layout_card_attractions" />
 
-            <com.traveler.views.PreviewCard
+            <com.explore.views.PreviewCard
                 android:id="@+id/videos_card"
                 android:visibility="gone"
                 tools:visibility="visible"
