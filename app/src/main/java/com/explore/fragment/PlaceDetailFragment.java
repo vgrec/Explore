@@ -14,7 +14,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.explore.Constants;
 import com.explore.Extra;
 import com.explore.R;
@@ -32,6 +31,7 @@ import com.explore.utils.AnimationUtils;
 import com.explore.utils.Utils;
 import com.explore.views.ScrimImageHeader;
 import com.explore.views.SmartTextView;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -127,21 +127,23 @@ public class PlaceDetailFragment extends Fragment {
 
     @OnClick(R.id.place_address)
     void showPlaceAddressOnMap() {
-        String lat = placeResponse.getPlace().getGeometry().getLocation().getLat();
-        String lng = placeResponse.getPlace().getGeometry().getLocation().getLng();
-        String address = placeResponse.getPlace().getAddress();
+        if (placeResponse != null && placeResponse.getPlace() != null && placeResponse.getPlace().getGeometry() != null) { // this is java.
+            String lat = placeResponse.getPlace().getGeometry().getLocation().getLat();
+            String lng = placeResponse.getPlace().getGeometry().getLocation().getLng();
+            String address = placeResponse.getPlace().getAddress();
 
-        Intent intent = new Intent(getActivity(), MapActivity.class);
-        intent.putExtra(ExploreMapFragment.KEY_LATITUDE, lat);
-        intent.putExtra(ExploreMapFragment.KEY_LONGITUDE, lng);
-        intent.putExtra(ExploreMapFragment.KEY_ADDRESS, address);
-        startActivity(intent);
+            Intent intent = new Intent(getActivity(), MapActivity.class);
+            intent.putExtra(ExploreMapFragment.KEY_LATITUDE, lat);
+            intent.putExtra(ExploreMapFragment.KEY_LONGITUDE, lng);
+            intent.putExtra(ExploreMapFragment.KEY_ADDRESS, address);
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.phone_number)
     void openDialNumberScreen() {
 
-        // for example, tablets don't have telephony
+        // for example tablets don't have telephony
         if (!isTelephonySupported()) {
             return;
         }
