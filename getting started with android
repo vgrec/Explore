@@ -85,6 +85,10 @@ public class SimpleNameTest extends ActivityInstrumentationTestCase2<NameActivit
 ##### A simple test using onView()
 
 
+##### A simple test using onData()
+Whenever you have a ListView, GridView, Spinner, and other Adapter based views, you'll have to use onData(), in order to interact with an item from that list. 
+When working with onData() basically you are working directly with the data provided by your Adapter.
+
 ##### Common tests:
 1. Typing a text in the SearchView:
 onView(isAssignableFrom(EditText.class)).perform(typeText("4545"), pressImeActionButton());
