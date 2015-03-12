@@ -5,10 +5,12 @@
     <!-- the Local LogLevel for Analytics -->
     <string name="ga_logLevel">verbose</string>
 
+    <bool name="ga_debug">true</bool>
+
     <!-- Percentage of events to include in reports -->
     <string name="ga_sampleFrequency">100.0</string>
 
-    <string name="ga_trackingId">UA-XXXXXXX-Y</string>
+    <string name="ga_trackingId">UA-60701221-1</string>
 
     <!-- Enable automatic Activity measurement -->
     <bool name="ga_autoActivityTracking">true</bool>
@@ -18,6 +20,8 @@
 
     <!-- How long a session exists before giving up -->
     <integer name="ga_sessionTimeout">300</integer>
+
+    <integer name="ga_dispatchPeriod">30</integer>
 
     <!-- Treat events as test events and don't send to google -->
     <!--<bool name="ga_dryRun">false</bool>-->
