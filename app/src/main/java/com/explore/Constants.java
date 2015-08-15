@@ -6,7 +6,7 @@ package com.explore;
 public class Constants {
 
     public class Wikipedia {
-        public static final String TEXT_SEARCH_URL = "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exlimit=10&exintro=&explaintext=&titles=%s&redirects=";
+        public static final String TEXT_SEARCH_URL = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exlimit=10&exintro=&explaintext=&titles=%s&redirects=false";
     }
 
     public class Flickr {

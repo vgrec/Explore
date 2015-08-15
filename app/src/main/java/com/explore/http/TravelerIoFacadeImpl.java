@@ -3,6 +3,7 @@ package com.explore.http;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -110,6 +111,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
             @Override
             public void onErrorResponse(VolleyError error) {
 //                EventBus.getDefault().post(descriptionResponse);
+                Log.d("GREC", "error");
             }
         });
         requestQueue.add(request);
