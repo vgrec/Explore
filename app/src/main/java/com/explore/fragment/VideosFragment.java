@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.adapters.VideosAdapter;
 import com.explore.http.TravelerIoFacade;
 import com.explore.http.TravelerIoFacadeImpl;

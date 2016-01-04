@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.explore.Constants;
 import com.explore.Extra;
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.activity.AttractionsActivity;
 import com.explore.activity.DescriptionActivity;
 import com.explore.activity.ImagesActivity;

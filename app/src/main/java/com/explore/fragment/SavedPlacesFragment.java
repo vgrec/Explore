@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.explore.Extra;
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.activity.MainActivity;
 import com.explore.activity.PlaceDetailActivity;
 import com.explore.adapters.SavedPlacesAdapter;

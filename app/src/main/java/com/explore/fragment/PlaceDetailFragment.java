@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.explore.Constants;
 import com.explore.Extra;
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.activity.ImagesActivity;
 import com.explore.activity.MapActivity;
 import com.explore.activity.PlaceDetailActivity;

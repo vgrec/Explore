@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.http.ImageLoader;
 
 import java.util.ArrayList;

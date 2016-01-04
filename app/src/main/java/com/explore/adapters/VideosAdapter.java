@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.explore.http.ImageLoader;
-import com.explore.R;
 import com.explore.models.youtube.Video;
+import com.vgrec.explore.R;
 
 import java.util.List;
 

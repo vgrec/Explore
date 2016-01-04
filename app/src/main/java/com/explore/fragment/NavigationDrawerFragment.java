@@ -22,7 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.utils.ScrimUtil;
 import com.explore.utils.Utils;
 

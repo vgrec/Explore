@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ScrollView;
 
 import com.explore.Extra;
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.fragment.PlaceDetailFragment;
 import com.explore.views.NotifyingScrollView;
 import com.explore.views.ProgressView;

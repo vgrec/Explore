@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.explore.Constants;
-import com.explore.R;
 import com.explore.models.db.SavedPlace;
 import com.explore.views.PreviewImage;
+import com.vgrec.explore.R;
 
 import java.util.List;
 

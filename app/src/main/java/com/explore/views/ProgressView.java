@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

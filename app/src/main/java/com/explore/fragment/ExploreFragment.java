@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.activity.LocationSummaryActivity;
 import com.explore.activity.MainActivity;
 import com.explore.adapters.PlacesAutoCompleteAdapter;

@@ -7,7 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.fragment.ExploreFragment;
 import com.explore.fragment.NavigationDrawerFragment;
 import com.explore.fragment.SavedPlacesFragment;

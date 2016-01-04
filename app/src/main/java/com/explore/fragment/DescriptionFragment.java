@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.models.wikipedia.PageDescription;
 
 /**

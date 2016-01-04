@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Window;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.adapters.AttractionsPagerAdapter;
 import com.explore.http.TravelerIoFacadeImpl;
 

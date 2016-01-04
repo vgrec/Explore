@@ -6,7 +6,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 
 /**
  * @author vgrec, created on 1/29/15.

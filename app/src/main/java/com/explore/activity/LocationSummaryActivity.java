@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ScrollView;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.fragment.LocationSummaryFragment;
 import com.explore.views.NotifyingScrollView;
 import com.explore.views.ProgressView;

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import com.google.android.gms.maps.StreetViewPanoramaOptions;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
-import com.explore.R;
+import com.vgrec.explore.R;
 
 /**
  * Not used in V1.

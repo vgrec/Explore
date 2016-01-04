@@ -2,7 +2,7 @@ package com.explore.activity;
 
 import android.os.Bundle;
 
-import com.explore.R;
+import com.vgrec.explore.R;
 import com.explore.fragment.VideosFragment;
 
 public class VideosActivity extends BaseActivity {
