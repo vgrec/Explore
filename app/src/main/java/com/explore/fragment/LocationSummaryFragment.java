@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.explore.Constants;
 import com.explore.Extra;
-import com.vgrec.explore.R;
 import com.explore.activity.AttractionsActivity;
 import com.explore.activity.DescriptionActivity;
 import com.explore.activity.ImagesActivity;
@@ -33,14 +32,13 @@ import com.explore.models.google.PlaceItemsResponse;
 import com.explore.models.google.PlaceType;
 import com.explore.models.wikipedia.DescriptionResponse;
 import com.explore.models.wikipedia.PageDescription;
-import com.explore.models.youtube.Entry;
 import com.explore.models.youtube.Video;
 import com.explore.models.youtube.VideosResponse;
 import com.explore.utils.Utils;
-import com.explore.utils.VideoUtils;
 import com.explore.views.PreviewCard;
 import com.explore.views.PreviewImage;
 import com.explore.views.ScrimImageHeader;
+import com.vgrec.explore.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -242,8 +240,7 @@ public class LocationSummaryFragment extends Fragment {
     // On youtube videos received
     public void onEvent(VideosResponse result) {
         if (result != null) {
-            List<Entry> entries = result.getFeed().getEntries();
-            videos = VideoUtils.toVideos(entries);
+            videos = result.getVideos();
             showFirstVideos();
         }
     }

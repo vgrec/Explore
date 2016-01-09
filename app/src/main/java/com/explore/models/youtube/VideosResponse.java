@@ -1,14 +1,19 @@
 package com.explore.models.youtube;
 
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class VideosResponse {
+    private List<Video> videos;
 
-    private Feed feed;
+    public VideosResponse(List<Video> videos) {
+        this.videos = videos;
+    }
 
-    public Feed getFeed() {
-        return feed;
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public int getSize() {
+        return videos.size();
     }
 }

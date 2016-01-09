@@ -41,8 +41,10 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
                 FilterResults filterResults = new FilterResults();
                 if (constraint != null) {
                     resultList = ioFacade.autocomplete(constraint.toString());
-                    filterResults.values = resultList;
-                    filterResults.count = resultList.size();
+                    if (resultList != null) {
+                        filterResults.values = resultList;
+                        filterResults.count = resultList.size();
+                    }
                 }
                 return filterResults;
             }

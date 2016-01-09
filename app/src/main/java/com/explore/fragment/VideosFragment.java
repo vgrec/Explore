@@ -10,17 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vgrec.explore.R;
 import com.explore.adapters.VideosAdapter;
 import com.explore.http.TravelerIoFacade;
 import com.explore.http.TravelerIoFacadeImpl;
 import com.explore.listeners.RecyclerItemClickListener;
 import com.explore.models.events.VideosErrorEvent;
-import com.explore.models.youtube.Entry;
 import com.explore.models.youtube.Video;
 import com.explore.models.youtube.VideosResponse;
-import com.explore.utils.VideoUtils;
 import com.explore.views.ProgressView;
+import com.vgrec.explore.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,11 +90,10 @@ public class VideosFragment extends Fragment {
         ioFacade.getVideos();
     }
 
-    public void onEvent(VideosResponse result) {
+    public void onEvent(final VideosResponse result) {
         progressView.hide();
         if (result != null) {
-            List<Entry> entries = result.getFeed().getEntries();
-            List<Video> videosResponse = VideoUtils.toVideos(entries);
+            List<Video> videosResponse = result.getVideos();
             videos.addAll(videosResponse);
             adapter.notifyDataSetChanged();
         }

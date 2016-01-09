@@ -1,18 +1,17 @@
 package com.explore.models.youtube;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * author Unknown, created on 30.11.2014.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Title {
-
-    @JsonProperty("$t")
+public class Snippet {
     private String title;
+    private Thumbnails thumbnails;
 
-    public String getText() {
+    public String getTitle() {
         return title;
+    }
+
+    public Thumbnails getThumbnails() {
+        return thumbnails;
     }
 }

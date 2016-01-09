@@ -3,7 +3,7 @@ package com.explore.http;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.util.Log;
+import android.net.Uri;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,8 +21,11 @@ import com.explore.models.google.PlaceDetailsResponse;
 import com.explore.models.google.PlaceItemsResponse;
 import com.explore.models.google.PlaceType;
 import com.explore.models.wikipedia.DescriptionResponse;
+import com.explore.models.youtube.VideoDetailsResponse;
+import com.explore.models.youtube.VideoSearchResponse;
 import com.explore.models.youtube.VideosResponse;
 import com.explore.utils.Utils;
+import com.explore.utils.VideoUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,8 +99,6 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
         }
     }
 
-    // handle redirects, eg "slanic moldova"
-
     @Override
     public void getDescription() {
         String url = String.format(Constants.Wikipedia.TEXT_SEARCH_URL, location.replaceAll(" ", "%20"));
@@ -110,8 +111,7 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                EventBus.getDefault().post(descriptionResponse);
-                Log.d("GREC", "error");
+                EventBus.getDefault().post(error);
             }
         });
         requestQueue.add(request);
@@ -179,14 +179,22 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
 
     @Override
     public void getVideos() {
-        String location = (this.location) != null ? this.location : "Berlin";
-        String url = String.format(Constants.Youtube.VIDEOS_URL, "travel in " + location);
-        StringRequest request = new StringRequest(url.replaceAll(" ", "%20"), new Response.Listener<String>() {
+        Uri uri = Uri.parse("https://www.googleapis.com/youtube/v3/search")
+                .buildUpon()
+                .appendQueryParameter("key", "AIzaSyACYHmq3nim1ozMWgS63K2XBlP7N7jQLQA")
+                .appendQueryParameter("q", location.replaceAll(" ", "%20"))
+                .appendQueryParameter("maxResults", "45")
+                .appendQueryParameter("type", "video")
+                .appendQueryParameter("part", "id,snippet").build();
+
+        StringRequest request = new StringRequest(uri.toString(), new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                VideosResponse videosResponse = Utils.fromJson(VideosResponse.class, response);
-                EventBus.getDefault().post(videosResponse);
+                VideoSearchResponse videoSearchResponse = Utils.fromJson(VideoSearchResponse.class, response);
+                if (videoSearchResponse != null && videoSearchResponse.getSize() > 0) {
+                    getVideoDetails(videoSearchResponse);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -194,6 +202,31 @@ public class TravelerIoFacadeImpl implements TravelerIoFacade {
                 EventBus.getDefault().post(new VideosErrorEvent(error));
             }
         });
+
+        requestQueue.add(request);
+    }
+
+    private void getVideoDetails(final VideoSearchResponse videosResponse) {
+        Uri uri = Uri.parse("https://www.googleapis.com/youtube/v3/videos")
+                .buildUpon()
+                .appendQueryParameter("key", "AIzaSyACYHmq3nim1ozMWgS63K2XBlP7N7jQLQA")
+                .appendQueryParameter("id", VideoUtils.buildIdsString(videosResponse.getItems()))
+                .appendQueryParameter("part", "contentDetails").build();
+
+        StringRequest request = new StringRequest(uri.toString(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                VideoDetailsResponse detailsResponse = Utils.fromJson(VideoDetailsResponse.class, response);
+                VideosResponse videos = VideoUtils.join(videosResponse, detailsResponse);
+                EventBus.getDefault().post(videos);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                EventBus.getDefault().post(new VideosErrorEvent(error));
+            }
+        });
+
         requestQueue.add(request);
     }
 
