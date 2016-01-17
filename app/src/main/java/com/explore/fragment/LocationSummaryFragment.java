@@ -208,7 +208,9 @@ public class LocationSummaryFragment extends Fragment {
         });
     }
 
-    // On attractions received
+    /**
+     * Called by {@link EventBus} when the attractions are received
+     */
     public void onEvent(PlaceItemsResponse result) {
         if (result != null && result.getPlaceType() == PlaceType.RESTAURANT) {
             places = new ArrayList<>();
@@ -217,13 +219,17 @@ public class LocationSummaryFragment extends Fragment {
         }
     }
 
-    // On wikipedia description received
+    /**
+     * Called by {@link EventBus} when the Wikipedia description is received
+     */
     public void onEvent(DescriptionResponse result) {
         pageDescription = result.getPageDescription();
         showLocationShortDescription();
     }
 
-    // On Flickr photos received
+    /**
+     * Called by {@link EventBus} when the Flickr photos are received
+     */
     public void onEvent(List<FlickrPhoto> result) {
         if (result.size() > 2) {
             flickrPhotos = new ArrayList<>();
@@ -237,7 +243,9 @@ public class LocationSummaryFragment extends Fragment {
         }
     }
 
-    // On youtube videos received
+    /**
+     * Called by {@link EventBus} when the Youtube videos are received
+     */
     public void onEvent(VideosResponse result) {
         if (result != null) {
             videos = result.getVideos();

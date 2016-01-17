@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.explore.Extra;
+import com.explore.listeners.OnItemClickListener;
 import com.vgrec.explore.R;
 import com.explore.activity.PlaceDetailActivity;
 import com.explore.adapters.PlaceItemAdapter;
 import com.explore.http.TravelerIoFacade;
 import com.explore.http.TravelerIoFacadeImpl;
-import com.explore.listeners.RecyclerItemClickListener;
 import com.explore.models.events.AttractionsErrorEvent;
 import com.explore.models.google.Place;
 import com.explore.models.google.PlaceItemsResponse;
@@ -89,7 +89,7 @@ public class AttractionsFragment extends Fragment {
             downloadPlaces();
         }
 
-        adapter.setListener(new PlaceItemAdapter.OnLoadMoreListener() {
+        adapter.setLoadMoreItemListener(new PlaceItemAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 if (lastResultsSize >= NUMBER_OF_ITEMS_PER_PAGE) {
@@ -98,14 +98,12 @@ public class AttractionsFragment extends Fragment {
             }
         });
 
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        openPlaceDetailsActivity(position);
-                    }
-                })
-        );
+        adapter.setOnItemClickListener(new OnItemClickListener<Place>() {
+            @Override
+            public void onItemClick(Place item) {
+                openPlaceDetailsActivity(item);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         progressView.setTryAgainClickListener(new View.OnClickListener() {
@@ -116,9 +114,9 @@ public class AttractionsFragment extends Fragment {
         });
     }
 
-    private void openPlaceDetailsActivity(int position) {
+    private void openPlaceDetailsActivity(Place position) {
         Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
-        intent.putExtra(Extra.PLACE_ID, places.get(position).getPlaceId());
+        intent.putExtra(Extra.PLACE_ID, position.getPlaceId());
         startActivity(intent);
     }
 

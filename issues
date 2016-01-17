@@ -2,6 +2,8 @@
 - Change description in About
 - Increase quota query limit
 - Modify the interaction with list item to provide visual feedback for the user on touch
+- Play the video when clicking on an Youtube item
+- Display video duration
 - Open source the app
 
 # Next version:

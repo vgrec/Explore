@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.explore.Constants;
+import com.explore.listeners.OnItemClickListener;
 import com.explore.models.db.SavedPlace;
 import com.explore.views.PreviewImage;
 import com.vgrec.explore.R;
@@ -13,11 +14,15 @@ import com.vgrec.explore.R;
 import java.util.List;
 
 /**
+ * Adapter responsible for inflating and populating with data a {@link SavedPlace} item
+ * displayed in RecyclerView.
+ *
  * @author vgrec, created on 1/23/15.
  */
 public class SavedPlacesAdapter extends RecyclerView.Adapter<SavedPlacesAdapter.ViewHolder> {
 
     private List<SavedPlace> savedPlaces;
+    private OnItemClickListener<SavedPlace> onItemClickListener;
 
     public SavedPlacesAdapter(List<SavedPlace> savedPlaces) {
         this.savedPlaces = savedPlaces;
@@ -34,6 +39,7 @@ public class SavedPlacesAdapter extends RecyclerView.Adapter<SavedPlacesAdapter.
         SavedPlace savedPlace = savedPlaces.get(position);
         holder.previewImage.setUrl(String.format(Constants.Google.IMAGE_URL, savedPlace.getImageUrl()));
         holder.previewImage.setText(savedPlace.getTitle());
+        holder.position = position;
     }
 
     @Override
@@ -41,12 +47,25 @@ public class SavedPlacesAdapter extends RecyclerView.Adapter<SavedPlacesAdapter.
         return savedPlaces.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public PreviewImage previewImage;
+        public int position;
 
         public ViewHolder(View itemView) {
             super(itemView);
             previewImage = (PreviewImage) itemView.findViewById(R.id.favorite_place);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(savedPlaces.get(position));
+            }
+        }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener<SavedPlace> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

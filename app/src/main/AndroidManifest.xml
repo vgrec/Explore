@@ -60,10 +60,6 @@
         <activity
             android:name="com.explore.activity.MapActivity"
             android:label="@string/title_activity_map" />
-
-        <meta-data
-            android:name="com.google.android.gms.analytics.globalConfigResource"
-            android:resource="@xml/app_tracker" />
     </application>
 
 

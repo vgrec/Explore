@@ -41,6 +41,8 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
+ * Shows detailed information about a specific place
+ *
  * @author vgrec, created on 11/17/14.
  */
 

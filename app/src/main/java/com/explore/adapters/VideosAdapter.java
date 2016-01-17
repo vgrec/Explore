@@ -9,17 +9,21 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.explore.http.ImageLoader;
+import com.explore.listeners.OnItemClickListener;
 import com.explore.models.youtube.Video;
 import com.vgrec.explore.R;
 
 import java.util.List;
 
 /**
+ * Adapter responsible for inflating and populating with data a {@link Video} item
+ * displayed in RecyclerView.
+ *
  * @author vgrec, created on 12/2/14.
  */
 public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder> {
 
-
+    private OnItemClickListener<Video> onItemClickListener;
     private final List<Video> videos;
     private Context context;
 
@@ -39,6 +43,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
         Video video = videos.get(position);
         viewHolder.name.setText(video.getTitle());
         viewHolder.duration.setText(video.getDuration());
+        viewHolder.position = position;
         ImageLoader.loadImage(context, video.getThumbnailUrl(), viewHolder.videoThumbnail);
     }
 
@@ -47,16 +52,30 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
         return videos.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         public TextView name;
         public TextView duration;
         public NetworkImageView videoThumbnail;
+        public int position;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             duration = (TextView) itemView.findViewById(R.id.duration);
             videoThumbnail = (NetworkImageView) itemView.findViewById(R.id.video_thumbnail);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(videos.get(position));
+            }
+        }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener<Video> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

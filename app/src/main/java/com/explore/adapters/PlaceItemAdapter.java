@@ -9,13 +9,17 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.explore.Constants;
-import com.vgrec.explore.R;
 import com.explore.http.ImageLoader;
+import com.explore.listeners.OnItemClickListener;
 import com.explore.models.google.Place;
+import com.vgrec.explore.R;
 
 import java.util.List;
 
 /**
+ * Adapter responsible for inflating and populating with data a {@link Place} item
+ * displayed in RecyclerView.
+ *
  * @author vgrec, created on 11/4/14.
  */
 public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.ViewHolder> {
@@ -23,7 +27,8 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
     private List<Place> places;
     private Context context;
     private boolean taskInProgress;
-    private OnLoadMoreListener listener;
+    private OnLoadMoreListener loadMoreItemsListener;
+    private OnItemClickListener<Place> onItemClickListener;
 
     public interface OnLoadMoreListener {
         void onLoadMore();
@@ -45,6 +50,7 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
         Place place = places.get(position);
         viewHolder.name.setText(place.getName());
         viewHolder.rating.setText(place.getRating());
+        viewHolder.position = position;
 
         if (place.getPhotos() != null && place.getPhotos().size() > 0) {
             String url = String.format(Constants.Google.THUMBNAIL_URL, place.getPhotos().get(0).getPhotoReference());
@@ -59,8 +65,8 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
     private void loadMoreIfLastRowHit(int position) {
         boolean lastRowHit = (position == places.size() - 1);
         if (lastRowHit && !taskInProgress) {
-            if (listener != null) {
-                listener.onLoadMore();
+            if (loadMoreItemsListener != null) {
+                loadMoreItemsListener.onLoadMore();
             }
         }
     }
@@ -74,20 +80,33 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
         return places.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name;
         public TextView rating;
         public NetworkImageView placePicture;
+        public int position;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             rating = (TextView) itemView.findViewById(R.id.rating);
             placePicture = (NetworkImageView) itemView.findViewById(R.id.place_picture);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(places.get(position));
+            }
         }
     }
 
-    public void setListener(OnLoadMoreListener listener) {
-        this.listener = listener;
+    public void setLoadMoreItemListener(OnLoadMoreListener listener) {
+        this.loadMoreItemsListener = listener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener<Place> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

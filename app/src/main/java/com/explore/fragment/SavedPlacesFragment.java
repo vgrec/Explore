@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.explore.Extra;
+import com.explore.listeners.OnItemClickListener;
 import com.vgrec.explore.R;
 import com.explore.activity.MainActivity;
 import com.explore.activity.PlaceDetailActivity;
 import com.explore.adapters.SavedPlacesAdapter;
 import com.explore.db.SavedPlacesDataSource;
-import com.explore.listeners.RecyclerItemClickListener;
 import com.explore.models.db.SavedPlace;
 
 import java.util.ArrayList;
@@ -78,16 +78,14 @@ public class SavedPlacesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        adapter.setOnItemClickListener(new OnItemClickListener<SavedPlace>() {
+            @Override
+            public void onItemClick(SavedPlace item) {
+                openPlaceDetailsActivity(item);
+            }
+        });
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.number_of_columns)));
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        openPlaceDetailsActivity(savedPlaces.get(position));
-                    }
-                })
-        );
     }
 
     private void openPlaceDetailsActivity(SavedPlace savedPlace) {

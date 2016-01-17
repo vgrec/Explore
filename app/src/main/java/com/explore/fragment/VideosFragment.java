@@ -1,8 +1,6 @@
 package com.explore.fragment;
 
 import android.app.Fragment;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +11,7 @@ import android.view.ViewGroup;
 import com.explore.adapters.VideosAdapter;
 import com.explore.http.TravelerIoFacade;
 import com.explore.http.TravelerIoFacadeImpl;
-import com.explore.listeners.RecyclerItemClickListener;
+import com.explore.listeners.OnItemClickListener;
 import com.explore.models.events.VideosErrorEvent;
 import com.explore.models.youtube.Video;
 import com.explore.models.youtube.VideosResponse;
@@ -66,14 +64,12 @@ public class VideosFragment extends Fragment {
             downloadVideos();
         }
 
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        openPlayVideoActivity(position);
-                    }
-                })
-        );
+        adapter.setOnItemClickListener(new OnItemClickListener<Video>() {
+            @Override
+            public void onItemClick(Video item) {
+                openPlayVideoActivity(item);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         progressView.setTryAgainClickListener(new View.OnClickListener() {
@@ -90,6 +86,9 @@ public class VideosFragment extends Fragment {
         ioFacade.getVideos();
     }
 
+    /**
+     * Called by {@link EventBus} when the videos are received
+     */
     public void onEvent(final VideosResponse result) {
         progressView.hide();
         if (result != null) {
@@ -99,12 +98,16 @@ public class VideosFragment extends Fragment {
         }
     }
 
+    /**
+     * Called by {@link EventBus} in case an error occurred during the
+     * retrieval of videos.
+     */
     public void onEvent(VideosErrorEvent errorEvent) {
         progressView.showError();
     }
 
-    private void openPlayVideoActivity(int position) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position).getLink())));
+    private void openPlayVideoActivity(Video video) {
+//        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position).getLink())));
     }
 
     @Override
