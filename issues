@@ -1,9 +1,10 @@
 # For Release:
-- Add terms and conditions in nav drawer
+- Change description in About
 - Increase quota query limit
+- Modify the interaction with list item to provide visual feedback for the user on touch
+- Open source the app
 
 # Next version:
-- Ads in Attractions and Place details. (parhaps on main screen too, or only on main and details screens)
 - Display title/attributions on Flickr/Google photos (ImagesActivity)
 - Display google attributions (if any) in Place details screen
 - Save in favorites the Pallet color according to each place
@@ -17,9 +18,6 @@
 
 # Nice to have:
 - Save the whole Place in Favorites, not only ids.
-- Google Analytics
-- Crashlitycs
-- Increase image caching
 - Zoom of images
 
 # Future ideas

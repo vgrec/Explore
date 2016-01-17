@@ -35,7 +35,12 @@
     <string name="no_favorites">No favorites yet!</string>
     <string name="logo">Discover beautiful places to visit</string>
     <string name="ok">OK</string>
-    <string name="about_text"><![CDATA[<b>Explore</b> is a simple app that helps you discover beautiful places to visit. <br /> <br />Don\'t know where to spend your next vacation? Use <b>Explore</b> to find out!]]></string>
+    <string name="about_text"><![CDATA[<b>Explore</b> is a simple app that helps you discover beautiful places to visit. <br /> <br />
+        <b>Please note</b> that the application uses data from different independent sources (<b>Wikipedia</b>, <b>Flickr</b>, <b>Youtube</b>, and <b>Google Places</b>)
+        and because of this, especially for a less known search term, the presented results sometimes might appear inconsistent. <br/>
+        For example Google Places might return one thing, but the description returned by Wikipedia to relate to another thing. <br/>
+        If you are going to make a decision based on the information provided by this app, always check if the provided information is correct.
+        ]]></string>
 
     <string name="maps_debug">AIzaSyBsBWRCsTwJUHyHloJE5kqTJIqYPRQLvZA</string>
     <string name="maps_release">AIzaSyCDNeUzfjtTXWVKj91GznaFagnEpanOsa4</string>
