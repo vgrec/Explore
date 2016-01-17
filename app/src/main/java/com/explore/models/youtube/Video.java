@@ -1,19 +1,16 @@
 package com.explore.models.youtube;
 
-/**
- * @author vgrec, created on 12/2/14.
- */
 public class Video {
     private final String title;
     private final String thumbnail;
     private final String duration;
-    private final String link;
+    private final String videoId;
 
-    public Video(String title, String thumbnail, String duration, String link) {
+    public Video(String title, String thumbnail, String duration, String videoId) {
         this.title = title;
         this.thumbnail = thumbnail;
         this.duration = duration;
-        this.link = link;
+        this.videoId = videoId;
     }
 
     public String getTitle() {
@@ -28,7 +25,7 @@ public class Video {
         return duration;
     }
 
-    public String getLink() {
-        return link;
+    public String getVideoId() {
+        return videoId;
     }
 }

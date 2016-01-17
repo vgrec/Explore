@@ -339,7 +339,8 @@ public class LocationSummaryFragment extends Fragment {
             previewImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(finalI).getLink())));
+                    String youtubeVideoBaseUrl = "http://www.youtube.com/watch?v=";
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeVideoBaseUrl + videos.get(finalI).getVideoId())));
                 }
             });
             previewImage.setUrl(videos.get(i).getThumbnailUrl());

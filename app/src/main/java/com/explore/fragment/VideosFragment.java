@@ -1,6 +1,8 @@
 package com.explore.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -107,7 +109,8 @@ public class VideosFragment extends Fragment {
     }
 
     private void openPlayVideoActivity(Video video) {
-//        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position).getLink())));
+        String youtubeVideoBaseUrl = "http://www.youtube.com/watch?v=";
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeVideoBaseUrl+video.getVideoId())));
     }
 
     @Override
