@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Provides different utility methods.
+ *
  * @author vgrec, created on 9/5/14.
  */
 public class Utils {

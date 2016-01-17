@@ -17,7 +17,9 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
- * @author vgrec, created on 12/29/14.
+ * Displays a loading indicator above everything else while
+ * an HTTP request is in progress. If the HTTP request failed,
+ * it provides the ability to retry.
  */
 public class ProgressView extends LinearLayout {
 

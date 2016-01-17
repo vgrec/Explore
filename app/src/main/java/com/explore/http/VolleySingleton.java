@@ -9,6 +9,9 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 /**
+ * Instantiates the {@link RequestQueue} and the {@link ImageLoader} used to
+ * make HTTP requests and download images respectively.
+ *
  * @author vgrec, created on 9/4/14.
  */
 public class VolleySingleton {

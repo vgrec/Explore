@@ -16,6 +16,9 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
+ * Generic container view that takes a title and the content to be displayed in it
+ * using xml attributes.
+ *
  * @author vgrec, created on 12/8/14.
  */
 public class PreviewCard extends LinearLayout {

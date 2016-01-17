@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- * @author vgrec, created on 9/5/14.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DescriptionResponse {
 

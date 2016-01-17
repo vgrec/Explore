@@ -5,22 +5,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 
-import com.explore.http.TravelerIoFacade;
-import com.explore.http.TravelerIoFacadeImpl;
+import com.explore.http.ExploreHttpFacade;
+import com.explore.http.ExploreHttpFacadeImpl;
 
 import java.util.ArrayList;
 
 /**
+ * Adapter used in conjunction with {@link android.widget.AutoCompleteTextView} to
+ * show completion suggestions while the user is typing.
+ *
  * @author vgrec, created on 3/3/15.
  */
 public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
 
     private ArrayList<String> resultList;
-    private TravelerIoFacade ioFacade;
+    private ExploreHttpFacade ioFacade;
 
     public PlacesAutoCompleteAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
-        ioFacade = new TravelerIoFacadeImpl(context);
+        ioFacade = new ExploreHttpFacadeImpl(context);
     }
 
     @Override

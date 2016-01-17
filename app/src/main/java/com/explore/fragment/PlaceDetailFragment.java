@@ -21,7 +21,7 @@ import com.explore.activity.ImagesActivity;
 import com.explore.activity.MapActivity;
 import com.explore.activity.PlaceDetailActivity;
 import com.explore.db.SavedPlacesDataSource;
-import com.explore.http.TravelerIoFacadeImpl;
+import com.explore.http.ExploreHttpFacadeImpl;
 import com.explore.models.db.SavedPlace;
 import com.explore.models.events.PlaceDetailsErrorEvent;
 import com.explore.models.google.Place;
@@ -239,7 +239,7 @@ public class PlaceDetailFragment extends Fragment {
 
     private void downloadPlaceDetailsAndUpdateUi() {
         showProgressView();
-        TravelerIoFacadeImpl ioFacade = new TravelerIoFacadeImpl(getActivity());
+        ExploreHttpFacadeImpl ioFacade = new ExploreHttpFacadeImpl(getActivity());
         ioFacade.getPlaceDetails(placeId);
     }
 
@@ -270,7 +270,7 @@ public class PlaceDetailFragment extends Fragment {
 
         updateAddToFavoritesIcon(place.getPlaceId());
 
-        int primaryColor = TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).getPrimaryColor();
+        int primaryColor = ExploreHttpFacadeImpl.InternalExploreSettings.getInstance(getActivity()).getPrimaryColor();
 
         nameTextView.setText(place.getName());
         detailsHeaderContainer.setBackgroundColor(primaryColor);

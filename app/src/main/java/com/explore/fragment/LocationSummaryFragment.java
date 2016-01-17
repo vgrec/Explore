@@ -21,8 +21,8 @@ import com.explore.activity.ImagesActivity;
 import com.explore.activity.LocationSummaryActivity;
 import com.explore.activity.PlaceDetailActivity;
 import com.explore.activity.VideosActivity;
-import com.explore.http.TravelerIoFacade;
-import com.explore.http.TravelerIoFacadeImpl;
+import com.explore.http.ExploreHttpFacade;
+import com.explore.http.ExploreHttpFacadeImpl;
 import com.explore.http.VolleySingleton;
 import com.explore.models.events.FlickrPhotosErrorEvent;
 import com.explore.models.flickr.FlickrPhoto;
@@ -49,6 +49,9 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
+ * Displays a summary about a location.
+ * The summary is composed from data retrieved from Wikipedia, Flickr, Youtube, and Google Places.
+ *
  * @author vgrec, created on 8/22/14.
  */
 public class LocationSummaryFragment extends Fragment {
@@ -132,7 +135,7 @@ public class LocationSummaryFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         setListenersForPreviewCards();
 
-        final TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
+        final ExploreHttpFacade ioFacade = new ExploreHttpFacadeImpl(getActivity());
 
         if (getActivity() != null) {
             ((LocationSummaryActivity) getActivity()).getProgressView().setTryAgainClickListener(new View.OnClickListener() {
@@ -373,7 +376,7 @@ public class LocationSummaryFragment extends Fragment {
             @Override
             public void onGenerated(Palette palette) {
                 if (getActivity() != null) {
-                    TravelerIoFacadeImpl.TravelerSettings settings = TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity());
+                    ExploreHttpFacadeImpl.InternalExploreSettings settings = ExploreHttpFacadeImpl.InternalExploreSettings.getInstance(getActivity());
                     settings.setDarkMutedColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
                     titleHeader.setBackgroundColor(palette.getDarkVibrantColor(getResources().getColor(R.color.dark_grey)));
                 }

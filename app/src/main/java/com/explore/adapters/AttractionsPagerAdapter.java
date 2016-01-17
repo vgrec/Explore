@@ -9,6 +9,9 @@ import com.explore.models.google.PlaceType;
 import com.explore.fragment.AttractionsFragment;
 
 /**
+ * Adapter responsible for returning the appropriate {@link AttractionsFragment}
+ * depending of the current place type.
+ *
  * @author vgrec, created on 11/3/14.
  */
 public class AttractionsPagerAdapter extends FragmentPagerAdapter {

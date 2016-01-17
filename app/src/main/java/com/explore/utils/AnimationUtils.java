@@ -8,6 +8,8 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 
 /**
+ * Utility methods for animations.
+ *
  * @author vgrec, created on 2/24/15.
  */
 public class AnimationUtils {

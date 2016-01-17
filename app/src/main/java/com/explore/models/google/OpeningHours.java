@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author vgrec, created on 11/17/14.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpeningHours {
     @JsonProperty("open_now")

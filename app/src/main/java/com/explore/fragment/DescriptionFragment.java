@@ -11,6 +11,8 @@ import com.vgrec.explore.R;
 import com.explore.models.wikipedia.PageDescription;
 
 /**
+ * Displays the Wikipedia description.
+ *
  * @author vgrec, created on 10/27/14.
  */
 public class DescriptionFragment extends Fragment {

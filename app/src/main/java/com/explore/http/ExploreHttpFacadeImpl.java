@@ -39,36 +39,39 @@ import java.util.concurrent.TimeoutException;
 import de.greenrobot.event.EventBus;
 
 /**
+ * Central component for constructing and issuing the actual HTTP requests.
+ * The HTTP result is communicated back to the calling Activity/Fragment using {@link EventBus}.
+ *
  * @author vgrec, created on 8/22/14.
  */
-public class TravelerIoFacadeImpl implements TravelerIoFacade {
+public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
 
     private String location;
     private RequestQueue requestQueue;
 
-    public TravelerIoFacadeImpl(Context context) {
+    public ExploreHttpFacadeImpl(Context context) {
         requestQueue = VolleySingleton.getInstance(context).getRequestQueue();
-        location = TravelerSettings.getInstance(context).getLocation();
+        location = InternalExploreSettings.getInstance(context).getLocation();
     }
 
     /**
-     * Store specific settings related to TravelerIoFacade, eg, location, palette colors.
+     * Store specific settings related to the {@link ExploreHttpFacade}, eg.: location, palette colors.
      */
-    public static class TravelerSettings {
+    public static class InternalExploreSettings {
 
         public static final String LOCATION = "LOCATION";
         public static final String DARK_MUTED = "DARK_MUTED";
         public static final String PRIMARY_COLOR = "PRIMARY_COLOR";
         private final SharedPreferences settings;
-        private static TravelerSettings instance;
+        private static InternalExploreSettings instance;
 
-        public TravelerSettings(Context context) {
+        public InternalExploreSettings(Context context) {
             settings = context.getSharedPreferences("travl_settings", Context.MODE_PRIVATE);
         }
 
-        public static TravelerSettings getInstance(Context context) {
+        public static InternalExploreSettings getInstance(Context context) {
             if (instance == null) {
-                instance = new TravelerSettings(context);
+                instance = new InternalExploreSettings(context);
             }
             return instance;
         }

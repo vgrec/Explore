@@ -8,7 +8,7 @@ import android.view.Window;
 import com.astuetz.PagerSlidingTabStrip;
 import com.vgrec.explore.R;
 import com.explore.adapters.AttractionsPagerAdapter;
-import com.explore.http.TravelerIoFacadeImpl;
+import com.explore.http.ExploreHttpFacadeImpl;
 
 public class AttractionsActivity extends BaseActivity {
 
@@ -36,6 +36,7 @@ public class AttractionsActivity extends BaseActivity {
             title = getIntent().getStringExtra(TITLE);
         }
 
-        setTitle("Attractions in " + (title != null ? title : TravelerIoFacadeImpl.TravelerSettings.getInstance(this).getLocation()));
+        title = (title != null) ? title : ExploreHttpFacadeImpl.InternalExploreSettings.getInstance(this).getLocation();
+        setTitle(getString(R.string.attractions_in_title_prefix) + " " + title);
     }
 }

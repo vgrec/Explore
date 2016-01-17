@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.vgrec.explore.R;
 
 /**
+ * Custom TextView used to display custom fonts.
+ *
  * @author vgrec, created on 1/29/15.
  */
 public class TypefacedTextView extends TextView {

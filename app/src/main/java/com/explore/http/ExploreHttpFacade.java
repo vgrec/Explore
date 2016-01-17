@@ -5,9 +5,11 @@ import com.explore.models.google.PlaceType;
 import java.util.ArrayList;
 
 /**
+ * Interface defining all the methods the application uses that interacts with the HTTP.
+ *
  * @author vgrec, created on 8/22/14.
  */
-public interface TravelerIoFacade {
+public interface ExploreHttpFacade {
 
     void getDescription();
 

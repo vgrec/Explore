@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.explore.adapters.VideosAdapter;
-import com.explore.http.TravelerIoFacade;
-import com.explore.http.TravelerIoFacadeImpl;
+import com.explore.http.ExploreHttpFacade;
+import com.explore.http.ExploreHttpFacadeImpl;
 import com.explore.listeners.OnItemClickListener;
 import com.explore.models.events.VideosErrorEvent;
 import com.explore.models.youtube.Video;
@@ -82,7 +82,7 @@ public class VideosFragment extends Fragment {
 
     private void downloadVideos() {
         progressView.show();
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
+        ExploreHttpFacade ioFacade = new ExploreHttpFacadeImpl(getActivity());
         ioFacade.getVideos();
     }
 

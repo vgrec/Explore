@@ -7,9 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author vgrec, created on 11/4/14.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Place implements Serializable {
 

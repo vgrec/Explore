@@ -26,6 +26,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+/**
+ * Displays the users favorites places.
+ */
 public class SavedPlacesFragment extends Fragment {
 
     private List<SavedPlace> savedPlaces = new ArrayList<>();

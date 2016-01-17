@@ -14,9 +14,6 @@ import com.explore.http.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author vgrec, created on 10/24/14.
- */
 public class ImageGalleryPagerAdapter extends PagerAdapter {
 
     private List<String> urls = new ArrayList<String>();

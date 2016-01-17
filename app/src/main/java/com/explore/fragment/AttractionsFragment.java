@@ -14,8 +14,8 @@ import com.explore.listeners.OnItemClickListener;
 import com.vgrec.explore.R;
 import com.explore.activity.PlaceDetailActivity;
 import com.explore.adapters.PlaceItemAdapter;
-import com.explore.http.TravelerIoFacade;
-import com.explore.http.TravelerIoFacadeImpl;
+import com.explore.http.ExploreHttpFacade;
+import com.explore.http.ExploreHttpFacadeImpl;
 import com.explore.models.events.AttractionsErrorEvent;
 import com.explore.models.google.Place;
 import com.explore.models.google.PlaceItemsResponse;
@@ -30,6 +30,9 @@ import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 
 /**
+ * Displays a list of attractions, eg.: Restaurants, Museums, etc,
+ * retrieved from Google Places.
+ *
  * @author vgrec, created on 11/3/14.
  */
 public class AttractionsFragment extends Fragment {
@@ -122,7 +125,7 @@ public class AttractionsFragment extends Fragment {
 
     private void downloadPlaces() {
         showTaskInProgress();
-        TravelerIoFacade ioFacade = new TravelerIoFacadeImpl(getActivity());
+        ExploreHttpFacade ioFacade = new ExploreHttpFacadeImpl(getActivity());
         ioFacade.getPlaces(placeType, nextPageToken);
     }
 

@@ -15,13 +15,17 @@ import com.vgrec.explore.R;
 import com.explore.activity.LocationSummaryActivity;
 import com.explore.activity.MainActivity;
 import com.explore.adapters.PlacesAutoCompleteAdapter;
-import com.explore.http.TravelerIoFacadeImpl;
+import com.explore.http.ExploreHttpFacadeImpl;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
+/**
+ * The main application screen.
+ * User is expected to provide a search term and start the search.
+ */
 public class ExploreFragment extends Fragment {
 
     @InjectView(R.id.go)
@@ -72,7 +76,7 @@ public class ExploreFragment extends Fragment {
     }
 
     private void startSummaryActivity(String location) {
-        TravelerIoFacadeImpl.TravelerSettings.getInstance(getActivity()).setLocation(location);
+        ExploreHttpFacadeImpl.InternalExploreSettings.getInstance(getActivity()).setLocation(location);
         Intent intent = new Intent(getActivity(), LocationSummaryActivity.class);
         startActivity(intent);
     }

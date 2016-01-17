@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 
-/**
- * @author vgrec, created on 9/5/14.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PageDescription implements Serializable{
 

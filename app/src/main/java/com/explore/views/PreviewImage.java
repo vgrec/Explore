@@ -14,6 +14,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
+ * Container view for an ImageView with title.
+ *
  * @author vgrec, created on 12/16/14.
  */
 public class PreviewImage extends LinearLayout {

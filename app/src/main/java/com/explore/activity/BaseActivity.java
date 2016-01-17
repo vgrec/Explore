@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 /**
+ * Provides common functionality that all activities needs to have.
+ *
  * @author vgrec, created on 2/5/15.
  */
 public class BaseActivity extends ActionBarActivity {

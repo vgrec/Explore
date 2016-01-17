@@ -13,9 +13,6 @@ import com.explore.adapters.ImageGalleryPagerAdapter;
 
 import java.util.ArrayList;
 
-/**
- * @author vgrec, created on 10/24/14.
- */
 public class ImagesFragment extends Fragment {
 
     private ArrayList<String> urls = new ArrayList<String>();

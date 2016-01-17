@@ -17,6 +17,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.vgrec.explore.R;
 
 /**
+ * Given the latitude and longitude coordinates shows the location of
+ * that place on the map.
+ *
  * @author vgrec, created on 3/5/15.
  */
 public class ExploreMapFragment extends SupportMapFragment {

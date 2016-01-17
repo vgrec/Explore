@@ -1,8 +1,5 @@
 package com.explore.models.google;
 
-/**
- * @author vgrec, created on 11/4/14.
- */
 public enum PlaceType {
     MUSEUM("museum", "museum"),
     RESTAURANT("restaurant", "restaurant"),
