@@ -1,10 +1,10 @@
 # For Release:
-- Change description in About
 - Increase quota query limit
-- Modify the interaction with list item to provide visual feedback for the user on touch
 - Play the video when clicking on an Youtube item
 - Display video duration
 - Make the HTTP requests use the UriBuilder instead of String.format to construct the url.
+- Change loading indicator
+- Introduce StreetView?
 - Open source the app
 
 # Next version:
