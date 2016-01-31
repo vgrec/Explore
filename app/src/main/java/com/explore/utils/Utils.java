@@ -2,6 +2,7 @@ package com.explore.utils;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -11,6 +12,10 @@ import com.explore.Constants;
 import com.explore.models.flickr.FlickrPhoto;
 import com.explore.models.flickr.Size;
 import com.explore.models.google.GooglePhoto;
+
+import org.joda.time.Period;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -75,5 +80,44 @@ public class Utils {
         } catch (UnsupportedEncodingException e) {
             return input;
         }
+    }
+
+    public static String parseDuration(String duration) {
+        String formattedDuration = "";
+
+        try {
+            PeriodFormatter formatter = ISOPeriodFormat.standard();
+            Period period = formatter.parsePeriod(duration);
+            int hours = period.getHours();
+            int minutes = period.getMinutes();
+            int seconds = period.getSeconds();
+
+            String secondsStr = format(seconds);
+            String minutesStr = format(minutes);
+            String hoursStr = format(hours);
+
+            formattedDuration = minutesStr + ":" + secondsStr;
+
+            if (hours > 0) {
+                formattedDuration = hoursStr + ":" + formattedDuration;
+            }
+
+        } catch (IllegalArgumentException e) {
+            Log.e(Constants.TAG, "Cannot parse video duration", e);
+        }
+
+        return formattedDuration;
+    }
+
+    /**
+     * @param time an integer that represents seconds, minutes, or hours
+     */
+    @NonNull
+    private static String format(int time) {
+        String secondsStr = String.valueOf(time);
+        if (time < 10) {
+            secondsStr = "0" + time;
+        }
+        return secondsStr;
     }
 }

@@ -5,6 +5,8 @@ package com.explore;
  */
 public class Constants {
 
+    public static final String TAG = "Explore";
+
     public class Wikipedia {
         public static final String TEXT_SEARCH_URL = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exlimit=10&exintro=&explaintext=&titles=%s&redirects=false";
     }

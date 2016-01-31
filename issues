@@ -1,6 +1,5 @@
 # For Release:
 - Increase quota query limit
-- Display video duration
 - Make the HTTP requests use the UriBuilder instead of String.format to construct the url.
 - Change loading indicator
 - Introduce StreetView?

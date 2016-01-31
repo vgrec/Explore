@@ -24,6 +24,7 @@
     <color name="light_teal">#b2dfdb</color>
     <color name="black">#000000</color>
     <color name="black_light">#424242</color>
+    <color name="black_transparent">#9000</color>
     <color name="red">#e51c23</color>
     <color name="pink">#e91e63</color>
     <color name="purple">#9c27b0</color>

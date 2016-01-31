@@ -11,6 +11,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.explore.http.ImageLoader;
 import com.explore.listeners.OnItemClickListener;
 import com.explore.models.youtube.Video;
+import com.explore.utils.Utils;
 import com.vgrec.explore.R;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Video video = videos.get(position);
         viewHolder.name.setText(video.getTitle());
-        viewHolder.duration.setText(video.getDuration());
+        viewHolder.duration.setText(Utils.parseDuration(video.getDuration()));
         viewHolder.position = position;
         ImageLoader.loadImage(context, video.getThumbnailUrl(), viewHolder.videoThumbnail);
     }
