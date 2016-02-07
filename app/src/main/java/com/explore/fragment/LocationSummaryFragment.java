@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.explore.Constants;
 import com.explore.Extra;
 import com.explore.activity.AttractionsActivity;
 import com.explore.activity.DescriptionActivity;
@@ -23,6 +22,7 @@ import com.explore.activity.PlaceDetailActivity;
 import com.explore.activity.VideosActivity;
 import com.explore.http.ExploreHttpFacade;
 import com.explore.http.ExploreHttpFacadeImpl;
+import com.explore.http.Urls;
 import com.explore.http.VolleySingleton;
 import com.explore.models.events.FlickrPhotosErrorEvent;
 import com.explore.models.flickr.FlickrPhoto;
@@ -311,7 +311,7 @@ public class LocationSummaryFragment extends Fragment {
                 }
             });
             if (places.get(i).getPhotos() != null && places.get(i).getPhotos().size() > 0) {
-                String url = String.format(Constants.Google.THUMBNAIL_URL, places.get(i).getPhotos().get(0).getPhotoReference());
+                String url = Urls.getPlaceThumbnailUrl(places.get(i).getPhotos().get(0).getPhotoReference());
                 previewImage.setUrl(url);
             } else {
                 previewImage.setUrl(places.get(i).getIconUrl());
@@ -351,8 +351,7 @@ public class LocationSummaryFragment extends Fragment {
 
     private void downloadImageAndProcessColor(FlickrPhoto flickrPhoto, final ImageView imageView, Size size) {
         com.android.volley.toolbox.ImageLoader imageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
-        String url = String.format(Constants.Flickr.PHOTO_URL, flickrPhoto.getFarm(), flickrPhoto.getServer(), flickrPhoto.getId(), flickrPhoto.getSecret(), size);
-        imageLoader.get(url, new com.android.volley.toolbox.ImageLoader.ImageListener() {
+        imageLoader.get(Urls.getFlickrImageUrl(flickrPhoto, size), new com.android.volley.toolbox.ImageLoader.ImageListener() {
 
             public void onErrorResponse(VolleyError error) {
                 imageView.setImageResource(R.drawable.ic_launcher);
@@ -365,9 +364,6 @@ public class LocationSummaryFragment extends Fragment {
                     smallImageView.setImageBitmap(bitmap);
                     generatePaletteAndSetColor(bitmap);
                 }
-//                else {
-//                    hideProgressView();
-//                }
             }
         });
     }
@@ -387,8 +383,7 @@ public class LocationSummaryFragment extends Fragment {
     }
 
     private void downloadImage(FlickrPhoto flickrPhoto, Size size) {
-        String url = String.format(Constants.Flickr.PHOTO_URL, flickrPhoto.getFarm(), flickrPhoto.getServer(), flickrPhoto.getId(), flickrPhoto.getSecret(), size);
-        scrimImageHeader.setImageUrl(url);
+        scrimImageHeader.setImageUrl(Urls.getFlickrImageUrl(flickrPhoto, size));
     }
 
     @Override

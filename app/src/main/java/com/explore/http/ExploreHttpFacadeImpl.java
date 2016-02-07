@@ -3,7 +3,6 @@ package com.explore.http;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,7 +10,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
-import com.explore.Constants;
 import com.explore.models.events.AttractionsErrorEvent;
 import com.explore.models.events.FlickrPhotosErrorEvent;
 import com.explore.models.events.PlaceDetailsErrorEvent;
@@ -104,8 +102,7 @@ public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
 
     @Override
     public void getDescription() {
-        String url = String.format(Constants.Wikipedia.TEXT_SEARCH_URL, location.replaceAll(" ", "%20"));
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Urls.getWikipediaDescriptionUrl(location), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 DescriptionResponse descriptionResponse = Utils.fromJson(DescriptionResponse.class, response);
@@ -122,8 +119,7 @@ public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
 
     @Override
     public void getFlickrPhotos() {
-        String url = String.format(Constants.Flickr.SEARCH_PHOTOS_URL, location + "%20city");
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Urls.getSearchFlickrPhotosUrl(location), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 PhotosResponse photosResponse = Utils.fromJson(PhotosResponse.class, response);
@@ -140,10 +136,7 @@ public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
 
     @Override
     public void getPlaces(final PlaceType placeType, String nextPageToken) {
-        String queryString = placeType.getQuery();
-        String placeTypeString = placeType.getPlaceType();
-        String url = String.format(Constants.Google.PLACES_URL, queryString, location, placeTypeString, nextPageToken);
-        url = url.replaceAll(" ", "%20");
+        String url = Urls.getSearchPlacesUrl(placeType, nextPageToken, location);
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -164,8 +157,7 @@ public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
 
     @Override
     public void getPlaceDetails(String placeId) {
-        String url = String.format(Constants.Google.PLACE_DETAILS_URL, placeId);
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Urls.getPlaceDetailsUrl(placeId), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 PlaceDetailsResponse placeItemsResponse = Utils.fromJson(PlaceDetailsResponse.class, response);
@@ -182,15 +174,7 @@ public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
 
     @Override
     public void getVideos() {
-        Uri uri = Uri.parse("https://www.googleapis.com/youtube/v3/search")
-                .buildUpon()
-                .appendQueryParameter("key", "AIzaSyACYHmq3nim1ozMWgS63K2XBlP7N7jQLQA")
-                .appendQueryParameter("q", location.replaceAll(" ", "%20"))
-                .appendQueryParameter("maxResults", "45")
-                .appendQueryParameter("type", "video")
-                .appendQueryParameter("part", "id,snippet").build();
-
-        StringRequest request = new StringRequest(uri.toString(), new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Urls.getSearchVideosUrl(location), new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -210,13 +194,8 @@ public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
     }
 
     private void getVideoDetails(final VideoSearchResponse videosResponse) {
-        Uri uri = Uri.parse("https://www.googleapis.com/youtube/v3/videos")
-                .buildUpon()
-                .appendQueryParameter("key", "AIzaSyACYHmq3nim1ozMWgS63K2XBlP7N7jQLQA")
-                .appendQueryParameter("id", VideoUtils.buildIdsString(videosResponse.getItems()))
-                .appendQueryParameter("part", "contentDetails").build();
-
-        StringRequest request = new StringRequest(uri.toString(), new Response.Listener<String>() {
+        String url = Urls.getVideoDetailsUrl(videosResponse);
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 VideoDetailsResponse detailsResponse = Utils.fromJson(VideoDetailsResponse.class, response);
@@ -237,7 +216,7 @@ public class ExploreHttpFacadeImpl implements ExploreHttpFacade {
     public ArrayList<String> autocomplete(String input) {
         ArrayList<String> resultList = null;
 
-        String url = String.format(Constants.Google.AUTOCOMPLETE_URL, Utils.encodeAsUrl(input));
+        String url = Urls.getAutocompleteUrl(input);
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         JsonObjectRequest request = new JsonObjectRequest(url, null, future, future);
         requestQueue.add(request);

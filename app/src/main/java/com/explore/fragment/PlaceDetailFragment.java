@@ -14,14 +14,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.explore.Constants;
 import com.explore.Extra;
-import com.vgrec.explore.R;
 import com.explore.activity.ImagesActivity;
 import com.explore.activity.MapActivity;
 import com.explore.activity.PlaceDetailActivity;
 import com.explore.db.SavedPlacesDataSource;
 import com.explore.http.ExploreHttpFacadeImpl;
+import com.explore.http.Urls;
 import com.explore.models.db.SavedPlace;
 import com.explore.models.events.PlaceDetailsErrorEvent;
 import com.explore.models.google.Place;
@@ -32,6 +31,7 @@ import com.explore.utils.Utils;
 import com.explore.views.ScrimImageHeader;
 import com.explore.views.SmartTextView;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.vgrec.explore.R;
 
 import java.util.List;
 
@@ -287,7 +287,7 @@ public class PlaceDetailFragment extends Fragment {
         Utils.setColorForTextViewDrawable(getResources().getColor(R.color.colorPrimary), addressTextView, phoneNumberTextView, webSiteTextView);
 
         if (place.getPhotos().size() > 0) {
-            String url = String.format(Constants.Google.IMAGE_URL, place.getPhotos().get(0).getPhotoReference());
+            String url = Urls.getPlaceImageUrl(place.getPhotos().get(0).getPhotoReference());
             bigImageHeader.setImageUrl(url);
             bigImageHeader.setNumberOfPhotos(place.getPhotos().size());
         }

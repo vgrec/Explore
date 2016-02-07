@@ -6,12 +6,12 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.explore.Constants;
+import com.explore.http.Urls;
 import com.explore.models.flickr.FlickrPhoto;
 import com.explore.models.flickr.Size;
 import com.explore.models.google.GooglePhoto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -30,21 +30,11 @@ import java.util.List;
  */
 public class Utils {
 
-
     public static <T> T fromJson(Class<T> clazz, String json) {
         try {
             return new ObjectMapper().readValue(json, clazz);
         } catch (IOException e) {
-            Log.e("GREC", "Cannot construct object from json", e);
-        }
-        return null;
-    }
-
-    public static <T> String toJson(T object) {
-        try {
-            return new ObjectMapper().writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            Log.e("GREC", "Exception", e);
+            Log.e(Constants.TAG, "Cannot construct object from json", e);
         }
         return null;
     }
@@ -61,7 +51,7 @@ public class Utils {
     public static ArrayList<String> flickrPhotosToUrls(ArrayList<FlickrPhoto> flickrPhotos) {
         ArrayList<String> urls = new ArrayList<>();
         for (FlickrPhoto flickrPhoto : flickrPhotos) {
-            urls.add(String.format(Constants.Flickr.PHOTO_URL, flickrPhoto.getFarm(), flickrPhoto.getServer(), flickrPhoto.getId(), flickrPhoto.getSecret(), Size.z));
+            urls.add(Urls.getFlickrImageUrl(flickrPhoto, Size.z));
         }
         return urls;
     }
@@ -69,7 +59,7 @@ public class Utils {
     public static ArrayList<String> googlePhotosToUrls(List<GooglePhoto> photos) {
         ArrayList<String> urls = new ArrayList<>();
         for (GooglePhoto photo : photos) {
-            urls.add(String.format(Constants.Google.IMAGE_URL, photo.getPhotoReference()));
+            urls.add(Urls.getPlaceImageUrl(photo.getPhotoReference()));
         }
         return urls;
     }

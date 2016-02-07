@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.explore.Constants;
 import com.explore.http.ImageLoader;
+import com.explore.http.Urls;
 import com.explore.listeners.OnItemClickListener;
 import com.explore.models.google.Place;
 import com.vgrec.explore.R;
@@ -53,7 +53,7 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
         viewHolder.position = position;
 
         if (place.getPhotos() != null && place.getPhotos().size() > 0) {
-            String url = String.format(Constants.Google.THUMBNAIL_URL, place.getPhotos().get(0).getPhotoReference());
+            String url = Urls.getPlaceThumbnailUrl(place.getPhotos().get(0).getPhotoReference());
             ImageLoader.loadImage(context, url, viewHolder.placePicture);
         } else {
             ImageLoader.loadImage(context, place.getIconUrl(), viewHolder.placePicture);

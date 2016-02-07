@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.explore.Constants;
+import com.explore.http.Urls;
 import com.explore.listeners.OnItemClickListener;
 import com.explore.models.db.SavedPlace;
 import com.explore.views.PreviewImage;
@@ -37,7 +37,7 @@ public class SavedPlacesAdapter extends RecyclerView.Adapter<SavedPlacesAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         SavedPlace savedPlace = savedPlaces.get(position);
-        holder.previewImage.setUrl(String.format(Constants.Google.IMAGE_URL, savedPlace.getImageUrl()));
+        holder.previewImage.setUrl(Urls.getPlaceImageUrl(savedPlace.getImageUrl()));
         holder.previewImage.setText(savedPlace.getTitle());
         holder.position = position;
     }
