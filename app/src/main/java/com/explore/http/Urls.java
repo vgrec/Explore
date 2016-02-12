@@ -8,6 +8,7 @@ import com.explore.models.google.PlaceType;
 import com.explore.models.youtube.VideoSearchResponse;
 import com.explore.utils.Utils;
 import com.explore.utils.VideoUtils;
+import com.vgrec.explore.BuildConfig;
 
 /**
  * Helper class that provides all the URLs the application uses.
@@ -17,13 +18,8 @@ import com.explore.utils.VideoUtils;
 public class Urls {
 
     public static final String GOOGLE_PLACES_BASE_URL = "https://maps.googleapis.com/maps/api/place";
-    public static final String GOOGLE_PLACES_API_KEY = "AIzaSyBVcUHbF6cYBhgUBWUvLGLuwx6B8-tSj24";
-
     public static final String YOUTUBE_BASE_URL = "https://www.googleapis.com/youtube/v3";
-    public static final String YOUTUBE_API_KEY = "AIzaSyACYHmq3nim1ozMWgS63K2XBlP7N7jQLQA";
-
     public static final String FLICKR_BASE_URL = "https://api.flickr.com/services/rest";
-    public static final String FLICKR_API_KEY = "97e9fc9835ab601cee0fe21fce7b11aa";
 
     // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_{size}.jpg
     public static final String FLICKR_PHOTO_URL = "https://farm%s.staticflickr.com/%s/%s_%s_%s.jpg";
@@ -34,7 +30,7 @@ public class Urls {
         Uri uri = Uri.parse(GOOGLE_PLACES_BASE_URL + "/textsearch/json")
                 .buildUpon()
                 .appendQueryParameter("query", placeType.getPlaceType() + " in " + location)
-                .appendQueryParameter("key", GOOGLE_PLACES_API_KEY)
+                .appendQueryParameter("key", BuildConfig.PLACES_API_KEY)
                 .appendQueryParameter("types", placeType.getPlaceType())
                 .appendQueryParameter("pagetoken", nextPageToken)
                 .build();
@@ -45,7 +41,7 @@ public class Urls {
         Uri uri = Uri.parse(GOOGLE_PLACES_BASE_URL + "/details/json")
                 .buildUpon()
                 .appendQueryParameter("placeid", placeId)
-                .appendQueryParameter("key", GOOGLE_PLACES_API_KEY)
+                .appendQueryParameter("key", BuildConfig.PLACES_API_KEY)
                 .build();
         return uri.toString();
     }
@@ -53,7 +49,7 @@ public class Urls {
     public static String getVideoDetailsUrl(VideoSearchResponse videosResponse) {
         Uri uri = Uri.parse(YOUTUBE_BASE_URL + "/videos")
                 .buildUpon()
-                .appendQueryParameter("key", YOUTUBE_API_KEY)
+                .appendQueryParameter("key", BuildConfig.YOUTUBE_API_KEY)
                 .appendQueryParameter("id", VideoUtils.buildIdsString(videosResponse.getItems()))
                 .appendQueryParameter("part", "contentDetails")
                 .build();
@@ -63,7 +59,7 @@ public class Urls {
     public static String getSearchVideosUrl(String location) {
         Uri uri = Uri.parse(YOUTUBE_BASE_URL + "/search")
                 .buildUpon()
-                .appendQueryParameter("key", "AIzaSyACYHmq3nim1ozMWgS63K2XBlP7N7jQLQA")
+                .appendQueryParameter("key", BuildConfig.YOUTUBE_API_KEY)
                 .appendQueryParameter("q", location)
                 .appendQueryParameter("maxResults", "45")
                 .appendQueryParameter("type", "video")
@@ -76,7 +72,7 @@ public class Urls {
         Uri uri = Uri.parse(FLICKR_BASE_URL)
                 .buildUpon()
                 .appendQueryParameter("method", "flickr.photos.search")
-                .appendQueryParameter("api_key", FLICKR_API_KEY)
+                .appendQueryParameter("api_key", BuildConfig.FLICKR_API_KEY)
                 .appendQueryParameter("format", "json")
                 .appendQueryParameter("nojsoncallback", "1")
                 .appendQueryParameter("per_page", "15")
@@ -108,7 +104,7 @@ public class Urls {
     public static String getAutocompleteUrl(String input) {
         Uri uri = Uri.parse(GOOGLE_PLACES_BASE_URL + "/autocomplete/json")
                 .buildUpon()
-                .appendQueryParameter("key", GOOGLE_PLACES_API_KEY)
+                .appendQueryParameter("key", BuildConfig.PLACES_API_KEY)
                 .appendQueryParameter("input", Utils.encodeAsUrl(input))
                 .build();
         return uri.toString();
@@ -117,7 +113,7 @@ public class Urls {
     public static String getPlaceThumbnailUrl(String photoReference) {
         Uri uri = Uri.parse(GOOGLE_PLACES_BASE_URL + "/photo")
                 .buildUpon()
-                .appendQueryParameter("key", GOOGLE_PLACES_API_KEY)
+                .appendQueryParameter("key", BuildConfig.PLACES_API_KEY)
                 .appendQueryParameter("maxwidth", "250")
                 .appendQueryParameter("photoreference", photoReference)
                 .build();
@@ -127,7 +123,7 @@ public class Urls {
     public static String getPlaceImageUrl(String photoReference) {
         Uri uri = Uri.parse(GOOGLE_PLACES_BASE_URL + "/photo")
                 .buildUpon()
-                .appendQueryParameter("key", GOOGLE_PLACES_API_KEY)
+                .appendQueryParameter("key", BuildConfig.PLACES_API_KEY)
                 .appendQueryParameter("maxwidth", "400")
                 .appendQueryParameter("photoreference", photoReference)
                 .build();

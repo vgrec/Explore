@@ -1,11 +1,13 @@
 # For Release:
 - Increase quota query limit
-- Make the HTTP requests use the UriBuilder instead of String.format to construct the url.
 - Change loading indicator
 - Introduce StreetView?
 - Open source the app
 
-# Next version:
+
+# Nice to have:
+- Save the whole Place in Favorites, not only ids.
+- Zoom of images
 - Display title/attributions on Flickr/Google photos (ImagesActivity)
 - Display google attributions (if any) in Place details screen
 - Save in favorites the Pallet color according to each place
@@ -16,10 +18,6 @@
 - Animations for Lollipop (when opening the Image gallery)
 - DESIGN FOR TABLETS: http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0B71WflkWs_SAZjY3azBTRXRNNzg/patterns_actions_fab_placement8.png
 
-
-# Nice to have:
-- Save the whole Place in Favorites, not only ids.
-- Zoom of images
 
 # Future ideas
 - Have info about weather
