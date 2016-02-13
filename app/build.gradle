@@ -18,8 +18,8 @@ android {
         applicationId "com.vgrec.explore"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 4
-        versionName "1.0"
+        versionCode 5
+        versionName "1.1"
 
         buildConfigField("String", "PLACES_API_KEY", "\"" + placesApiKey + "\"")
         buildConfigField("String", "YOUTUBE_API_KEY", "\"" + youtubeApiKey + "\"")
