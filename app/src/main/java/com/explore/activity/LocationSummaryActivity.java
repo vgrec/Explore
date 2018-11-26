@@ -2,6 +2,7 @@ package com.explore.activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ScrollView;
@@ -30,7 +31,7 @@ public class LocationSummaryActivity extends BaseActivity implements NotifyingSc
         ButterKnife.inject(this);
         setTitle("");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        actionBarBackgroundDrawable = toolbar.getBackground();
+        actionBarBackgroundDrawable = DrawableCompat.wrap(toolbar.getBackground()).mutate();
 
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
