@@ -1,14 +1,13 @@
 package com.explore.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.Window;
 
-import com.astuetz.PagerSlidingTabStrip;
-import com.vgrec.explore.R;
 import com.explore.adapters.AttractionsPagerAdapter;
 import com.explore.http.ExploreHttpFacadeImpl;
+import com.vgrec.explore.R;
 
 public class AttractionsActivity extends BaseActivity {
 
@@ -20,16 +19,11 @@ public class AttractionsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attractions);
 
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        ViewPager pager = findViewById(R.id.pager);
         pager.setAdapter(new AttractionsPagerAdapter(getFragmentManager()));
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        tabs.setTextColor(Color.WHITE);
-        tabs.setIndicatorColor(Color.WHITE);
+        TabLayout tabs = findViewById(R.id.tabs);
         tabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        tabs.setDividerColor(getResources().getColor(android.R.color.transparent));
-        tabs.setTextSize(getResources().getDimensionPixelSize(R.dimen.tabs_text_size));
-        tabs.setIndicatorHeight(getResources().getDimensionPixelOffset(R.dimen.tabs_indicator_height));
-        tabs.setViewPager(pager);
+        tabs.setupWithViewPager(pager);
 
         String title = null;
         if (getIntent() != null) {
