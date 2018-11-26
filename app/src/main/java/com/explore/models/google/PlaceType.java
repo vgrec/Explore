@@ -5,7 +5,7 @@ public enum PlaceType {
     RESTAURANT("restaurant", "restaurant"),
     SHOPPING("shops", "shopping_mall"),
     ZOO("zoo", "zoo"),
-    CINEMA("theater", "movie_theater");
+    CINEMA("cinema", "movie_theater");
 
     private String query;
     private String type;

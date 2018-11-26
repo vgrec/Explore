@@ -29,7 +29,7 @@ public class Urls {
     public static String getSearchPlacesUrl(PlaceType placeType, String nextPageToken, String location) {
         Uri uri = Uri.parse(GOOGLE_PLACES_BASE_URL + "/textsearch/json")
                 .buildUpon()
-                .appendQueryParameter("query", placeType.getPlaceType() + " in " + location)
+                .appendQueryParameter("query", placeType.getQuery() + " in " + location)
                 .appendQueryParameter("key", BuildConfig.PLACES_API_KEY)
                 .appendQueryParameter("types", placeType.getPlaceType())
                 .appendQueryParameter("pagetoken", nextPageToken)
