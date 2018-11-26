@@ -16,8 +16,6 @@ import com.explore.listeners.OnItemClickListener;
 import com.explore.models.google.Place;
 import com.vgrec.explore.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
@@ -53,8 +51,16 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Place place = places.get(position);
         viewHolder.name.setText(place.getName());
-        viewHolder.ratingNumber.setText(place.getRating());
-        viewHolder.ratingBar.setRating(Float.valueOf(place.getRating()));
+
+        if (place.getRating() != null) {
+            viewHolder.ratingBar.setVisibility(View.VISIBLE);
+            viewHolder.ratingBar.setVisibility(View.VISIBLE);
+            viewHolder.ratingNumber.setText(place.getRating());
+            viewHolder.ratingBar.setRating(Float.valueOf(place.getRating()));
+        } else {
+            viewHolder.ratingBar.setVisibility(View.GONE);
+            viewHolder.ratingBar.setVisibility(View.GONE);
+        }
 
         boolean isOpened = false;
         if (place.getOpeningHours() != null) {
