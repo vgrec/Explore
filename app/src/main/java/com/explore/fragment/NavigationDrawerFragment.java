@@ -1,6 +1,7 @@
 package com.explore.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -21,7 +22,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.explore.utils.ScrimUtil;
 import com.explore.utils.Utils;
 import com.vgrec.explore.R;
@@ -145,13 +145,11 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void showAboutDialog() {
-        new MaterialDialog.Builder(getActivity())
-                .icon(getResources().getDrawable(R.drawable.ic_launcher))
-                .title(R.string.about)
-                .content(Html.fromHtml(getString(R.string.about_text)))
-                .contentColorRes(R.color.dark_grey)
-                .positiveText(R.string.ok)
-                .positiveColorRes(R.color.teal)
+        new AlertDialog.Builder(getActivity())
+                .setIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                .setTitle(R.string.about)
+                .setMessage(Html.fromHtml(getString(R.string.about_text)))
+                .setPositiveButton(R.string.ok, null)
                 .show();
     }
 
