@@ -23,28 +23,41 @@
         android:textSize="16sp"
         tools:text="Name" />
 
-    <TextView
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/rating_group"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        android:layout_marginRight="8dp"
         android:layout_toRightOf="@id/place_picture"
-        android:textColor="#424242"
-        tools:text="4.5" />
+        android:gravity="center_vertical">
 
-    <RatingBar
-        android:id="@+id/rating_bar"
-        style="@style/UserRatingBar"
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:textColor="#424242"
+            tools:text="4.5" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            style="@style/UserRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="5"
+            android:stepSize="0.5" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/opening_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name"
-        android:layout_marginLeft="-1dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/rating"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:rating="5"
-        android:stepSize="0.5" />
+        android:layout_below="@id/rating_group"
+        android:layout_toRightOf="@id/place_picture"
+        tools:text="Opened" />
 
 </RelativeLayout>

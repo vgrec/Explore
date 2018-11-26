@@ -1,6 +1,7 @@
 package com.explore.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.explore.http.Urls;
 import com.explore.listeners.OnItemClickListener;
 import com.explore.models.google.Place;
 import com.vgrec.explore.R;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -53,6 +56,22 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
         viewHolder.ratingNumber.setText(place.getRating());
         viewHolder.ratingBar.setRating(Float.valueOf(place.getRating()));
 
+        boolean isOpened = false;
+        if (place.getOpeningHours() != null) {
+            isOpened = place.getOpeningHours().isOpened();
+        }
+
+        String status = isOpened
+                ? context.getString(R.string.status_opened)
+                : context.getString(R.string.status_closed);
+
+        int statusColor = isOpened
+                ? ContextCompat.getColor(context, R.color.green)
+                : ContextCompat.getColor(context, R.color.red);
+
+        viewHolder.openingStatus.setText(status);
+        viewHolder.openingStatus.setTextColor(statusColor);
+
         if (place.getPhotos() != null && place.getPhotos().size() > 0) {
             String url = Urls.getPlaceThumbnailUrl(place.getPhotos().get(0).getPhotoReference());
             ImageLoader.loadImage(context, url, viewHolder.placePicture);
@@ -86,6 +105,7 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
         TextView ratingNumber;
         RatingBar ratingBar;
         NetworkImageView placePicture;
+        TextView openingStatus;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -93,6 +113,7 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
             ratingNumber = itemView.findViewById(R.id.rating);
             ratingBar = itemView.findViewById(R.id.rating_bar);
             placePicture = itemView.findViewById(R.id.place_picture);
+            openingStatus = itemView.findViewById(R.id.opening_status);
             itemView.setOnClickListener(this);
         }
 

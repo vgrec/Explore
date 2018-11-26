@@ -45,5 +45,7 @@
     <string name="maps_debug">AIzaSyBsBWRCsTwJUHyHloJE5kqTJIqYPRQLvZA</string>
     <string name="maps_release">AIzaSyCDNeUzfjtTXWVKj91GznaFagnEpanOsa4</string>
     <string name="attractions_in_title_prefix">Attractions in</string>
+    <string name="status_opened">Opened</string>
+    <string name="status_closed">Closed</string>
 
 </resources>
