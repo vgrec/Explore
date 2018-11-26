@@ -52,9 +52,6 @@
             android:label="@string/title_activity_place_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.explore.activity.StreetViewActivity"
-            android:label="@string/title_activity_street_view" />
-        <activity
             android:name="com.explore.activity.VideosActivity"
             android:label="@string/title_activity_videos" />
         <activity

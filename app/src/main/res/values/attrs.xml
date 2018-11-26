@@ -12,7 +12,7 @@
     </declare-styleable>
 
     <declare-styleable name="TypefacedTextView">
-        <attr name="font" format="string" />
+        <attr name="textviewFont" format="string" />
     </declare-styleable>
 
 </resources>
