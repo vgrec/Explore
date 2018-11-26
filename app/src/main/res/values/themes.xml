@@ -10,6 +10,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/black_light</item>
         <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:listDivider">@drawable/divider_drawable</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">

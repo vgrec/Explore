@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="4dp"
-    android:background="?android:attr/selectableItemBackground"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="8dp">
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/place_picture"
-        android:src="@drawable/lac"
-        android:layout_marginRight="6dp"
-        android:scaleType="centerCrop"
         android:layout_width="100dp"
-        android:layout_height="90dp" />
+        android:layout_height="80dp"
+        android:layout_marginRight="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lac" />
 
     <TextView
         android:id="@+id/name"
-        android:layout_toRightOf="@id/place_picture"
-        android:textSize="16sp"
-        tools:text="Name"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/place_picture"
+        android:maxLines="2"
+        android:textSize="16sp"
+        tools:text="Name" />
 
-    <!-- Hidden in first version. Display RatingBar instead in the next v. -->
     <TextView
         android:id="@+id/rating"
-        android:visibility="gone"
-        android:layout_toRightOf="@id/place_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        tools:text="Rating: 4.5"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_marginRight="8dp"
+        android:layout_toRightOf="@id/place_picture"
+        android:textColor="#424242"
+        tools:text="4.5" />
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        style="@style/UserRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/rating"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="5"
+        android:stepSize="0.5" />
 
 </RelativeLayout>

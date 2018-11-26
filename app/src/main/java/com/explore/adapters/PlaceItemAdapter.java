@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -49,8 +50,8 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Place place = places.get(position);
         viewHolder.name.setText(place.getName());
-        viewHolder.rating.setText(place.getRating());
-        viewHolder.position = position;
+        viewHolder.ratingNumber.setText(place.getRating());
+        viewHolder.ratingBar.setRating(Float.valueOf(place.getRating()));
 
         if (place.getPhotos() != null && place.getPhotos().size() > 0) {
             String url = Urls.getPlaceThumbnailUrl(place.getPhotos().get(0).getPhotoReference());
@@ -81,23 +82,24 @@ public class PlaceItemAdapter extends RecyclerView.Adapter<PlaceItemAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView name;
-        public TextView rating;
-        public NetworkImageView placePicture;
-        public int position;
+        TextView name;
+        TextView ratingNumber;
+        RatingBar ratingBar;
+        NetworkImageView placePicture;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
-            rating = (TextView) itemView.findViewById(R.id.rating);
-            placePicture = (NetworkImageView) itemView.findViewById(R.id.place_picture);
+            name = itemView.findViewById(R.id.name);
+            ratingNumber = itemView.findViewById(R.id.rating);
+            ratingBar = itemView.findViewById(R.id.rating_bar);
+            placePicture = itemView.findViewById(R.id.place_picture);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(places.get(position));
+                onItemClickListener.onItemClick(places.get(getAdapterPosition()));
             }
         }
     }
