@@ -15,7 +15,7 @@ android {
         applicationId "com.vgrec.explore"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 6
+        versionCode 7
         versionName "1.1"
 
         buildConfigField("String", "PLACES_API_KEY", "\"" + placesApiKey + "\"")
