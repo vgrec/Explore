@@ -27,7 +27,6 @@
             android:id="@+id/location_autocomplete"
             android:hint="@string/country_or_city"
             android:singleLine="true"
-            android:text="Paris"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
